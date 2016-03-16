@@ -1,0 +1,100 @@
+<link rel="import" href="../elements.html">
+
+<!--
+`<uqlibrary-app-menu>` is a the main menu of the UQL Apps
+
+Example:
+    <uqlibrary-app-menu></uqlibrary-app-menu>
+
+@demo
+
+@demo demo/index.html Demo of the Full view
+-->
+<dom-module id="uqlibrary-app-menu">
+  <!-- All element styles -->
+  <style is="custom-style" include="iron-flex iron-flex-alignment common-styles">
+    :host {
+      font-family: var(--font-family);
+      font-size: var(--body-font-size);
+
+      height: 100%;
+      display: block;
+      background-color: #FFF;
+    }
+
+    /** Menu item styles **/
+    paper-menu {
+      --paper-menu-selected-item: {
+        color: var(--accent-color-dark);
+      };
+
+      --paper-menu-focused-item-after: {
+        background: var(--accent-color-dark);
+      };
+    }
+
+    paper-menu iron-icon {
+      margin-right: 33px;
+      color: rgba(0,0,0,.54);
+    }
+
+    paper-menu a {
+      @apply(--layout-horizontal);
+      @apply(--layout-center);
+
+      text-decoration: none;
+      color: rgba(0,0,0,.54);
+      line-height: 24px;
+      min-height: 48px;
+      padding: 0 16px;
+      font-size: 16px;
+      font-weight: 500;
+      outline-color: rgba(0,0,0,0.870588);
+      outline-style: none;
+      outline-width: 0;
+    }
+
+    paper-menu a:hover {
+      background-color: var(--secondary-color-light);
+    }
+
+    .divider {
+      border-bottom: 1px solid var(--border-color);
+    }
+  </style>
+
+  <!-- Template -->
+  <template>
+    <uqlibrary-api-applications id="apiApplications" user="{{account}}"></uqlibrary-api-applications>
+
+    <paper-menu class="app-menu" attr-for-selected="data-route" selected="[[route]]">
+
+      <template is="dom-repeat" items="{{ _applications }}">
+        <!-- Divider -->
+        <template is="dom-if" if="{{item.isDivider}}">
+          <div class="divider"></div>
+        </template>
+        <!-- Menu item -->
+        <template is="dom-if" if="{{item.isLink}}">
+          <!-- External link -->
+          <template is="dom-if" if="{{item.isExternal}}">
+            <a href="{{item.link}}" aria-label="{{item.description}}">
+              <iron-icon icon="{{item.icon}}"></iron-icon>
+              <span>{{item.title}}</span>
+            </a>
+          </template>
+          <!-- Internal link -->
+          <template is="dom-if" if="{{!item.isExternal}}">
+            <a data-route="{{item.route}}" href="{{baseUrl}}users" aria-label="{{item.description}}">
+              <iron-icon icon="{{item.icon}}"></iron-icon>
+              <span>{{item.title}}</span>
+            </a>
+          </template>
+        </template>
+      </template>
+    </paper-menu>
+  </template>
+
+  <!-- Location of the script -->
+  <script src="uqlibrary-app-menu.js"></script>
+</dom-module>

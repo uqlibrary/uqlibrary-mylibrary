@@ -49,10 +49,11 @@
           item.isLink = true;
 
           if (item.link.indexOf("http") == 0) {
-            this._applications[i].isExternal = true;
+            item.isExternal = true;
           } else {
-            this._applications[i].isExternal = false;
-            this._applications[i].route = this._applications[i].link.substring(1)
+            item.isExternal = false;
+            item.route = item.link.substring(1);
+            item.href = this.baseUrl + item.route;
           }
         }
       }

@@ -22,7 +22,37 @@ Example:
       background-color: #FFF;
     }
 
-    /** Menu item styles **/
+    /** Top of menu styles */
+    .account {
+      background: url('../../images/menutop.jpg') 100%;
+      background-size: cover;
+      border-bottom: 1px solid #CCC;
+    }
+
+    .gradient {
+      background: -moz-linear-gradient(top,transparent 30%,#000 100%);
+      background: -webkit-linear-gradient(top,transparent 30%,#000 100%);
+      background: -o-linear-gradient(top,transparent 30%,#000 100%);
+      background: -ms-linear-gradient(top,transparent 30%,#000 100%);
+      background: linear-gradient(to bottom,transparent 30%,#000 100%);
+
+      @apply(--layout-horizontal-reverse);
+      @apply(--layout-end-justified);
+    }
+
+    .details {
+      padding: 110px 14px 14px 16px;
+    }
+
+    .gradient paper-icon-button {
+      @apply(--layout-self-end);
+      color: #FFF;
+      margin-bottom: 8px;
+      margin-right: 8px;
+      padding: 2px;
+    }
+
+    /** Menu item styles */
     paper-menu {
       --paper-menu-selected-item: {
         color: var(--accent-color-dark);
@@ -66,10 +96,23 @@ Example:
   <!-- Template -->
   <template>
     <uqlibrary-api-account id="apiAccount"></uqlibrary-api-account>
-    <uqlibrary-api-applications id="apiApplications" user="{{account}}"></uqlibrary-api-applications>
+    <uqlibrary-api-applications id="apiApplications" user="{{_account}}"></uqlibrary-api-applications>
 
+    <!-- Top of menu -->
+    <template is="dom-if" if="{{_account.hasSession}}">
+      <div class="account">
+        <div class="gradient">
+          <paper-icon-button icon="lock" aria-label="Logout" title="Logout" on-tap="{{toggleLogout}}"></paper-icon-button>
+          <div class="details flex">
+            <div class="menu inverse">{{_account.name}}</div>
+            <div class="menu inverse">{{_account.mail}}</div>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <!-- Menu -->
     <paper-menu class="app-menu" attr-for-selected="data-route" selected="[[route]]">
-
       <template is="dom-repeat" items="{{ _applications }}">
         <!-- Divider -->
         <template is="dom-if" if="{{item.isDivider}}">

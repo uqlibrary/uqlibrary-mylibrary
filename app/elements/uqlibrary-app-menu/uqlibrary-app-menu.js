@@ -42,7 +42,7 @@
       // Load the user's account
       this.$.apiAccount.addEventListener('uqlibrary-api-account-loaded', function (e) {
         if (e.detail.hasSession) {
-          self.account = e.detail;
+          self._account = e.detail;
           self.$.apiApplications.get();
         }
       });

@@ -25,10 +25,30 @@
       _applications: {
         type: Object,
         observer: '_applicationsChanged'
+      },
+      /**
+       * Holds the user's account
+       */
+      _account: {
+        type: Object,
+        value: {
+          hasSession: false
+        }
       }
     },
     ready: function () {
       var self = this;
+
+      // Load the user's account
+      this.$.apiAccount.addEventListener('uqlibrary-api-account-loaded', function (e) {
+        if (e.detail.hasSession) {
+          self.account = e.detail;
+          self.$.apiApplications.get();
+        }
+      });
+      this.$.apiAccount.get();
+
+      // Load the Applications
       this.$.apiApplications.addEventListener('uqlibrary-api-applications-loaded', function(e) {
         self._applications = e.detail;
         self.fire('uqlibrary-menu-loaded');

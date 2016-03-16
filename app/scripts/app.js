@@ -21,25 +21,20 @@
   // Listen for template bound event to know when bindings
   // have resolved and content has been stamped to the page
   app.addEventListener('dom-change', function() {
-    console.log('Our app is ready to rock!');
+
   });
 
   // See https://github.com/Polymer/polymer/issues/1381
   window.addEventListener('WebComponentsReady', function() {
-    // imports are loaded and elements have been registered
+
   });
 
   /**
    * Listens for the Toggle Drawer event from child components
    */
-  app.addEventListener('uqlibrary-toggle-drawer', function () {
-    app.$.paperDrawerPanel.toggle();
+  window.addEventListener('uqlibrary-toggle-drawer', function () {
+    app.$.paperDrawerPanel.togglePanel();
   });
-
-  // Scroll page to top and expand header
-  app.scrollPageToTop = function() {
-    app.$.headerPanelMain.scrollToTop(true);
-  };
 
   app.closeDrawer = function() {
     app.$.paperDrawerPanel.closeDrawer();

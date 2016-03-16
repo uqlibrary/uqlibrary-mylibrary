@@ -56,47 +56,18 @@
 
   <template is="dom-bind" id="app">
 
-    <paper-drawer-panel id="paperDrawerPanel">
+    <paper-drawer-panel id="paperDrawerPanel" disable-edge-swipe="true">
       <!-- Drawer Scroll Header Panel -->
-      <paper-scroll-header-panel drawer fixed>
-        <!-- Menu -->
+      <div drawer>
         <uqlibrary-app-menu route="{{route}}" base-url="{{baseUrl}}"></uqlibrary-app-menu>
-      </paper-scroll-header-panel>
-
-      <!-- Main Area -->
-      <paper-scroll-header-panel main id="headerPanelMain">
-
+      </div>
+      <div main id="headerPanelMain">
         <iron-pages attr-for-selected="data-route" selected="{{route}}">
-          <section data-route="home" tabindex="-1">
-            <uqlibrary-element stand-alone="false"></uqlibrary-element>
-          </section>
 
-          <section data-route="users" tabindex="-1">
-            <paper-material elevation="1">
-              <h1 class="page-title" tabindex="-1">Users</h1>
-              <p>This is the users section</p>
-              <a href$="{{baseUrl}}users/Addy">Addy</a><br>
-              <a href$="{{baseUrl}}users/Rob">Rob</a><br>
-              <a href$="{{baseUrl}}users/Chuck">Chuck</a><br>
-              <a href$="{{baseUrl}}users/Sam">Sam</a>
-            </paper-material>
-          </section>
+          <uqlibrary-element data-route="home" stand-alone="false"></uqlibrary-element>
 
-          <section data-route="user-info" tabindex="-1">
-            <paper-material elevation="-1">
-              <h1 class="page-title" tabindex="-1">User: {{params.name}}</h1>
-              <div>This is {{params.name}}'s section</div>
-            </paper-material>
-          </section>
-
-          <section data-route="contact" tabindex="-1">
-            <paper-material elevation="1">
-              <h1 class="page-title" tabindex="-1">Contact</h1>
-              <p>This is the contact section</p>
-            </paper-material>
-          </section>
         </iron-pages>
-      </paper-scroll-header-panel>
+      </div>
     </paper-drawer-panel>
 
     <paper-toast id="toast">

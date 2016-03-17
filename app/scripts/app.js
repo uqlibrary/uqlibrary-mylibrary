@@ -26,7 +26,8 @@
 
   // See https://github.com/Polymer/polymer/issues/1381
   window.addEventListener('WebComponentsReady', function() {
-
+    document.querySelector('#preloader').style.display = 'none';
+    document.querySelector('#paperDrawerPanel').style.display = 'block';
   });
 
   /**

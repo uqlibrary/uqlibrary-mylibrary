@@ -54,6 +54,16 @@
   <span id="browser-sync-binding"></span>
   <!-- endbuild -->
 
+  <div id="preloader">
+    <div class="header">My Library</div>
+
+    <!-- Preload spinner -->
+    <div id="card">
+      <img src="images/loading.svg" width="48" />
+      <p id="loadingTitle" class="text-center">Loading my library ...</p>
+    </div>
+  </div>
+
   <template is="dom-bind" id="app">
 
     <paper-drawer-panel id="paperDrawerPanel" disable-edge-swipe="true">
@@ -63,9 +73,9 @@
       </div>
       <div main id="headerPanelMain">
         <iron-pages attr-for-selected="data-route" selected="{{route}}">
-
-          <uqlibrary-element data-route="home" stand-alone="false"></uqlibrary-element>
-
+          <section id="home" data-route="home">
+            <uqlibrary-element stand-alone="false"></uqlibrary-element>
+          </section>
         </iron-pages>
       </div>
     </paper-drawer-panel>

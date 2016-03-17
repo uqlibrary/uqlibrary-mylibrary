@@ -27,6 +27,7 @@ var historyApiFallback = require('connect-history-api-fallback');
 var packageJson = require('./package.json');
 var crypto = require('crypto');
 var ensureFiles = require('./tasks/ensure-files.js');
+var replace = require('gulp-replace-task');
 
 // var ghPages = require('gulp-gh-pages');
 
@@ -136,10 +137,14 @@ gulp.task('copy', function() {
   // Copy over only the bower_components we need
   // These are things which cannot be vulcanized
   var bower = gulp.src([
-    'app/bower_components/{webcomponentsjs,platinum-sw,sw-toolbox,promise-polyfill}/**/*'
+    'app/bower_components/{webcomponentsjs,platinum-sw,sw-toolbox,promise-polyfill}/**/*',
   ]).pipe(gulp.dest(dist('bower_components')));
 
-  return merge(app, bower)
+  var mocks = gulp.src([
+    'app/bower_components/uqlibrary-api/mock/**/*'
+  ]).pipe(gulp.dest(dist('bower_components/uqlibrary-api/mock')));
+
+  return merge(app, bower, mocks)
     .pipe($.size({
       title: 'copy'
     }));
@@ -162,12 +167,16 @@ gulp.task('html', function() {
 });
 
 // Vulcanize granular configuration
-gulp.task('vulcanize', function() {
+gulp.task('vulcanize', ['clean_bower'], function() {
   return gulp.src('app/elements/elements.html')
     .pipe($.vulcanize({
       stripComments: true,
       inlineCss: true,
       inlineScripts: true
+    }))
+    .pipe($.crisper({
+      scriptInHead: false,
+      onlySplit: false
     }))
     .pipe(gulp.dest(dist('elements')))
     .pipe($.size({title: 'vulcanize'}));
@@ -213,12 +222,23 @@ gulp.task('clean', function() {
   return del(['.tmp', dist()]);
 });
 
+// update paths to bower_components for all components inside bower_components
+gulp.task('clean_bower', function() {
+
+  var regEx = new RegExp("bower_components", "g");
+
+  return gulp.src('app/bower_components/**/*.html')
+    .pipe(replace({patterns: [{ match: regEx, replacement: ".."}], usePrefix: false}))
+    .pipe(gulp.dest('app/bower_components'))
+    .pipe($.size({title: 'clean_bower'}));
+});
+
 gulp.task('elements', function() {
   return styleTask('elements', ['**/*.css']);
 });
 
 // Watch files for changes & reload
-gulp.task('serve', ['elements', 'styles'], function() {
+gulp.task('serve', ['elements', 'styles', 'clean_bower'], function() {
   browserSync({
     port: 5000,
     notify: false,

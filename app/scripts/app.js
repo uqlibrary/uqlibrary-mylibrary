@@ -33,7 +33,7 @@
     window.addEventListener('uqlibrary-api-account-loaded', function (e) {
       if (e.detail.hasSession) {
         document.querySelector('#preloader').style.display = 'none';
-        document.querySelector('#mylibrary').style.display = 'block';console.log(e);
+        document.querySelector('#mylibrary').style.display = 'block';
       } else {
         app.$.accountApi.login(document.location.href);
       }

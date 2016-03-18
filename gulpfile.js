@@ -319,6 +319,78 @@ gulp.task('deploy-gh-pages', function() {
 // Adds tasks for `gulp test:local` and `gulp test:remote`
 require('web-component-tester').gulp.init(gulp);
 
+/**
+ * Command line param:
+ *    --path {INVALIDATION_PATH}
+ *
+ * If no bucket path passed will invalidate production subdir
+ */
+gulp.task('invalidate', function () {
+  var awsConfig = JSON.parse(fs.readFileSync('./aws.json'));
+
+  var invalidatePath = '';
+
+  if (argv.path) {
+    invalidatePath = argv.path + '/*';
+  } else {
+    invalidatePath += '/pages/*';
+  }
+
+  $.util.log('Invalidation path: ' + invalidatePath);
+
+  var invalidationBatch = {
+    CallerReference: new Date().toString(),
+    Paths: {
+      Quantity: 1,
+      Items: [
+        invalidatePath
+      ]
+    }
+  };
+
+  var awsSettings = {
+    credentials: {
+      accessKeyId: awsConfig.accessKeyId,
+      secretAccessKey: awsConfig.secretAccessKey
+    },
+    distributionId: awsConfig.params.distribution,
+    region: awsConfig.params.region
+  };
+
+  return gulp.src(['**/*'])
+    .pipe(cloudfront(invalidationBatch, awsSettings));
+});
+
+// upload package to S3
+gulp.task('publish', function () {
+
+  // create a new publisher using S3 options
+  var awsConfig = JSON.parse(fs.readFileSync('./aws.json'));
+  var publisher = $.awspublish.create(awsConfig);
+
+  // define custom headers
+  var headers = {
+    'Cache-Control': 'max-age=315360000, no-transform, public'
+  };
+
+  return gulp.src(dist('**/*'))
+    .pipe($.rename(function (path) {
+      path.dirname = awsConfig.params.bucketSubDir + '/' + path.dirname;
+    }))
+    // gzip, Set Content-Encoding headers
+    .pipe($.awspublish.gzip())
+
+    // publisher will add Content-Length, Content-Type and headers specified above
+    // If not specified it will set x-amz-acl to public-read by default
+    .pipe(publisher.publish(headers))
+
+    // create a cache file to speed up consecutive uploads
+    .pipe(publisher.cache())
+
+    // print upload updates to console
+    .pipe($.awspublish.reporter());
+});
+
 // Load custom tasks from the `tasks` directory
 try {
   require('require-dir')('tasks');

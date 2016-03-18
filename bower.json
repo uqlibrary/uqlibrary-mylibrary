@@ -11,7 +11,8 @@
     "uqlibrary-styles": "uqlibrary/uqlibrary-styles",
     "uqlibrary-starter-kit": "uqlibrary/uqlibrary-starter-kit",
     "font-roboto": "PolymerElements/font-roboto#^1.0.1",
-    "uqlibrary-api": "uqlibrary/uqlibrary-api#polymer1.0"
+    "uqlibrary-api": "uqlibrary/uqlibrary-api#polymer1.0",
+    "uqlibrary-browser-supported": "uqlibrary/uqlibrary-browser-supported"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"

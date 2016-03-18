@@ -41,6 +41,9 @@
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <!-- endbuild -->
 
+  <!-- build:js bower_components/uqlibrary-browser-supported/uqlibrary-browser-supported.js -->
+  <script src="bower_components/uqlibrary-browser-supported/uqlibrary-browser-supported.js"></script>
+
   <!-- Because this project uses vulcanize this should be your only html import
        in this file. All other imports should go in elements.html -->
   <link rel="import" href="elements/elements.html">
@@ -58,28 +61,40 @@
     <div class="header">My Library</div>
 
     <!-- Preload spinner -->
-    <div id="card">
+    <div id="preloader-loading" class="preloader-card">
       <img src="images/loading.svg" width="48" />
       <p id="loadingTitle" class="text-center">Loading my library ...</p>
     </div>
+
+    <!-- Unsupported browser -->
+    <div id="preloader-unsupported" class="preloader-card">
+      Your current browser (<span id="browser-name">ie</span>, version <span id="browser-version">7</span>) is not on UQ
+      Library’s list of supported browsers. If you experience any problems with this site, please try using the site
+      with a different browser, or upgrade your current browser to the latest version.<br /> <br />
+      If you are using assistive technology, please refer to our support for users with disabilities.
+      If you experience any problems with this site, there are Library staff who can provide assistance and supply
+      information in a format that meets your needs.
+    </div>
   </div>
 
-  <template is="dom-bind" id="app">
+  <div id="mylibrary">
+    <template is="dom-bind" id="app">
 
-    <paper-drawer-panel id="paperDrawerPanel" disable-edge-swipe="true">
-      <!-- Drawer Scroll Header Panel -->
-      <div drawer>
-        <uqlibrary-app-menu route="{{route}}" base-url="{{baseUrl}}"></uqlibrary-app-menu>
-      </div>
-      <div main id="headerPanelMain">
-        <iron-pages attr-for-selected="data-route" selected="{{route}}">
-          <section id="home" data-route="home">
-            <uqlibrary-element stand-alone="false"></uqlibrary-element>
-          </section>
-        </iron-pages>
-      </div>
-    </paper-drawer-panel>
-  </template>
+      <paper-drawer-panel id="paperDrawerPanel" disable-edge-swipe="true">
+        <!-- Drawer Scroll Header Panel -->
+        <div drawer>
+          <uqlibrary-app-menu route="{{route}}" base-url="{{baseUrl}}"></uqlibrary-app-menu>
+        </div>
+        <div main id="headerPanelMain">
+          <iron-pages attr-for-selected="data-route" selected="{{route}}">
+            <section id="home" data-route="home">
+              <uqlibrary-element stand-alone="false"></uqlibrary-element>
+            </section>
+          </iron-pages>
+        </div>
+      </paper-drawer-panel>
+    </template>
+  </div>
 
   <script>
     (function () {

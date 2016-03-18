@@ -5,15 +5,22 @@ iron-pages {
   height: 100%;
 }
 
-#paperDrawerPanel {
+#mylibrary {
   display: none;
 }
 
 #preloader {
   display: block;
   background-color: #ddd;
-  height: 100%;
-  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  #unsupportedMessage {
+    display: none;
+  }
 
   .header {
     width: 100%;
@@ -26,18 +33,27 @@ iron-pages {
     font-size: 20px;
   }
 
-  #card {
+  .preloader-card {
     margin: 0 auto;
     margin-top: 100px;
     width: 100%;
-    max-width: 768px;
+    max-width: 720px;
     background-color: #FFF;
     border-radius: 4px;
     border: 1px solid #ccc;
     text-align: center;
-    padding: 40px 0;
+    padding: 40px;
     box-shadow: 5px 5px 5px #999;
-    font-size: 20px;
+    font-size: 14px;
+    font-family: 'Roboto', 'helvetica', 'times new roman', 'sans-serif';
+  }
+
+  #preloader-loading {
+    display: none;
+  }
+
+  #preloader-unsupported {
+    display: block;
   }
 }
 

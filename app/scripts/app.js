@@ -27,8 +27,16 @@
 
     // See https://github.com/Polymer/polymer/issues/1381
     window.addEventListener('WebComponentsReady', function() {
-      document.querySelector('#preloader').style.display = 'none';
-      document.querySelector('#mylibrary').style.display = 'block';
+
+    });
+
+    window.addEventListener('uqlibrary-api-account-loaded', function (e) {
+      if (e.detail.hasSession) {
+        document.querySelector('#preloader').style.display = 'none';
+        document.querySelector('#mylibrary').style.display = 'block';console.log(e);
+      } else {
+        app.$.accountApi.login(document.location.href);
+      }
     });
 
     /**
@@ -42,7 +50,6 @@
       app.$.paperDrawerPanel.closeDrawer();
     };
   } else {
-    console.log(browserData);
     document.querySelector('#browser-name').textContent = browserData.browser;
     document.querySelector('#browser-version').textContent = browserData.version;
   }

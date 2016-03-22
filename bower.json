@@ -12,10 +12,17 @@
     "uqlibrary-starter-kit": "uqlibrary/uqlibrary-starter-kit",
     "font-roboto": "PolymerElements/font-roboto#^1.0.1",
     "uqlibrary-api": "uqlibrary/uqlibrary-api#polymer1.0",
-    "uqlibrary-browser-supported": "uqlibrary/uqlibrary-browser-supported"
+    "uqlibrary-browser-supported": "uqlibrary/uqlibrary-browser-supported",
+    "uqlibrary-papercut": "uqlibrary/uqlibrary-papercut#v1.0.2",
+    "uqlibrary-hours": "uqlibrary/uqlibrary-hours#v1.0.1"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
   },
-  "ignore": []
+  "ignore": [],
+  "resolutions": {
+    "uqlibrary-styles": "master",
+    "uqlibrary-ga": "^1.0.0",
+    "uqlibrary-hours": "v1.0.1"
+  }
 }

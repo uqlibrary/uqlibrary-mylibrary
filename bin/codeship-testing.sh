@@ -18,6 +18,7 @@ case "$branch" in
     echo "install selenium"
     curl -sSL https://raw.githubusercontent.com/codeship/scripts/master/packages/selenium_server.sh | bash -s
     cd bin/local
+    echo "Installed selenium. Running Nightwatch"
     ./nightwatch.js
     ./nightwatch.js --env chrome
   ;;

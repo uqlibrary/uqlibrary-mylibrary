@@ -21,8 +21,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       page.base(app.baseUrl.replace(/\/$/, '<DeploymentUrl>'));
     }
 
-    console.log(app.baseUrl);
-
     function closeDrawer(ctx, next) {
       app.closeDrawer();
       next();
@@ -47,6 +45,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     page('/hours', function () {
       app.route = 'hours';
+    });
+
+    page('/computers', function () {
+      app.route = 'computers';
     });
 
     // 404

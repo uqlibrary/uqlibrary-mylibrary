@@ -14,7 +14,8 @@
     "uqlibrary-api": "uqlibrary/uqlibrary-api#polymer1.0",
     "uqlibrary-browser-supported": "uqlibrary/uqlibrary-browser-supported",
     "uqlibrary-papercut": "uqlibrary/uqlibrary-papercut#v1.0.2",
-    "uqlibrary-hours": "uqlibrary/uqlibrary-hours#v1.0.2"
+    "uqlibrary-hours": "uqlibrary/uqlibrary-hours#v1.0.2",
+    "uqlibrary-computers": "uqlibrary/uqlibrary-computers#v1.0.1"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"

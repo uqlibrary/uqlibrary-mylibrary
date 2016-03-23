@@ -89,14 +89,21 @@
         </div>
         <div main id="headerPanelMain">
           <iron-pages attr-for-selected="data-route" selected="{{route}}">
+            <!-- Home -->
             <section id="home" data-route="home">
               <uqlibrary-element stand-alone="false"></uqlibrary-element>
             </section>
+            <!-- Papercut -->
             <section id="papercut" data-route="papercut">
               <uqlibrary-papercut stand-alone="false"></uqlibrary-papercut>
             </section>
+            <!-- Hours -->
             <section id="hours" data-route="hours">
               <uqlibrary-hours stand-alone="false"></uqlibrary-hours>
+            </section>
+            <!-- Computers -->
+            <section id="computers" data-route="computers">
+              <uqlibrary-computers stand-alone="false"></uqlibrary-computers>
             </section>
           </iron-pages>
         </div>

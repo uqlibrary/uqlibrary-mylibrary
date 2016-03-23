@@ -31,7 +31,9 @@ This project acts as a container for all individual uqlibrary applications.
 * Nightwatch is also run on Codeship for deployment testing. No gulp interface provided
 
 ## Publishing
-* Any commits to master are automatically deploy to [assets](http://assets.library.uq.edu.au/master/mylibrary/index.html)
+* Make sure MyLibrary functions properly when using ```gulp serve:dist```
+* Before committing to master, run ```gulp test```
+* Any commits to master are automatically deployed to [assets](http://assets.library.uq.edu.au/master/mylibrary/index.html)
 * Any commits to production will go live on the main UQ Library website
 
 

@@ -52,11 +52,13 @@
   <!-- For shared styles, shared-styles.html import in elements.html -->
   <style is="custom-style" include="common-styles"></style>
 
-  <!-- build:remove -->
-  <base href="/" />
-  <!-- endbuild -->
+  <script type="text/javascript">
+    var baseHref = "<DeploymentUrl>";
 
-  <base href="<DeploymentUrl>" />
+    if (baseHref.match(/(DeploymentUrl)/)) { baseHref = "/"; }
+
+    document.write("<base href='"+baseHref+"'/>");
+  </script>
 </head>
 
 <body unresolved>

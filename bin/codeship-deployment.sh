@@ -60,6 +60,7 @@ echo "Prepare AWS configuration..."
 
 # Set correct Base URL for routing
 sed -i -e "s#<DeploymentUrl>#${WebsiteUrl}#g" "dist/index.html"
+sed -i -e "s#<DeploymentUrl>#${WebsiteUrl}#g" "dist/scripts/app.js"
 
 # Use env vars to set AWS config
 awsconfigtemp="template.aws.json"

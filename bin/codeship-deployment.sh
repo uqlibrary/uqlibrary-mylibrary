@@ -48,7 +48,7 @@ fi
 if [ ${CI_BRANCH} != "production" ]; then
   export S3BucketSubDir=/${CI_BRANCH}/${dest}
   export InvalidationPath=/${CI_BRANCH}/${dest}
-  export WebsiteUrl=/${CI_BRANCH}/mylibrary
+  export WebsiteUrl=/${CI_BRANCH}/mylibrary/
 else
   export S3BucketSubDir=/${dest}
   export InvalidationPath=/${dest}
@@ -59,7 +59,7 @@ echo "Deploying to S3 bucket sub-dir: ${S3BucketSubDir}"
 echo "Prepare AWS configuration..."
 
 # Set correct Base URL for routing
-sed -i -e "s#<DeploymentUrl>#${WebsiteUrl}#g" "dist/elements/elements.js"
+sed -i -e "s#<DeploymentUrl>#${WebsiteUrl}#g" "dist/index.html"
 
 # Use env vars to set AWS config
 awsconfigtemp="template.aws.json"

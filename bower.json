@@ -2,27 +2,31 @@
   "name": "uqlibrary-mylibrary",
   "private": true,
   "dependencies": {
-    "iron-elements": "PolymerElements/iron-elements#^1.0.0",
-    "neon-elements": "PolymerElements/neon-elements#^1.0.0",
-    "page": "visionmedia/page.js#~1.6.4",
-    "paper-elements": "PolymerElements/paper-elements#^1.0.1",
-    "platinum-elements": "PolymerElements/platinum-elements#^1.1.0",
-    "polymer": "Polymer/polymer#^1.2.0",
-    "uqlibrary-styles": "uqlibrary/uqlibrary-styles",
+    "iron-elements": "Polymerelements/iron-elements#^1.0.9",
+    "neon-elements": "PolymerElements/neon-elements#1.0.0",
+    "page": "visionmedia/page.js#^1.7.1",
+    "paper-elements": "Polymerelements/paper-elements#^1.0.7",
+    "platinum-elements": "Polymerelements/platinum-elements#^2.0.0",
+    "polymer": "^1.4.0",
     "uqlibrary-starter-kit": "uqlibrary/uqlibrary-starter-kit",
-    "font-roboto": "PolymerElements/font-roboto#^1.0.1",
+    "font-roboto": "Polymerelements/font-roboto#^1.0.1",
     "uqlibrary-api": "uqlibrary/uqlibrary-api#polymer1.0",
     "uqlibrary-browser-supported": "uqlibrary/uqlibrary-browser-supported",
-    "uqlibrary-papercut": "uqlibrary/uqlibrary-papercut#v1.0.2",
-    "uqlibrary-hours": "uqlibrary/uqlibrary-hours#v1.0.2",
-    "uqlibrary-computers": "uqlibrary/uqlibrary-computers#v1.0.2"
+    "uqlibrary-papercut": "uqlibrary/uqlibrary-papercut#^1.0.4",
+    "uqlibrary-hours": "uqlibrary/uqlibrary-hours#^1.0.4",
+    "uqlibrary-computers": "uqlibrary/uqlibrary-computers#^1.0.5",
+    "uqlibrary-styles": "uqlibrary/uqlibrary-styles#master",
+    "uqlibrary-menu": "uqlibrary/uqlibrary-menu#^1.0.1"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
   },
   "ignore": [],
   "resolutions": {
+    "platinum-elements": "^2.0.0",
     "uqlibrary-styles": "master",
-    "uqlibrary-ga": "^1.0.0"
+    "platinum-bluetooth": "^2.0.0",
+    "iron-elements": "^1.0.9",
+    "paper-elements": "^1.0.7"
   }
 }

@@ -51,6 +51,14 @@
 
   <!-- For shared styles, shared-styles.html import in elements.html -->
   <style is="custom-style" include="common-styles"></style>
+
+  <script type="text/javascript">
+    var baseHref = "<DeploymentUrl>";
+
+    if (baseHref.match(/(DeploymentUrl)/)) { baseHref = "/"; }
+
+    document.write("<base href='"+baseHref+"'/>");
+  </script>
 </head>
 
 <body unresolved>

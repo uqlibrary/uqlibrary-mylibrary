@@ -5,7 +5,6 @@ var Nightwatch = require('../../node_modules/nightwatch/lib/index.js');
 try {
 
   Nightwatch.cli(function(argv) {
-    console.log(Nightwatch);
     Nightwatch.runner(argv);
   });
 

@@ -136,17 +136,42 @@ gulp.task('copy', function() {
   // Copy over only the bower_components we need
   // These are things which cannot be vulcanized
   var bower = gulp.src([
-    'app/bower_components/{webcomponentsjs,platinum-sw,sw-toolbox,promise-polyfill}/**/*',
+    'app/bower_components/{webcomponentsjs,platinum-sw,sw-toolbox,promise-polyfill}/**/*'
   ]).pipe(gulp.dest(dist('bower_components')));
 
   var mocks = gulp.src([
     'app/bower_components/uqlibrary-api/mock/**/*'
   ]).pipe(gulp.dest(dist('bower_components/uqlibrary-api/mock')));
 
-  return merge(app, bower, mocks)
+  var data = gulp.src([
+    'app/bower_components/uqlibrary-api/data/*'
+  ]).pipe(gulp.dest(dist('bower_components/uqlibrary-api/data')));
+
+  var browserSupported = gulp.src([
+    'app/bower_components/uqlibrary-browser-supported/*'
+  ]).pipe(gulp.dest(dist('bower_components/uqlibrary-browser-supported')));
+
+  // Force the app - gulp sometimes bugs out and "forgets" it
+  var mainApp = gulp.src([
+    'app/scripts/*'
+  ]).pipe(gulp.dest(dist('scripts')));
+
+  return merge(app, bower, mocks, data, mainApp, browserSupported)
     .pipe($.size({
       title: 'copy'
     }));
+});
+
+// inject browser-update.js code into html pages
+gulp.task('inject-browser-update', function() {
+
+  var regEx = new RegExp("//bower_components/uqlibrary-browser-supported/browser-update.js", "g");
+  var browserUpdate=fs.readFileSync("app/bower_components/uqlibrary-browser-supported/browser-update.js", "utf8");
+
+  return gulp.src(dist('*'))
+    .pipe(replace({patterns: [{ match: regEx, replacement: browserUpdate}], usePrefix: false}))
+    .pipe(gulp.dest(dist()))
+    .pipe($.size({title: 'inject-browser-update'}));
 });
 
 // Copy web fonts to dist
@@ -296,6 +321,7 @@ gulp.task('default', ['clean'], function(cb) {
     ['ensureFiles', 'copy', 'styles'],
     ['images', 'fonts', 'html'],
     'vulcanize', // 'cache-config',
+    'inject-browser-update',
     cb);
 });
 

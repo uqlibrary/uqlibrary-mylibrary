@@ -11,7 +11,7 @@
     "uqlibrary-starter-kit": "uqlibrary/uqlibrary-starter-kit",
     "font-roboto": "Polymerelements/font-roboto#^1.0.1",
     "uqlibrary-api": "uqlibrary/uqlibrary-api#polymer1.0",
-    "uqlibrary-browser-supported": "uqlibrary/uqlibrary-browser-supported",
+    "uqlibrary-browser-supported": "uqlibrary/uqlibrary-browser-supported#master",
     "uqlibrary-papercut": "uqlibrary/uqlibrary-papercut#^1.0.4",
     "uqlibrary-hours": "uqlibrary/uqlibrary-hours#^1.0.4",
     "uqlibrary-computers": "uqlibrary/uqlibrary-computers#^1.0.5",

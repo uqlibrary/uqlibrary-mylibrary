@@ -95,7 +95,7 @@
     <template is="dom-bind" id="app">
       <uqlibrary-api-account id="accountApi"></uqlibrary-api-account>
 
-      <paper-drawer-panel id="paperDrawerPanel" disable-edge-swipe="true">
+      <paper-drawer-panel id="paperDrawerPanel" disable-swipe="true">
         <!-- Drawer Scroll Header Panel -->
         <div drawer>
           <!--<uqlibrary-app-menu route="{{route}}" base-url="{{baseUrl}}"></uqlibrary-app-menu>-->
@@ -118,6 +118,10 @@
             <!-- Computers -->
             <section id="computers" data-route="computers">
               <uqlibrary-computers stand-alone="false"></uqlibrary-computers>
+            </section>
+            <!-- Contacts -->
+            <section id="contact" data-route="contact">
+              <uqlibrary-contacts stand-alone="false"></uqlibrary-contacts>
             </section>
           </iron-pages>
         </div>

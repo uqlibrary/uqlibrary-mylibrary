@@ -16,7 +16,7 @@
     "uqlibrary-hours": "uqlibrary/uqlibrary-hours#^1.0.4",
     "uqlibrary-computers": "uqlibrary/uqlibrary-computers#^1.0.5",
     "uqlibrary-styles": "uqlibrary/uqlibrary-styles#master",
-    "uqlibrary-menu": "uqlibrary/uqlibrary-menu#v1.0.2",
+    "uqlibrary-menu": "uqlibrary/uqlibrary-menu#v1.0.3",
     "uqlibrary-contacts": "uqlibrary/uqlibrary-contacts#v1.0.2"
   },
   "devDependencies": {
@@ -28,6 +28,7 @@
     "iron-elements": "^1.0.9",
     "paper-elements": "^1.0.7",
     "platinum-elements": "^2.0.0",
-    "platinum-bluetooth": "^2.0.0"
+    "platinum-bluetooth": "^2.0.0",
+    "uqlibrary-menu": "v1.0.3"
   }
 }

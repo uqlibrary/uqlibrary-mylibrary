@@ -1,0 +1,14 @@
+CACHE MANIFEST
+
+# Version <VERSION>
+
+NETWORK:
+*
+
+CACHE:
+http://assets.library.uq.edu.au/master/mylibrary/favicon.ico
+http://assets.library.uq.edu.au/master/mylibrary/scripts/app.js
+http://assets.library.uq.edu.au/master/mylibrary/bower_components/webcomponentsjs/webcomponents-lite.min.js
+http://assets.library.uq.edu.au/master/mylibrary/elements/elements.html
+http://assets.library.uq.edu.au/master/mylibrary/elements/elements.js
+http://assets.library.uq.edu.au/master/mylibrary/styles/main.css

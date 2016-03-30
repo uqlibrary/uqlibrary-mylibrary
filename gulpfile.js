@@ -174,6 +174,18 @@ gulp.task('inject-browser-update', function() {
     .pipe($.size({title: 'inject-browser-update'}));
 });
 
+// inject preloader.html code into html pages
+gulp.task('inject-preloader', function() {
+
+  var regEx = new RegExp("#preloader#", "g");
+  var browserUpdate=fs.readFileSync("app/bower_components/uqlibrary-browser-supported/preloader.html", "utf8");
+
+  return gulp.src(dist('*'))
+      .pipe(replace({patterns: [{ match: regEx, replacement: browserUpdate}], usePrefix: false}))
+      .pipe(gulp.dest(dist()))
+      .pipe($.size({title: 'inject-preloader'}));
+});
+
 // Copy web fonts to dist
 gulp.task('fonts', function() {
   return gulp.src(['app/fonts/**'])
@@ -266,7 +278,7 @@ gulp.task('serve', ['elements', 'styles', 'clean_bower'], function() {
   browserSync({
     port: 5000,
     notify: false,
-    logPrefix: 'PSK',
+    logPrefix: 'MyLibrary',
     snippetOptions: {
       rule: {
         match: '<span id="browser-sync-binding"></span>',
@@ -296,7 +308,7 @@ gulp.task('serve:dist', ['default'], function() {
   browserSync({
     port: 5001,
     notify: false,
-    logPrefix: 'PSK',
+    logPrefix: 'MyLibrary',
     snippetOptions: {
       rule: {
         match: '<span id="browser-sync-binding"></span>',
@@ -321,6 +333,7 @@ gulp.task('default', ['clean'], function(cb) {
     ['ensureFiles', 'copy', 'styles'],
     ['images', 'fonts', 'html'],
     'vulcanize', // 'cache-config',
+    'inject-preloader',
     'inject-browser-update',
     cb);
 });

@@ -17,7 +17,7 @@
     "uqlibrary-computers": "uqlibrary/uqlibrary-computers#^1.0.5",
     "uqlibrary-styles": "uqlibrary/uqlibrary-styles#master",
     "uqlibrary-menu": "uqlibrary/uqlibrary-menu#v1.0.6",
-    "uqlibrary-contacts": "uqlibrary/uqlibrary-contacts#v1.0.2",
+    "uqlibrary-contacts": "uqlibrary/uqlibrary-contacts#v1.0.3",
     "uqlibrary-masquerade": "uqlibrary/uqlibrary-masquerade#v1.0.0"
   },
   "devDependencies": {

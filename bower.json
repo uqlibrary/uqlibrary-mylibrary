@@ -18,7 +18,8 @@
     "uqlibrary-styles": "uqlibrary/uqlibrary-styles#master",
     "uqlibrary-menu": "uqlibrary/uqlibrary-menu#v1.0.6",
     "uqlibrary-contacts": "uqlibrary/uqlibrary-contacts#v1.0.2",
-    "uqlibrary-masquerade": "uqlibrary/uqlibrary-masquerade#v1.0.0"
+    "uqlibrary-masquerade": "uqlibrary/uqlibrary-masquerade#v1.0.0",
+    "uqlibrary-search": "uqlibrary/uqlibrary-search#v1.0.0"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
@@ -30,6 +31,7 @@
     "paper-elements": "^1.0.7",
     "platinum-elements": "^2.0.0",
     "platinum-bluetooth": "^2.0.0",
-    "uqlibrary-menu": "v1.0.6"
+    "uqlibrary-menu": "v1.0.6",
+    "uqlibrary-ga": "^1.0.0"
   }
 }

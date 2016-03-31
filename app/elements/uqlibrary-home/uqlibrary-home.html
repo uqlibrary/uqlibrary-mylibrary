@@ -1,0 +1,52 @@
+<link rel="import" href="../elements.html">
+
+<!--
+Element providing the library main home component
+
+Example:
+    <uqlibrary-home></uqlibrary-home>
+
+@demo
+
+@demo demo/index.html Demo of the Full view
+-->
+<dom-module id="uqlibrary-home">
+  <!-- All element styles -->
+  <style is="custom-style" include="iron-flex iron-flex-alignment common-styles">
+    :host {
+      @apply(--uql-app-host);
+      background-color: #FFF;
+    }
+
+    .content {
+      padding: 20px;
+    }
+  </style>
+
+  <!-- Template -->
+  <template>
+    <div class="fit layout vertical">
+      <paper-header-panel class="flex">
+        <!-- Header -->
+        <paper-toolbar>
+          <paper-icon-button icon="menu" on-tap="_toggleDrawerPanel" paper-drawer-toggle title="open menu button" aria-label="open menu button"></paper-icon-button>
+
+          <div class="title uqlibrary-app-title" title="[[headerTitle]]">[[headerTitle]]</div>
+        </paper-toolbar>
+
+        <!-- Content -->
+        <div class="content">
+          <uqlibrary-search app-name="[[headerTitle]] search"></uqlibrary-search>
+          <br /><br />
+
+          <uqlibrary-app-buttons></uqlibrary-app-buttons>
+        </div>
+
+      </paper-header-panel>
+    </div>
+
+  </template>
+
+  <!-- Location of the script -->
+  <script src="uqlibrary-home.js"></script>
+</dom-module>

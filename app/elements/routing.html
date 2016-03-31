@@ -55,6 +55,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       app.route = 'contact';
     });
 
+    page('/masquerade', function () {
+      app.route = 'masquerade';
+    });
+
     // 404
     page('*', function () {
       page.redirect(app.baseUrl);

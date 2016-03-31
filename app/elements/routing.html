@@ -26,42 +26,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       next();
     }
 
+    var routes =
+
     // Routes
     page('*', closeDrawer, function (ctx, next) {
-      next();
-    });
+      var routes = ['home', 'contact', 'papercut', 'hours', 'computers', 'masquerade'];
 
-    page('/', function () {
-      app.route = 'home';
-    });
+      // IE fix
+      if (ctx.path[0] == ".") {
+        ctx.path = ctx.path.substring(2);
+      } else {
+        ctx.path = ctx.path.substring(1);
+      }
 
-    page(app.baseUrl, function () {
-      app.route = 'home';
-    });
+      if (routes.indexOf(ctx.path) === -1) {
+        ctx.path = "home";
+      }
 
-    page('/papercut', function () {
-      app.route = 'papercut';
-    });
-
-    page('/hours', function () {
-      app.route = 'hours';
-    });
-
-    page('/computers', function () {
-      app.route = 'computers';
-    });
-
-    page('/contact', function () {
-      app.route = 'contact';
-    });
-
-    page('/masquerade', function () {
-      app.route = 'masquerade';
-    });
-
-    // 404
-    page('*', function () {
-      page.redirect(app.baseUrl);
+      app.route = ctx.path;
     });
 
     // add #! before urls

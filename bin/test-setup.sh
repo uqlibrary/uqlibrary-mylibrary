@@ -16,12 +16,11 @@ for component in ${components[@]}; do
   list="$list '$component',"
 done
 
-list="[ $list ]"
 dir="app/test/"
 
 cp "app/test/template.index.html" "app/test/index.html"
 
-sed -i -e "s#\[\]#${list}#g" "app/test/index.html"
+sed -i -e "s#\[\]#[ ${list} ]#g" "app/test/index.html"
 sed -i -e "s#${dir}##g" "app/test/index.html"
 
 #echo "Check file syntax"

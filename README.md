@@ -16,14 +16,14 @@ This project acts as a container for all individual uqlibrary applications.
 
 ## Developing a new app
 1. Clone [uqlibrary-starter-kit](https://github.com/uqlibrary/uqlibrary-starter-kit)
-2. Make sure the element contains the paper-toolbar
-3. Make sure the element has a "standAlone" attribute and a "_toggleDrawerPanel" function
-4. When the App is ready, tag a release
-5. In uqlibrary-mylibrary, bower install the element (ie. bower install uqlibrary/uqlibrary-starter-kit#v1.0.0)
-6. Add the element in app/elements/elements.html
-7. Add a section containing the element in app/index.html
-8. Add a menu item in uqlibrary-api (applications HTML)
-9. Add a route via PageJS in app/elements/routing.html
+1. Make sure the element contains the paper-toolbar
+1. Make sure the element has a "standAlone" attribute and a "_toggleDrawerPanel" function
+1. When the App is ready, tag a release, eg git tag -a v1.0.0 -m 'First release'
+1. In uqlibrary-mylibrary, bower install the element (ie. bower install uqlibrary/uqlibrary-starter-kit#v1.0.0)
+1. Add the element in app/elements/elements.html
+1. Add a section containing the element in app/index.html
+1. Add a menu item in uqlibrary-api (applications HTML)
+1. Add a route via PageJS in app/elements/routing.html
 
 ## Tests
 * gulp test:local

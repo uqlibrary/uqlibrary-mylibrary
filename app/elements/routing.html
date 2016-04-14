@@ -30,7 +30,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     // Routes
     page('*', closeDrawer, function (ctx, next) {
-      var routes = ['home', 'contact', 'papercut', 'hours', 'computers', 'masquerade'];
+      var routes = [
+        'computers',
+        'contact',
+        'home',
+        'hours',
+        'masquerade',
+        'papercut',
+        'research'
+      ];
 
       // IE fix
       if (ctx.path[0] == ".") {
@@ -40,7 +48,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       if (routes.indexOf(ctx.path) === -1) {
-        ctx.path = "home";
+        ctx.path = 'home';
       }
 
       app.route = ctx.path;

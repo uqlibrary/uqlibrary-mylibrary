@@ -34,6 +34,7 @@
     "platinum-elements": "^2.0.0",
     "platinum-bluetooth": "^2.0.0",
     "uqlibrary-menu": "v1.0.6",
-    "uqlibrary-ga": "^1.0.0"
+    "uqlibrary-ga": "^1.0.0",
+    "uqlibrary-api": "polymer1.0"
   }
 }

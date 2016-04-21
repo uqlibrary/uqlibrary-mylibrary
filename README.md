@@ -40,6 +40,18 @@ This project acts as a container for all individual uqlibrary applications.
 * gulp test:remote
 * Nightwatch is also run on Codeship for deployment testing. No gulp interface provided
 
+## Running with live data locally
+
+* Add dev-app.library.uq.edu.au to your /etc/hosts or equivalent file
+* Comment out the cookies which control mock data in demo.html (or create a new file)
+* Run the gulp task
+```
+gulp demo
+```
+* If you still have the mock cookies in your browser, delete them via your browser.
+* Use the Masquerading function at app.library.uq.edu.au/v1/home to masquerade as a user with data you are interested in.
+* Return to your demo page and you should be getting live data.
+
 ## Publishing
 * Make sure MyLibrary functions properly when using ```gulp serve:dist```
 * Before committing to master, run ```gulp test```

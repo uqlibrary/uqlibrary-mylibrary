@@ -21,8 +21,7 @@
     "uqlibrary-hours": "uqlibrary/uqlibrary-hours#^1.0.4",
     "uqlibrary-masquerade": "uqlibrary/uqlibrary-masquerade#polymer1.0",
     "uqlibrary-papercut": "uqlibrary/uqlibrary-papercut#polymer1.0",
-    "uqlibrary-research": "uqlibrary/uqlibrary-research#polymer1.0",
-    "uqlibrary-borrowing": "uqlibrary/uqlibrary-borrowing#polymer1.0"
+    "uqlibrary-research": "uqliwtbrary/uqlibrary-research#polymer1.0"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"

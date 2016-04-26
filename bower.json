@@ -10,18 +10,20 @@
     "platinum-elements": "Polymerelements/platinum-elements#^2.0.0",
     "polymer": "^1.4.0",
     "uqlibrary-api": "uqlibrary/uqlibrary-api#polymer1.0",
-    "uqlibrary-browser-supported": "uqlibrary/uqlibrary-browser-supported#master",
-    "uqlibrary-computers": "uqlibrary/uqlibrary-computers#^1.0.5",
-    "uqlibrary-contacts": "uqlibrary/uqlibrary-contacts#v1.0.6",
-    "uqlibrary-courses": "uqlibrary/uqlibrary-courses#polymer1.0",
-    "uqlibrary-hours": "uqlibrary/uqlibrary-hours#^1.0.4",
-    "uqlibrary-masquerade": "uqlibrary/uqlibrary-masquerade#v1.0.0",
-    "uqlibrary-menu": "uqlibrary/uqlibrary-menu#v1.0.6",
-    "uqlibrary-papercut": "uqlibrary/uqlibrary-papercut#polymer1.0",
-    "uqlibrary-research": "uqlibrary/uqlibrary-research#polymer1.0",
+    "uqlibrary-styles": "uqlibrary/uqlibrary-styles#v1.0.0",
+    "uqlibrary-browser-supported": "uqlibrary/uqlibrary-browser-supported#v1.0.0",
     "uqlibrary-search": "uqlibrary/uqlibrary-search#v1.0.8",
     "uqlibrary-starter-kit": "uqlibrary/uqlibrary-starter-kit",
-    "uqlibrary-styles": "uqlibrary/uqlibrary-styles#master"
+    "uqlibrary-menu": "uqlibrary/uqlibrary-menu#v1.0.6",
+    "uqlibrary-computers": "uqlibrary/uqlibrary-computers#^1.0.5",
+    "uqlibrary-contacts": "uqlibrary/uqlibrary-contacts#polymer1.0",
+    "uqlibrary-courses": "uqlibrary/uqlibrary-courses#polymer1.0",
+    "uqlibrary-hours": "uqlibrary/uqlibrary-hours#^1.0.4",
+    "uqlibrary-masquerade": "uqlibrary/uqlibrary-masquerade#polymer1.0",
+    "uqlibrary-papercut": "uqlibrary/uqlibrary-papercut#polymer1.0",
+    "uqlibrary-research": "uqlibrary/uqlibrary-research#polymer1.0",
+    "uqlibrary-booking": "uqlibrary/uqlibrary-booking#polymer1.0",
+    "lodash": "3.7.0"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
@@ -36,6 +38,8 @@
     "uqlibrary-menu": "v1.0.6",
     "uqlibrary-ga": "^1.0.0",
     "uqlibrary-api": "polymer1.0",
-    "uqlibrary-autosuggest-input": "master"
+    "uqlibrary-autosuggest-input": "master",
+    "uqlibrary-toolbar": "polymer1.0",
+    "lodash": "^3.7.0"
   }
 }

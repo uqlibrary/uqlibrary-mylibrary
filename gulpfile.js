@@ -289,6 +289,10 @@ gulp.task("demo", [], function () {
       {
         match: /(document\.cookie="UQLMockData)/g,
         replace: "// $1"
+      },
+      {
+        match: /\/\/ (delete_cookie)/g,
+        replace: "$1"
       }
     ],
     files: [

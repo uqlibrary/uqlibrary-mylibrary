@@ -26,10 +26,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       next();
     }
 
-    var routes =
-
     // Routes
-    page('*', closeDrawer, function (ctx, next) {
+    page('*', closeDrawer, function (ctx) {
       var routes = [
         'computers',
         'booking',
@@ -43,15 +41,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       ];
 
       // IE fix
-      if (ctx.path[0] == ".") {
+      if (ctx.path[0] === ".") {
         ctx.path = ctx.path.substring(2);
-      } else {
+      } else if (ctx.path[0] === "/") {
         ctx.path = ctx.path.substring(1);
       }
+
+      console.log(ctx.path);
+      console.log(routes.indexOf(ctx.path));
 
       if (routes.indexOf(ctx.path) === -1) {
         ctx.path = 'home';
       }
+
+      console.log(ctx);
 
       app.route = ctx.path;
     });
@@ -60,6 +63,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     page({
       hashbang: true
     });
+
+
 
   });
 </script>

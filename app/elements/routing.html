@@ -47,14 +47,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         ctx.path = ctx.path.substring(1);
       }
 
-      console.log(ctx.path);
-      console.log(routes.indexOf(ctx.path));
-
       if (routes.indexOf(ctx.path) === -1) {
         ctx.path = 'home';
       }
-
-      console.log(ctx);
 
       app.route = ctx.path;
     });

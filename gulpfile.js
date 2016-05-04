@@ -26,10 +26,13 @@ var glob = require('glob-all');
 var historyApiFallback = require('connect-history-api-fallback');
 var packageJson = require('./package.json');
 var crypto = require('crypto');
-var ensureFiles = require('./tasks/ensure-files.js');
 var replace = require('gulp-replace-task');
 var cloudfront = require('gulp-invalidate-cloudfront');
 var argv = require('yargs').argv;
+
+// Other tasks
+var ensureFiles = require('./tasks/ensure-files.js');
+var preDeployTasks = require('./tasks/pre-deployment-tasks.js');
 
 // var ghPages = require('gulp-gh-pages');
 
@@ -367,6 +370,12 @@ gulp.task('default', ['clean'], function (cb) {
     'vulcanize', // 'cache-config',
     'inject-preloader',
     'inject-browser-update',
+    'rev',
+    'monkey-patch-rev-manifest',
+    'rev-replace-polymer-fix',
+    'app-cache-version-update',
+    'rev-appcache-update',
+    'remove-rev-file',
     cb);
 });
 

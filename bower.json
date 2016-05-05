@@ -40,7 +40,6 @@
     "uqlibrary-ga": "^1.0.0",
     "uqlibrary-api": "polymer1.0",
     "lodash": "^3.7.0",
-    "uqlibrary-autosuggest-input": "v1.0.3",
-    "uqlibrary-iron-dropdown": "v1.2.1"
+    "uqlibrary-toolbar": "v1.0.6"
   }
 }

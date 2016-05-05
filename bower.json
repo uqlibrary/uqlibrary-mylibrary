@@ -31,15 +31,6 @@
   },
   "ignore": [],
   "resolutions": {
-    "uqlibrary-styles": "master",
-    "iron-elements": "^1.0.9",
-    "paper-elements": "^1.0.7",
-    "platinum-elements": "^2.0.0",
-    "platinum-bluetooth": "^2.0.0",
-    "uqlibrary-menu": "v1.0.6",
-    "uqlibrary-ga": "^1.0.0",
-    "uqlibrary-api": "polymer1.0",
-    "lodash": "^3.7.0",
-    "uqlibrary-toolbar": "v1.0.6"
+    "paper-elements": "^1.0.7"
   }
 }

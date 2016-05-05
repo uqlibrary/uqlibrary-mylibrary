@@ -31,6 +31,15 @@
   },
   "ignore": [],
   "resolutions": {
-    "paper-elements": "^1.0.7"
+    "paper-elements": "^1.0.7",
+    "platinum-elements": "^2.0.0",
+    "iron-elements": "^1.0.9",
+    "uqlibrary-styles": "1.0.0",
+    "uqlibrary-api": "polymer1.0",
+    "platinum-bluetooth": "^2.0.0",
+    "uqlibrary-autosuggest-input": "v1.0.6",
+    "uqlibrary-ga": "v1.0.3",
+    "uqlibrary-iron-dropdown": "v1.2.2",
+    "lodash": "^3.7.0"
   }
 }

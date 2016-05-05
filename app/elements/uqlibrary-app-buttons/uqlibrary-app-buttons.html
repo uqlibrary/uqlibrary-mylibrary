@@ -25,15 +25,12 @@ Example:
 
     <template is="dom-repeat" items="[[ applications ]]">
       <template is="dom-if" if="[[item.isLink]]">
-        <!-- App -->
-        <template is="dom-if" if="[[!item.isExternal]]">
-          <paper-button class="button-colored-theme inverse">
-            <a data-route$="[[item.route]]" href=".[[item.link]]" on-tap="_appClicked" aria-label="[[item.description]]">
-              <iron-icon icon="[[item.icon]]"></iron-icon>
-              <div class="button-small">[[item.title]]</div>
-            </a>
-          </paper-button>
-        </template>
+        <paper-button class="button-colored-theme inverse">
+          <a data-route$="[[item.route]]" href=".[[item.link]]" on-tap="_appClicked" aria-label="[[item.description]]">
+            <iron-icon icon="[[item.icon]]"></iron-icon>
+            <div class="button-small">[[item.title]]</div>
+          </a>
+        </paper-button>
       </template>
     </template>
   </template>

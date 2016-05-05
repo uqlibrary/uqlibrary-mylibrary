@@ -15,23 +15,54 @@ Example:
   <template>
     <!-- All element styles -->
     <style is="custom-style" include="iron-flex iron-flex-alignment common-styles">
+      :host {
+        @apply(--layout-vertical);
+      }
+
       paper-button {
         width: 130px;
+      }
+
+      paper-card {
+        margin: 50px auto;
+        width: 100%;
+        max-width: 600px;
+      }
+
+      paper-item {
+        color: var(--accent-color);
+        cursor: pointer;
+        border-top: 1px solid var(--border-color);
       }
     </style>
 
     <uqlibrary-api-account id="apiAccount"></uqlibrary-api-account>
     <uqlibrary-api-applications id="apiApplications" user="{{_account}}"></uqlibrary-api-applications>
 
-    <template is="dom-repeat" items="[[ applications ]]">
-      <template is="dom-if" if="[[item.isLink]]">
-        <paper-button class="button-colored-theme inverse">
-          <a data-route$="[[item.route]]" href=".[[item.link]]" on-tap="_appClicked" aria-label="[[item.description]]">
-            <iron-icon icon="[[item.icon]]"></iron-icon>
-            <div class="button-small">[[item.title]]</div>
-          </a>
-        </paper-button>
+    <!-- Applications -->
+    <div class="applications">
+      <template is="dom-repeat" items="[[ applications ]]">
+        <template is="dom-if" if="[[item.isLink]]">
+          <paper-button class="button-colored-theme inverse">
+            <a data-route$="[[item.route]]" href=".[[item.link]]" on-tap="_appClicked" aria-label="[[item.description]]">
+              <iron-icon icon="[[item.icon]]"></iron-icon>
+              <div class="button-small">[[item.title]]</div>
+            </a>
+          </paper-button>
+        </template>
       </template>
+    </div>
+
+    <!-- Service links -->
+    <template is="dom-if" if="{{_showServices}}">
+      <paper-card elevation="2" heading="Library Services">
+        <template is="dom-repeat" items="[[_services]]">
+          <paper-item on-click="_serviceClicked">
+            <paper-ripple></paper-ripple>
+            [[item.title]]
+          </paper-item>
+        </template>
+      </paper-card>
     </template>
   </template>
 

@@ -13,6 +13,20 @@
         observer: '_applicationsChanged'
       },
       /**
+       * Holds the service link(s)
+       */
+      _services: {
+        type: Array,
+        value: []
+      },
+      /**
+       * Whether the show services
+       */
+      _showServices: {
+        type: Boolean,
+        value: false
+      },
+      /**
        * Holds the user's account
        */
       _account: {
@@ -30,6 +44,7 @@
         if (e.detail.hasSession) {
           self._account = e.detail;
           self.$.apiApplications.get();
+          self._getServices();
         }
       });
 
@@ -40,6 +55,14 @@
 
       this.$.apiAccount.get();
       this.$.apiApplications.get();
+    },
+    /**
+     * Checks if this user has service links
+     * @returns {boolean}
+     * @private
+     */
+    _hasServices: function () {
+      return (this._services && this._services.length > 0);
     },
     /**
      * Called when an app button has been clicked
@@ -78,15 +101,6 @@
         }
       }
 
-      // Add service apps
-      var serviceApps = this._getServiceItems();
-      _.forEach(serviceApps, function (value) {
-        value.isExternal = true;
-        value.isLink = true;
-
-        apps.push(value);
-      });
-
       if (apps.length != this.applications.length) {
         this.applications = apps;
       }
@@ -97,36 +111,30 @@
      * Returns an app item
      * @private
      */
-    _getServiceItems: function () {
-      var student = {
-        link: 'https://www.library.uq.edu.au/library-services/services-for-students',
-        icon: 'hardware:developer-board',
-        title: 'Services for students'
-      };
-      var researchers = {
-        link: 'https://www.library.uq.edu.au/library-services/services-for-researchers',
-        icon: 'hardware:developer-board',
-        title: 'Services for researchers'
-      };
-      var alumni = {
-        link: 'https://www.library.uq.edu.au/library-services/services-for-uq-alumni',
-        icon: 'hardware:developer-board',
-        title: 'Services for UQ alumni'
-      };
-      var secondarySchools = {
-        link: 'https://www.library.uq.edu.au/library-services/services-for-secondary-schools',
-        icon: 'hardware:developer-board',
-        title: 'Services for secondary schools'
-      };
+    _getServices: function () {
       var community = {
         link: 'https://www.library.uq.edu.au/library-services/services-for-community',
-        icon: 'hardware:developer-board',
         title: 'Services for community'
       };
       var hospitalStaff = {
         link: 'https://www.library.uq.edu.au/library-services/services-for-hospital-staff',
-        icon: 'hardware:developer-board',
         title: 'Services for hospital staff'
+      };
+      var researchers = {
+        link: 'https://www.library.uq.edu.au/library-services/services-for-researchers',
+        title: 'Services for researchers'
+      };
+      var secondarySchools = {
+        link: 'https://www.library.uq.edu.au/library-services/services-for-secondary-schools',
+        title: 'Services for secondary schools'
+      };
+      var student = {
+        link: 'https://www.library.uq.edu.au/library-services/services-for-students',
+        title: 'Services for students'
+      };
+      var alumni = {
+        link: 'https://www.library.uq.edu.au/library-services/services-for-uq-alumni',
+        title: 'Services for UQ alumni'
       };
 
       var serviceItems = [];
@@ -156,11 +164,20 @@
           break;
         case 17:
         case 18:
-          serviceItems = [ student, researchers, secondarySchools, community, hospitalStaff, alumni ];
+          serviceItems = [ community, hospitalStaff, researchers, secondarySchools, student, alumni ];
           break;
       }
 
-      return serviceItems;
+      this._services = serviceItems;
+      this._showServices = (serviceItems.length > 0);
+    },
+    /**
+     * Called when a service is clicked
+     * @param e
+     * @private
+     */
+    _serviceClicked: function (e) {
+      window.location = e.model.item.link;
     }
   })
 })();

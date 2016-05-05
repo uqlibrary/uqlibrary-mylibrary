@@ -22,7 +22,7 @@
     "uqlibrary-masquerade": "uqlibrary/uqlibrary-masquerade#polymer1.0",
     "uqlibrary-papercut": "uqlibrary/uqlibrary-papercut#polymer1.0",
     "uqlibrary-research": "uqlibrary/uqlibrary-research#polymer1.0",
-    "uqlibrary-booking": "uqlibrary/uqlibrary-booking#v1.0.4",
+    "uqlibrary-booking": "uqlibrary/uqlibrary-booking#v1.0.5",
     "lodash": "3.7.0"
   },
   "devDependencies": {

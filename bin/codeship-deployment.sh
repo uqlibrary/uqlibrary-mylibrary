@@ -48,7 +48,7 @@ echo "Deploying to S3 bucket sub-dir: ${S3BucketSubDir}"
 echo "Prepare AWS configuration..."
 
 # Set correct Base URL for routing
-sed -i -e "s#<DeploymentUrl>#${WebsiteUrl}#g" "dist/*"
+find dist/* -type f -exec sed -i -e "s#<DeploymentUrl>#${WebsiteUrl}#g" {} \;
 
 # Use env vars to set AWS config
 awsconfigtemp="template.aws.json"

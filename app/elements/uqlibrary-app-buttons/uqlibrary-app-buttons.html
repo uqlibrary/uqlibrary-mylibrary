@@ -34,6 +34,24 @@ Example:
         cursor: pointer;
         border-top: 1px solid var(--border-color);
       }
+
+      .button-small {
+        padding: 0.8em 0.2em;
+      }
+
+      @media all and (max-width: 376px) {
+        paper-button {
+          width: 101px;
+          padding: 0.7em 0.2em;
+        }
+      }
+
+      @media all and (max-width: 320px) {
+        paper-button {
+          width: 130px;
+        }
+      }
+
     </style>
 
     <uqlibrary-api-account id="apiAccount"></uqlibrary-api-account>

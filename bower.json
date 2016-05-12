@@ -22,7 +22,7 @@
     "uqlibrary-papercut": "uqlibrary/uqlibrary-papercut#v1.0.7",
     "uqlibrary-research": "uqlibrary/uqlibrary-research#v1.0.7",
     "uqlibrary-booking": "uqlibrary/uqlibrary-booking#v1.0.9",
-    "uqlibrary-borrowing": "uqlibrary/uqlibrary-borrowing#v1.0.6",
+    "uqlibrary-borrowing": "uqlibrary/uqlibrary-borrowing#v1.0.7",
     "lodash": "3.7.0"
   },
   "devDependencies": {

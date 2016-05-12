@@ -136,6 +136,14 @@
         link: 'https://www.library.uq.edu.au/library-services/services-for-uq-alumni',
         title: 'Services for UQ alumni'
       };
+      var teachingStaff = {
+        link: 'https://www.library.uq.edu.au/library-services/services-for-teaching-staff',
+        title: 'Services for teaching staff'
+      };
+      var profStaff = {
+        link: 'https://www.library.uq.edu.au/library-services/services-for-professional-staff',
+        title: 'Services for professional staff'
+      };
 
       var serviceItems = [];
       switch(this._account.type) {
@@ -148,6 +156,9 @@
         case 2:
         case 22:
           serviceItems = [ researchers ];
+          break;
+        case 3:
+          serviceItems = [ student, researchers ];
           break;
         case 4:
         case 14:
@@ -162,9 +173,12 @@
         case 9:
           serviceItems = [ hospitalStaff ];
           break;
+        case 15:
+          serviceItems = [ profStaff ];
+          break;
         case 17:
         case 18:
-          serviceItems = [ community, hospitalStaff, researchers, secondarySchools, student, alumni ];
+          serviceItems = [ community, hospitalStaff, researchers, secondarySchools, student, alumni, teachingStaff, profStaff ];
           break;
       }
 

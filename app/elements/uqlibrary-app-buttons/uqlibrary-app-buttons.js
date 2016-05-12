@@ -155,10 +155,10 @@
           break;
         case 2:
         case 22:
-          serviceItems = [ researchers ];
+          serviceItems = [ researchers, student ];
           break;
         case 3:
-          serviceItems = [ student, researchers ];
+          serviceItems = [ researchers, teachingStaff ];
           break;
         case 4:
         case 14:

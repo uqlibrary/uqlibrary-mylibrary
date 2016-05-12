@@ -282,22 +282,12 @@ gulp.task("demo", [], function () {
   console.log("Running demonstration server...");
   browserSync({
     open: "external",
-    startPath: "/",
+    startPath: "/demo.html",
     host: "dev-app.library.uq.edu.au",
     port: 9999,
     server: {
       baseDir: ["app"],
     },
-    rewriteRules: [
-      {
-        match: /(document\.cookie="UQLMockData)/g,
-        replace: "// $1"
-      },
-      {
-        match: /\/\/ (delete_cookie)/g,
-        replace: "$1"
-      }
-    ],
     files: [
       "styles/*.css",
       "elements/**/*.html",
@@ -313,6 +303,7 @@ gulp.task('serve', ['elements', 'styles', 'clean_bower'], function () {
   browserSync({
     port: 5000,
     notify: false,
+    startPath: "/demo.html",
     logPrefix: 'MyLibrary',
     snippetOptions: {
       rule: {

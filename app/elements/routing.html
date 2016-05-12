@@ -53,14 +53,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       app.route = ctx.path;
+
+      var a = document.getElementById(ctx.path).children[0];
+      if (typeof a.activate === 'function') {
+        a.activate();
+      }
     });
 
     // add #! before urls
     page({
       hashbang: true
     });
-
-
-
   });
 </script>

@@ -89,6 +89,10 @@
 
           if (item.link.indexOf("http") == 0) {
             item.isExternal = true;
+
+            if (item.title === 'Document Delivery') {
+              apps.push(item);
+            }
           } else {
             item.isExternal = false;
             item.route = item.link.substring(1);

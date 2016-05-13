@@ -19,8 +19,14 @@ Example:
         @apply(--layout-vertical);
       }
 
+      .applications {
+        @apply(--layout-horizontal);
+      }
+
       paper-button {
         width: 130px;
+        height: 100px;
+        @apply(--layout-self-center);
       }
 
       paper-card {
@@ -62,10 +68,22 @@ Example:
       <template is="dom-repeat" items="[[ applications ]]">
         <template is="dom-if" if="[[item.isLink]]">
           <paper-button class="button-colored-theme inverse">
-            <a data-route$="[[item.route]]" href=".[[item.link]]" on-tap="_appClicked" aria-label="[[item.description]]">
-              <iron-icon icon="[[item.icon]]"></iron-icon>
-              <div class="button-small">[[item.title]]</div>
-            </a>
+
+            <!-- App -->
+            <template is="dom-if" if="[[!item.isExternal]]">
+              <a data-route$="[[item.route]]" href=".[[item.link]]" on-tap="_appClicked" aria-label="[[item.description]]">
+                <iron-icon icon="[[item.icon]]"></iron-icon>
+                <div class="button-small">[[item.title]]</div>
+              </a>
+            </template>
+
+            <!-- External link -->
+            <template is="dom-if" if="[[item.isExternal]]">
+              <a href="[[item.link]]" on-tap="_appClicked" aria-label="[[item.description]]" target="_blank">
+                <iron-icon icon="[[item.icon]]"></iron-icon>
+                <div class="button-small">[[item.title]]</div>
+              </a>
+            </template>
           </paper-button>
         </template>
       </template>

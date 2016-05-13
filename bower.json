@@ -21,7 +21,7 @@
     "uqlibrary-masquerade": "uqlibrary/uqlibrary-masquerade#v1.0.2",
     "uqlibrary-papercut": "uqlibrary/uqlibrary-papercut#v1.0.7",
     "uqlibrary-research": "uqlibrary/uqlibrary-research#v1.0.7",
-    "uqlibrary-booking": "uqlibrary/uqlibrary-booking#v1.1.1",
+    "uqlibrary-booking": "uqlibrary/uqlibrary-booking#v1.1.2",
     "uqlibrary-borrowing": "uqlibrary/uqlibrary-borrowing#v1.0.7",
     "lodash": "3.7.0"
   },

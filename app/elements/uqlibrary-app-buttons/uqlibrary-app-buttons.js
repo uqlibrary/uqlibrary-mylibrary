@@ -182,7 +182,7 @@
           break;
         case 17:
         case 18:
-          serviceItems = [ community, hospitalStaff, researchers, secondarySchools, student, alumni, teachingStaff, profStaff ];
+          serviceItems = [ community, hospitalStaff, profStaff, researchers, secondarySchools, student, alumni, teachingStaff ];
           break;
       }
 

@@ -162,7 +162,7 @@
           serviceItems = [ researchers, student ];
           break;
         case 3:
-          serviceItems = [ researchers, teachingStaff ];
+          serviceItems = [ profStaff, researchers, teachingStaff ];
           break;
         case 4:
         case 14:

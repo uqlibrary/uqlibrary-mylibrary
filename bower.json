@@ -9,7 +9,7 @@
     "paper-elements": "Polymerelements/paper-elements#^1.0.7",
     "platinum-elements": "Polymerelements/platinum-elements#^2.0.0",
     "polymer": "^1.4.0",
-    "uqlibrary-api": "uqlibrary/uqlibrary-api#v1.0.8",
+    "uqlibrary-api": "uqlibrary/uqlibrary-api#v1.1.1",
     "uqlibrary-styles": "uqlibrary/uqlibrary-styles#v1.0.0",
     "uqlibrary-browser-supported": "uqlibrary/uqlibrary-browser-supported#v1.0.0",
     "uqlibrary-search": "uqlibrary/uqlibrary-search#v1.1.2",

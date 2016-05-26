@@ -9,7 +9,7 @@
     "paper-elements": "Polymerelements/paper-elements#^1.0.7",
     "platinum-elements": "Polymerelements/platinum-elements#^2.0.0",
     "polymer": "^1.4.0",
-    "uqlibrary-api": "uqlibrary/uqlibrary-api#v1.1.2",
+    "uqlibrary-api": "uqlibrary/uqlibrary-api#v1.1.3",
     "uqlibrary-styles": "uqlibrary/uqlibrary-styles#v1.0.1",
     "uqlibrary-browser-supported": "uqlibrary/uqlibrary-browser-supported#v1.0.0",
     "uqlibrary-search": "uqlibrary/uqlibrary-search#v1.1.2",
@@ -22,7 +22,7 @@
     "uqlibrary-papercut": "uqlibrary/uqlibrary-papercut#v1.0.8",
     "uqlibrary-research": "uqlibrary/uqlibrary-research#v1.1.0",
     "uqlibrary-booking": "uqlibrary/uqlibrary-booking#v1.1.8",
-    "uqlibrary-borrowing": "uqlibrary/uqlibrary-borrowing#v1.0.7",
+    "uqlibrary-borrowing": "uqlibrary/uqlibrary-borrowing#v1.0.8",
     "lodash": "3.7.0"
   },
   "devDependencies": {

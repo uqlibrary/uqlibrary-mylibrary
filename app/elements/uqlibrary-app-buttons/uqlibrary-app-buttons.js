@@ -90,7 +90,7 @@
           if (item.link.indexOf("http") == 0) {
             item.isExternal = true;
 
-            if (item.title === 'Document Delivery') {
+            if (item.title === 'Document delivery') {
               apps.push(item);
             }
           } else {

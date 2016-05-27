@@ -6,10 +6,15 @@ This project acts as a container for all individual uqlibrary applications.
 > [Demo](http://assets.library.uq.edu.au/master/mylibrary/index.html)
 
 ## Setting up the project
-* npm install -g gulp bower
-* npm install
-* bower install
 
+Run these commands in your Terminal to get a local server working 
+
+(note the first one must be run as super user)
+
+    sudo npm install -g gulp bower
+    npm install
+    bower install
+  
 ## Developing
 * Follow the [Polymer style guide-lines](http://polymerelements.github.io/style-guide/)
 * Run ```gulp serve``` to run a local environment

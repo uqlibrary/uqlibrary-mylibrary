@@ -5,3 +5,5 @@ bower_components
 .publish/
 .idea/
 app/test/index.html
+*.html-e
+*.js-e

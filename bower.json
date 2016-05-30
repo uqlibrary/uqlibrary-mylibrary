@@ -21,7 +21,7 @@
     "uqlibrary-masquerade": "uqlibrary/uqlibrary-masquerade#v1.0.3",
     "uqlibrary-papercut": "uqlibrary/uqlibrary-papercut#v1.0.8",
     "uqlibrary-research": "uqlibrary/uqlibrary-research#v1.1.1",
-    "uqlibrary-booking": "uqlibrary/uqlibrary-booking#v1.1.8",
+    "uqlibrary-booking": "uqlibrary/uqlibrary-booking#v1.1.9",
     "uqlibrary-borrowing": "uqlibrary/uqlibrary-borrowing#v1.0.9",
     "lodash": "3.7.0"
   },
@@ -41,6 +41,6 @@
     "uqlibrary-iron-dropdown": "v1.2.2",
     "uqlibrary-toolbar": "v1.1.0",
     "uqlibrary-autosuggest-input": "v1.0.8",
-    "uqlibrary-date-selector": "v1.0.5"
+    "uqlibrary-date-selector": "v1.0.8"
   }
 }

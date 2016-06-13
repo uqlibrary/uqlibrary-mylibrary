@@ -41,7 +41,7 @@ if [ ${CI_BRANCH} != "production" ]; then
 else
   export S3BucketSubDir=/${dest}
   export InvalidationPath=/${dest}
-  export WebsiteUrl=/
+  export WebsiteUrl=/mylibrary/
 fi
 
 echo "Deploying to S3 bucket sub-dir: ${S3BucketSubDir}"

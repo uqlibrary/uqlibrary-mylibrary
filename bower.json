@@ -11,7 +11,7 @@
     "polymer": "^1.4.0",
     "uqlibrary-api": "uqlibrary/uqlibrary-api#v1.1.9",
     "uqlibrary-styles": "uqlibrary/uqlibrary-styles#v1.0.5",
-    "uqlibrary-browser-supported": "uqlibrary/uqlibrary-browser-supported#v1.0.0",
+    "uqlibrary-browser-supported": "uqlibrary/uqlibrary-browser-supported#v1.0.1",
     "uqlibrary-search": "uqlibrary/uqlibrary-search#v1.1.2",
     "uqlibrary-menu": "uqlibrary/uqlibrary-menu#v1.1.0",
     "uqlibrary-computers": "uqlibrary/uqlibrary-computers#v1.1.4",

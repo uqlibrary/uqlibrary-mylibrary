@@ -14,7 +14,7 @@ var ret = {
     },
     sauce: {
       browsers: [
-        'OSX 10.10/safari@8.0'
+        'OSX 10.11/safari@9.0'
       ]
     }
   }

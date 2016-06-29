@@ -9,7 +9,7 @@
     "paper-elements": "Polymerelements/paper-elements#^1.0.7",
     "platinum-elements": "Polymerelements/platinum-elements#^2.0.0",
     "polymer": "^1.4.0",
-    "uqlibrary-api": "uqlibrary/uqlibrary-api#1.2.0",
+    "uqlibrary-api": "uqlibrary/uqlibrary-api#alma",
     "uqlibrary-styles": "uqlibrary/uqlibrary-styles#v1.0.5",
     "uqlibrary-browser-supported": "uqlibrary/uqlibrary-browser-supported#v1.0.5",
     "uqlibrary-search": "uqlibrary/uqlibrary-search#v1.2.1",
@@ -21,7 +21,7 @@
     "uqlibrary-masquerade": "uqlibrary/uqlibrary-masquerade#v1.0.3",
     "uqlibrary-papercut": "uqlibrary/uqlibrary-papercut#v1.0.8",
     "uqlibrary-research": "uqlibrary/uqlibrary-research#v1.1.1",
-    "uqlibrary-borrowing": "uqlibrary/uqlibrary-borrowing#v1.2.1",
+    "uqlibrary-borrowing": "uqlibrary/uqlibrary-borrowing#alma",
     "uqlibrary-booking": "uqlibrary/uqlibrary-booking#v1.2.5",
     "lodash": "3.7.0"
   },
@@ -40,6 +40,6 @@
     "uqlibrary-toolbar": "v1.1.1",
     "uqlibrary-autosuggest-input": "v1.1.0",
     "uqlibrary-styles": "v1.0.5",
-    "uqlibrary-api": "1.2.0"
+    "uqlibrary-api": "alma"
   }
 }

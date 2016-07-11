@@ -361,6 +361,7 @@ gulp.task('default', ['clean'], function (cb) {
     'vulcanize', // 'cache-config',
     'inject-preloader',
     'inject-browser-update',
+    'inject-ga-values',
     'rev',
     'monkey-patch-rev-manifest',
     'rev-replace-polymer-fix',

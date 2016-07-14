@@ -3,7 +3,7 @@
 
 This project acts as a container for all individual uqlibrary applications. 
 
-> [Demo](http://assets.library.uq.edu.au/master/mylibrary/index.html)
+> [Demo](http://app.library.uq.edu.au/master/mylibrary/demo.html)
 
 ## Setting up the project
 

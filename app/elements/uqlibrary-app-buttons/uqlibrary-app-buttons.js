@@ -144,18 +144,24 @@
         link: 'https://www.library.uq.edu.au/library-services/services-for-professional-staff',
         title: 'Services for professional staff'
       };
+      var borrowingExternal = {
+        link: 'https://web.library.uq.edu.au/borrowing-requesting/how-borrow/borrowing-external-and-remote-students',
+        title: 'Services for external and remote students'
+      };
 
       var serviceItems = [];
       switch(this._account.type) {
         case 1:
         case 11:
         case 21:
+          serviceItems = [ student, borrowingExternal ];
+          break;
         case 31:
-          serviceItems = [ student ];
+          serviceItems = [ student, borrowingExternal ];
           break;
         case 2:
         case 22:
-          serviceItems = [ researchers, student ];
+          serviceItems = [ researchers, student, borrowingExternal ];
           break;
         case 3:
         case 15:

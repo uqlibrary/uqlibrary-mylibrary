@@ -23,6 +23,7 @@
     "uqlibrary-research": "uqlibrary/uqlibrary-research#v1.1.1",
     "uqlibrary-borrowing": "uqlibrary/uqlibrary-borrowing#v1.2.2",
     "uqlibrary-booking": "uqlibrary/uqlibrary-booking#v1.2.7",
+    "uqlibrary-ga": "uqlibrary/uqlibrary-ga#v1.0.5",
     "lodash": "3.7.0"
   },
   "devDependencies": {
@@ -40,6 +41,7 @@
     "uqlibrary-toolbar": "v1.1.1",
     "uqlibrary-autosuggest-input": "v1.1.0",
     "uqlibrary-styles": "v1.0.5",
-    "uqlibrary-api": "^v1.2.2"
+    "uqlibrary-api": "^v1.2.2",
+    "uqlibrary-ga": "v1.0.5"
   }
 }

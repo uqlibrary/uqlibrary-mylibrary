@@ -40,6 +40,7 @@
     "uqlibrary-toolbar": "v1.1.1",
     "uqlibrary-autosuggest-input": "v1.1.0",
     "uqlibrary-styles": "v1.0.5",
-    "uqlibrary-api": "^v1.2.2"
+    "uqlibrary-api": "^v1.2.2",
+    "uqlibrary-ga": "v1.0.4"
   }
 }

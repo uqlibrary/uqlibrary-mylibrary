@@ -34,7 +34,7 @@ Run these commands in your Terminal to get a local server working
 1. Make sure the element contains the paper-toolbar
 1. Make sure the element has a "standAlone" attribute and a "_toggleDrawerPanel" function
 1. When the App is ready, tag a release, eg git tag -a v1.0.0 -m 'First release'
-1. In uqlibrary-mylibrary, bower install the element (ie. bower install uqlibrary/uqlibrary-starter-kit#v1.0.0)
+1. In uqlibrary-mylibrary, bower install the element (eg. bower install uqlibrary/uqlibrary-starter-kit#v1.0.0) (Note that bower_components subfolders are no longer used and bower components are build into the parent directory, above each project)
 1. Add the element in app/elements/elements.html
 1. Add a section containing the element in app/index.html
 1. Add a menu item in uqlibrary-api (applications HTML)

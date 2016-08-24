@@ -9,13 +9,13 @@
     "paper-elements": "Polymerelements/paper-elements#^1.0.7",
     "platinum-elements": "Polymerelements/platinum-elements#^2.0.0",
     "polymer": "^1.4.0",
-    "uqlibrary-api": "uqlibrary/uqlibrary-api#v1.3.1",
+    "uqlibrary-api": "uqlibrary/uqlibrary-api#hours",
     "uqlibrary-styles": "uqlibrary/uqlibrary-styles#v1.0.5",
     "uqlibrary-browser-supported": "uqlibrary/uqlibrary-browser-supported#v1.0.5",
     "uqlibrary-search": "uqlibrary/uqlibrary-search#v1.2.3",
     "uqlibrary-menu": "uqlibrary/uqlibrary-menu#v1.1.1",
     "uqlibrary-computers": "uqlibrary/uqlibrary-computers#v1.1.9",
-    "uqlibrary-hours": "uqlibrary/uqlibrary-hours#^1.1.8",
+    "uqlibrary-hours": "uqlibrary/uqlibrary-hours#hours",
     "uqlibrary-contacts": "uqlibrary/uqlibrary-contacts#v1.1.9",
     "uqlibrary-courses": "uqlibrary/uqlibrary-courses#v1.1.9",
     "uqlibrary-masquerade": "uqlibrary/uqlibrary-masquerade#^v1.0.4",
@@ -40,7 +40,7 @@
     "uqlibrary-autosuggest-input": "v1.1.0",
     "uqlibrary-styles": "v1.0.5",
     "uqlibrary-ga": "v1.0.5",
-    "uqlibrary-api": "v1.3.1"
+    "uqlibrary-api": "hours"
 
   }
 }

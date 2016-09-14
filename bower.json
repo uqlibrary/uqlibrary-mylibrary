@@ -15,10 +15,10 @@
     "uqlibrary-search": "uqlibrary/uqlibrary-search#v1.2.3",
     "uqlibrary-menu": "uqlibrary/uqlibrary-menu#v1.1.1",
     "uqlibrary-computers": "uqlibrary/uqlibrary-computers#v1.1.9",
-    "uqlibrary-hours": "uqlibrary/uqlibrary-hours#hours",
+    "uqlibrary-hours": "uqlibrary/uqlibrary-hours#v1.1.9",
     "uqlibrary-contacts": "uqlibrary/uqlibrary-contacts#v1.1.9",
     "uqlibrary-courses": "uqlibrary/uqlibrary-courses#v1.1.9",
-    "uqlibrary-masquerade": "uqlibrary/uqlibrary-masquerade#^v1.0.4",
+    "uqlibrary-masquerade": "uqlibrary/uqlibrary-masquerade#v1.0.4",
     "uqlibrary-papercut": "uqlibrary/uqlibrary-papercut#v1.0.9",
     "uqlibrary-research": "uqlibrary/uqlibrary-research#v1.1.2",
     "uqlibrary-borrowing": "uqlibrary/uqlibrary-borrowing#v1.2.5",
@@ -40,7 +40,7 @@
     "uqlibrary-autosuggest-input": "v1.1.0",
     "uqlibrary-styles": "v1.0.5",
     "uqlibrary-ga": "v1.0.5",
-    "uqlibrary-api": "hours"
+    "uqlibrary-api": "v1.3.2"
 
   }
 }

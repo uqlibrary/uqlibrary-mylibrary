@@ -7,3 +7,4 @@ bower_components
 app/test/index.html
 *.html-e
 *.js-e
+/bin/local/reports

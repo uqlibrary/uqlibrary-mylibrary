@@ -54,7 +54,7 @@ Run these commands in your Terminal to get a local server working
 gulp demo
 ```
 * If you still have the mock cookies in your browser, delete them via your browser.
-* Use the Masquerading function at app.library.uq.edu.au/v1/home to masquerade as a user with data you are interested in.
+* Use the Masquerading function at https://www.library.uq.edu.au/mylibrary/#!masquerade to masquerade as another user to view library as this user
 * Return to your demo page and you should be getting live data.
 
 ## Publishing

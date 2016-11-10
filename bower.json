@@ -17,13 +17,14 @@
     "uqlibrary-computers": "uqlibrary/uqlibrary-computers#v1.1.9",
     "uqlibrary-hours": "uqlibrary/uqlibrary-hours#v1.2.0",
     "uqlibrary-contacts": "uqlibrary/uqlibrary-contacts#v1.1.9",
-    "uqlibrary-courses": "uqlibrary/uqlibrary-courses#v1.1.9",
+    "uqlibrary-courses": "uqlibrary/uqlibrary-courses#ampersand",
     "uqlibrary-masquerade": "uqlibrary/uqlibrary-masquerade#v1.0.5",
     "uqlibrary-papercut": "uqlibrary/uqlibrary-papercut#v1.0.9",
     "uqlibrary-research": "uqlibrary/uqlibrary-research#v1.1.2",
     "uqlibrary-borrowing": "uqlibrary/uqlibrary-borrowing#v1.2.5",
     "uqlibrary-booking": "uqlibrary/uqlibrary-booking#v1.3.0",
     "uqlibrary-ga": "uqlibrary/uqlibrary-ga#v1.0.5",
+    "uqlibrary-autosuggest-input": "uqlibrary/uqlibrary-autosuggest-input#ampersand",
     "lodash": "3.7.0"
   },
   "devDependencies": {
@@ -37,7 +38,7 @@
     "platinum-elements": "^2.0.0",
     "lodash": "3.7.0",
     "platinum-bluetooth": "^2.0.0",
-    "uqlibrary-autosuggest-input": "v1.1.0",
+    "uqlibrary-autosuggest-input": "ampersand",
     "uqlibrary-styles": "v1.1.0",
     "uqlibrary-ga": "v1.0.5",
     "uqlibrary-api": "v1.3.5"

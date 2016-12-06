@@ -8,7 +8,7 @@
     "glob-all": "^3.0.1",
     "gulp": "^3.8.5",
     "gulp-autoprefixer": "^3.1.0",
-    "gulp-awspublish": "^3.0.1",
+    "gulp-awspublish": "^2.0.2",
     "gulp-cache": "^0.4.0",
     "gulp-changed": "^1.0.0",
     "gulp-crisper": "^1.0.0",
@@ -30,24 +30,25 @@
     "gulp-rimraf": "^0.2.0",
     "gulp-sass": "^2.2.0",
     "gulp-size": "^2.0.0",
-    "gulp-uglify": "^1.2.0",
-    "gulp-useref": "^3.0.8",
+    "gulp-uglify": "^2.0.0",
+    "gulp-useref": "^2.1.0",
     "gulp-util": "^3.0.5",
     "gulp-vulcanize": "^6.0.0",
     "merge-stream": "^1.0.0",
-    "nightwatch": "^0.8.18",
+    "nightwatch": "^0.9.9",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.0.2",
-    "sauce-connect-launcher": "^0.14.0",
+    "sauce-connect-launcher": "^1.1.1",
     "vulcanize": ">= 1.4.2",
     "web-component-tester": "^4.3.5",
-    "yargs": "~4.3.2"
+    "yargs": "~3.30.0"
   },
   "scripts": {
     "test": "gulp test:local",
     "start": "gulp serve"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "npm": ">=3",
+    "node": "^6.2.2"
   }
 }

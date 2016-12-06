@@ -1,7 +1,7 @@
 # uqlibrary-mylibrary 
 [ ![Codeship Status for uqlibrary/uqlibrary-mylibrary](https://codeship.com/projects/7accd470-cee9-0133-67f3-5ed74b30bb55/status?branch=master)](https://codeship.com/projects/141087)
 [![Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-mylibrary.svg)](https://david-dm.org/uqlibrary/uqlibrary-mylibrary)
-[![Dev Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-mylibrary/dev-status.svg)](https://david-dm.org/uqlibrary/uqlibrary-mylibrary)
+[![Dev Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-mylibrary/dev-status.svg)](https://david-dm.org/uqlibrary/uqlibrary-mylibrary?type=dev)
 
 This project acts as a container for all individual uqlibrary applications. 
 
@@ -46,6 +46,16 @@ Run these commands in your Terminal to get a local server working
 * gulp test:local
 * gulp test:remote
 * Nightwatch is also run on Codeship for deployment testing. No gulp interface provided
+
+### Nightwatch tests run locally
+
+    $ cd bin/local/
+    $ gulp serve:dist
+    $ ./nightwatch.js
+
+You can also restrict to one browser:
+
+    $ ./nightwatch.js --env chrome
 
 ## Running with live data locally
 

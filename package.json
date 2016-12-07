@@ -1,20 +1,20 @@
 {
   "private": true,
   "devDependencies": {
-    "browser-sync": "^2.18.1",
+    "browser-sync": "^2.7.7",
     "connect-history-api-fallback": "^1.1.0",
     "del": "^2.0.2",
-    "es6-promise": "^3.1.2",
+    "es6-promise": "^4.0.5",
     "glob-all": "^3.0.1",
     "gulp": "^3.8.5",
     "gulp-autoprefixer": "^3.1.0",
-    "gulp-awspublish": "^2.0.2",
+    "gulp-awspublish": "^3.0.1",
     "gulp-cache": "^0.4.0",
     "gulp-changed": "^1.0.0",
     "gulp-crisper": "^1.0.0",
     "gulp-filter": "^4.0.0",
     "gulp-gh-pages": "^0.5.4",
-    "gulp-html-extract": "^0.1.0",
+    "gulp-html-extract": "^0.2.0",
     "gulp-if": "^2.0.0",
     "gulp-imagemin": "^2.2.1",
     "gulp-invalidate-cloudfront": "^0.1.2",
@@ -31,17 +31,17 @@
     "gulp-sass": "^2.2.0",
     "gulp-size": "^2.0.0",
     "gulp-uglify": "^2.0.0",
-    "gulp-useref": "^2.1.0",
+    "gulp-useref": "^3.0.8",
     "gulp-util": "^3.0.5",
-    "gulp-vulcanize": "^6.0.0",
+    "gulp-vulcanize": "^6.1.0",
     "merge-stream": "^1.0.0",
     "nightwatch": "^0.9.9",
     "require-dir": "^0.3.0",
-    "run-sequence": "^1.0.2",
+    "run-sequence": "^1.1.5",
     "sauce-connect-launcher": "^1.1.1",
     "vulcanize": ">= 1.4.2",
     "web-component-tester": "^4.3.5",
-    "yargs": "~3.30.0"
+    "yargs": "^6.5.0"
   },
   "scripts": {
     "test": "gulp test:local",
@@ -49,6 +49,6 @@
   },
   "engines": {
     "npm": ">=3",
-    "node": "^6.2.2"
+    "node": "^v6.2.2"
   }
 }

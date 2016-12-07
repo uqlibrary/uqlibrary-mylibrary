@@ -1,7 +1,7 @@
 # uqlibrary-mylibrary 
 [ ![Codeship Status for uqlibrary/uqlibrary-mylibrary](https://codeship.com/projects/7accd470-cee9-0133-67f3-5ed74b30bb55/status?branch=master)](https://codeship.com/projects/141087)
 [![Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-mylibrary.svg)](https://david-dm.org/uqlibrary/uqlibrary-mylibrary)
-[![Dev Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-mylibrary/dev-status.svg)](https://david-dm.org/uqlibrary/uqlibrary-mylibrary?type=dev)
+[![Dev Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-mylibrary/dev-status.svg)](https://david-dm.org/uqlibrary/uqlibrary-mylibrary)
 
 This project acts as a container for all individual uqlibrary applications. 
 

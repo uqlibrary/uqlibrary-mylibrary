@@ -4,6 +4,7 @@
 set -e
 
 # Update paths in bower_components
+echo 'gulp clean_bower'
 gulp clean_bower
 
 cp -R app/bower_components app/test
@@ -12,6 +13,7 @@ COUNTER=0
 list=""
 
 # Collect all components for testing
+echo 'Collect all components for testing'
 for component in ${components[@]}; do
   list="$list '$component',"
 done

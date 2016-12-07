@@ -60,11 +60,9 @@ To set these fields:
 
 1. Visit the [Mylibrary Codeship Environment Variable page](https://codeship.com/projects/141087/configure_environment)
 2. Note the values for SAUCE_USERNAME and for SAUCE_ACCESS_KEY
-3. For each of these, at the command line, enter:
- 
+3. export these as local variables on your box, eq:
 
-    $ SAUCE_ACCESS_KEY="XXX"
-    $ export SAUCE_ACCESS_KEY
+    `$ export SAUCE_ACCESS_KEY='XXX'`
 
 then run the `gulp test:remote` command again
 

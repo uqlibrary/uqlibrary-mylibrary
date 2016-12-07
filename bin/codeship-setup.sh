@@ -20,13 +20,6 @@ npm cache clear
 npm -v
 node -v
 
-nvm install v6.2.2
-nvm use v6.2.2
-
-npm -v
-node -v
-
-
 echo "Install dependencies"
 npm install -g gulp bower nightwatch
 npm install

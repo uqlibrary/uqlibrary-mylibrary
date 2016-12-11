@@ -1,5 +1,7 @@
 # uqlibrary-mylibrary 
 [ ![Codeship Status for uqlibrary/uqlibrary-mylibrary](https://codeship.com/projects/7accd470-cee9-0133-67f3-5ed74b30bb55/status?branch=master)](https://codeship.com/projects/141087)
+[![Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-mylibrary.svg)](https://david-dm.org/uqlibrary/uqlibrary-mylibrary)
+[![Dev Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-mylibrary/dev-status.svg)](https://david-dm.org/uqlibrary/uqlibrary-mylibrary?type=dev)
 
 This project acts as a container for all individual uqlibrary applications. 
 
@@ -41,9 +43,62 @@ Run these commands in your Terminal to get a local server working
 1. Add a route via PageJS in app/elements/routing.html
 
 ## Tests
-* gulp test:local
-* gulp test:remote
-* Nightwatch is also run on Codeship for deployment testing. No gulp interface provided
+
+### Run Tests Locally
+
+    $ gulp test:local
+
+### Run Tests Remotely 
+
+    $ gulp test:remote
+
+When you run this command, you may get the error:
+
+"Missing Sauce credentials. Did you forget to set SAUCE_USERNAME and/or SAUCE_ACCESS_KEY?"
+
+To set these fields: 
+
+1. Visit the [Mylibrary Codeship Environment Variable page](https://codeship.com/projects/141087/configure_environment)
+2. Note the values for SAUCE_USERNAME and for SAUCE_ACCESS_KEY
+3. export these as local variables on your box, eq:
+
+    `$ export SAUCE_ACCESS_KEY='XXX'`
+
+then run the `gulp test:remote` command again
+
+
+### Nightwatch tests
+
+Nightwatch is also run on Codeship for deployment testing. No gulp interface provided
+
+You can also run them locally:
+
+* Run Selenium server. Selenium is required to run tests locally [Selenium Installer] (http://selenium-release.storage.googleapis.com/index.html)
+
+```sh
+  java -jar selenium-server-standalone-{VERSION}.jar
+```
+
+or `brew install selenium-server-standalone` then `selenium-server -p 4444`
+
+* start server (will start server and project will be accessible at http://localhost:5001)
+
+```sh
+  gulp serve:dist
+```
+
+* start testing
+
+```sh
+  cd bin/local
+  ./nightwatch.js
+```  
+
+(You will need to use more than one tab as gulp serve continues running.)
+
+You can also restrict to one browser:
+
+    $ ./nightwatch.js --env chrome
 
 ## Running with live data locally
 
@@ -61,7 +116,7 @@ gulp demo
 * Make sure MyLibrary functions properly when using ```gulp serve:dist```
 * Before committing to master, run ```gulp test```
 * Any commits to master are automatically deployed to [app.library](http://app.library.uq.edu.au/master/mylibrary/index.html)
-* To deploy a feature branch create a deployment pipe line in codeship, feature branch will be deployed to app.library/[feature branch]/mylibrary
+* To deploy a feature branch create a deployment pipe line in codeship, feature branch will be deployed to: `http://app.library.uq.edu.au/[feature branch]/mylibrary/index.html`
 * Any commits to production will go live on the main UQ Library website (http://www.library.uq.edu.au/mylibrary)
 
 

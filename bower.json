@@ -16,7 +16,7 @@
     "uqlibrary-menu": "uqlibrary/uqlibrary-menu#v1.1.1",
     "uqlibrary-computers": "uqlibrary/uqlibrary-computers#v1.1.9",
     "uqlibrary-hours": "uqlibrary/uqlibrary-hours#v1.2.0",
-    "uqlibrary-contacts": "uqlibrary/uqlibrary-contacts#v1.2.0",
+    "uqlibrary-contacts": "uqlibrary/uqlibrary-contacts#v1.2.1",
     "uqlibrary-courses": "uqlibrary/uqlibrary-courses#v1.2.0",
     "uqlibrary-masquerade": "uqlibrary/uqlibrary-masquerade#v1.0.5",
     "uqlibrary-papercut": "uqlibrary/uqlibrary-papercut#v1.0.9",
@@ -40,6 +40,6 @@
     "uqlibrary-autosuggest-input": "v1.1.1",
     "uqlibrary-styles": "v1.1.0",
     "uqlibrary-ga": "v1.0.5",
-    "uqlibrary-api": "v1.3.7"
+    "uqlibrary-api": "v1.3.8"
   }
 }

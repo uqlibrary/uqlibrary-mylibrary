@@ -44,9 +44,22 @@ Run these commands in your Terminal to get a local server working
 
 ## Tests
 
+Obviously, update bower to include your changes:
+
+    $ bower update
+
+To get the complete test package, run the test setup script:
+
+    $ ./bin/test-setup.sh
+
+(This will produce a long set of dated 'starting' and 'finishing'
+ lines.)
+
 ### Run Tests Locally
 
     $ gulp test:local
+
+(You should see over 50 tests run and 1 or 2 minutes of run time - a fast response time means no tests were run)
 
 ### Run Tests Remotely 
 
@@ -120,4 +133,6 @@ gulp demo
 * Any commits to production will go live on the main UQ Library website (http://www.library.uq.edu.au/mylibrary)
 
 
+## Common Problems
+* The first build of mylibrary each year (each semester?) will fail because uqlibrary_courses needs the  data in mock/term_dates_get.json updated to reflect the new year. Failing tests include uqlibrary-courses-functional-test.html
 

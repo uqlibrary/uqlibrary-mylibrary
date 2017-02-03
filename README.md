@@ -133,6 +133,37 @@ gulp demo
 * Any commits to production will go live on the main UQ Library website (http://www.library.uq.edu.au/mylibrary)
 
 
-## Common Problems
-* The first build of mylibrary each year (each semester?) will fail because uqlibrary_courses needs the  data in mock/term_dates_get.json updated to reflect the new year. Failing tests include uqlibrary-courses-functional-test.html
+## Codeship config (at Jan/2017)
+Setup Commands:
+```
+  jdk_switcher use oraclejdk8
+  chmod a+x -R bin/*
+  bin/codeship-setup.sh
+  npm cache clear
+  rm -rf node_modules
+  npm install
+  bin/test-setup.sh
+```
+3 Test Pipelines:
+  
+Unit tests:
+```
+  export PIPE_NUM=1
+  bin/codeship-testing.sh
+```
 
+Test Commands:
+```
+  export PIPE_NUM=3
+  echo "start server in the background, wait 20 sec for it to load"
+  nohup bash -c "gulp serve:dist 2>&1 &" && sleep 20; cat nohup.out
+  bin/codeship-testing.sh
+```
+
+Nightwatch:
+```
+  export PIPE_NUM=2
+  echo "start server in the background, wait 20 sec for it to load"
+  nohup bash -c "gulp serve:dist 2>&1 &" && sleep 20; cat nohup.out
+  bin/codeship-testing.sh
+```

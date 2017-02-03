@@ -22,6 +22,9 @@ case "$branch" in
     ./nightwatch.js
     ./nightwatch.js --env chrome
   ;;
+  "3")
+    echo "saucelabs testing not performed on master branch"
+  ;;
   esac
   ;;
 *)

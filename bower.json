@@ -9,7 +9,7 @@
     "paper-elements": "Polymerelements/paper-elements#^1.0.7",
     "platinum-elements": "Polymerelements/platinum-elements#^2.0.0",
     "polymer": "^1.4.0",
-    "uqlibrary-api": "uqlibrary/uqlibrary-api#v1.3.9",
+    "uqlibrary-api": "uqlibrary/uqlibrary-api#v1.4.0",
     "uqlibrary-styles": "uqlibrary/uqlibrary-styles#v1.1.0",
     "uqlibrary-browser-supported": "uqlibrary/uqlibrary-browser-supported#v1.0.5",
     "uqlibrary-search": "uqlibrary/uqlibrary-search#v1.2.7",
@@ -17,18 +17,20 @@
     "uqlibrary-computers": "uqlibrary/uqlibrary-computers#v1.1.9",
     "uqlibrary-hours": "uqlibrary/uqlibrary-hours#v1.2.0",
     "uqlibrary-contacts": "uqlibrary/uqlibrary-contacts#v1.2.1",
-    "uqlibrary-courses": "uqlibrary/uqlibrary-courses#v1.2.1",
+    "uqlibrary-courses": "uqlibrary/uqlibrary-courses#v1.2.2",
     "uqlibrary-masquerade": "uqlibrary/uqlibrary-masquerade#v1.0.5",
     "uqlibrary-papercut": "uqlibrary/uqlibrary-papercut#v1.0.9",
     "uqlibrary-research": "uqlibrary/uqlibrary-research#v1.1.2",
     "uqlibrary-borrowing": "uqlibrary/uqlibrary-borrowing#v1.2.5",
-    "uqlibrary-booking": "uqlibrary/uqlibrary-booking#polymer1.0",
+    "uqlibrary-booking": "uqlibrary/uqlibrary-booking#v1.3.1",
     "uqlibrary-ga": "uqlibrary/uqlibrary-ga#v1.0.7",
     "uqlibrary-autosuggest-input": "uqlibrary/uqlibrary-autosuggest-input#v1.1.1",
     "lodash": "3.7.0"
   },
   "devDependencies": {
-    "uq-wait": "uqlibrary/uq-wait#v1.0.0"
+    "uq-wait": "uqlibrary/uq-wait#v1.0.0",
+    "web-component-tester": "^4.2.2",
+    "test-fixture": "PolymerElements/test-fixture#^1.1.0"
   },
   "ignore": [],
   "resolutions": {
@@ -40,6 +42,6 @@
     "uqlibrary-autosuggest-input": "v1.1.1",
     "uqlibrary-styles": "v1.1.0",
     "uqlibrary-ga": "v1.0.7",
-    "uqlibrary-api": "v1.3.9"
+    "uqlibrary-api": "v1.4.0"
   }
 }

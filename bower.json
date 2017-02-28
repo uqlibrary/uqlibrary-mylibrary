@@ -24,7 +24,7 @@
     "uqlibrary-borrowing": "uqlibrary/uqlibrary-borrowing#v1.2.5",
     "uqlibrary-booking": "uqlibrary/uqlibrary-booking#v1.3.1",
     "uqlibrary-ga": "uqlibrary/uqlibrary-ga#v1.0.7",
-    "uqlibrary-autosuggest-input": "uqlibrary/uqlibrary-autosuggest-input#v1.1.1",
+    "uqlibrary-autosuggest-input": "uqlibrary/uqlibrary-autosuggest-input#v1.1.2",
     "lodash": "3.7.0"
   },
   "devDependencies": {
@@ -39,7 +39,7 @@
     "platinum-elements": "^2.0.0",
     "lodash": "3.7.0",
     "platinum-bluetooth": "^2.0.0",
-    "uqlibrary-autosuggest-input": "v1.1.1",
+    "uqlibrary-autosuggest-input": "v1.1.2",
     "uqlibrary-styles": "v1.1.0",
     "uqlibrary-ga": "v1.0.7",
     "uqlibrary-api": "v1.4.2"

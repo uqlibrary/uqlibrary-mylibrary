@@ -6,13 +6,6 @@ var ret = {
     'pathMappings': []
   },
   plugins: {
-    local: {
-      browsers: [
-        'firefox',
-        'chrome',
-          'safari'
-      ]
-    },
     sauce: {
       browsers: [
           'Windows 10/microsoftedge@13',

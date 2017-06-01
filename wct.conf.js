@@ -13,10 +13,7 @@ var ret = {
           'Windows 10/firefox@50',
           'OS X 10.11/safari@9.0',
           'OS X 10.11/firefox@50',
-          'OS X 10.11/chrome@54',
-          'OS X 10.11/iphone@9.2',
-          'OS X 10.11/ipad@9.2',
-          'Linux/android@5.1'
+          'OS X 10.11/chrome@54'
       ]
     }
   }

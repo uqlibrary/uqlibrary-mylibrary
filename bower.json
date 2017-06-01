@@ -22,7 +22,6 @@
     "uqlibrary-papercut": "uqlibrary/uqlibrary-papercut#v1.1.4",
     "uqlibrary-research": "uqlibrary/uqlibrary-research#v1.1.2",
     "uqlibrary-borrowing": "uqlibrary/uqlibrary-borrowing#v1.2.5",
-    "uqlibrary-booking": "uqlibrary/uqlibrary-booking#v1.3.3",
     "uqlibrary-ga": "uqlibrary/uqlibrary-ga#v1.0.9",
     "uqlibrary-autosuggest-input": "uqlibrary/uqlibrary-autosuggest-input#v1.1.3",
     "lodash": "3.7.0"

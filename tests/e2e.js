@@ -8,6 +8,6 @@ module.exports = {
       .assert.elementPresent('uqlibrary-menu', 'uqlibrary-menu component is present')
       .assert.visible('#home')
       .assert.containsText('uqlibrary-menu paper-menu a.iron-selected', 'My Library')
-      .end(); done();
+      .end();
   }
 };

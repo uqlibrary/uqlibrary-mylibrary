@@ -12,7 +12,7 @@ case "$PIPE_NUM" in
     gulp test
 
     if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
-        echo "remote unit testing"
+        echo "remote unit testing -  only performed on master and production branch"
         gulp test:remote
     fi
   ;;
@@ -30,27 +30,27 @@ case "$PIPE_NUM" in
     ./nightwatch.js --env chrome
   ;;
   "3")
-    echo "saucelabs testing only performed on production branch"
+    echo "saucelabs testing only performed on master and production branch"
 
     if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
         cd bin/saucelabs
 
-        echo "test chrome on windows (default)"
+        printf "\n --- TEST CHROME ON WINDOWS (default) --- \n\n"
         ./nightwatch.js
 
-        echo "test edge"
+        printf "\n --- TEST EDGE ---\n\n"
         ./nightwatch.js --env edge
 
-        echo "test firefox on windows"
+        printf "\n --- TEST FIREFOX ON WINDOWS ---\n\n"
         ./nightwatch.js --env firefox-on-windows
 
-        echo "test chrome on mac"
+        printf "\n --- TEST CHROME ON MAC ---\n\n"
         ./nightwatch.js --env chrome-on-mac
 
-        echo "test firefox on mac"
+        printf "\n --- TEST FIREFOX ON MAC ---\n\n"
         ./nightwatch.js --env firefox-on-mac
 
-        echo "test safari on mac"
+        printf "\n --- TEST SAFARI ON MAC ---\n\n"
         ./nightwatch.js --env safari-on-mac
     fi
   ;;

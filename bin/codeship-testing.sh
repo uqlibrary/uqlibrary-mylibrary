@@ -6,34 +6,15 @@ else
   branch=$CI_BRANCH
 fi
 
-case "$branch" in
-"master")
-  case "$PIPE_NUM" in
+case "$PIPE_NUM" in
   "1")
     echo "local unit testing"
     gulp test
-  ;;
-  "2")
-    echo "local integration testing"
-    echo "install selenium"
-    curl -sSL https://raw.githubusercontent.com/codeship/scripts/master/packages/selenium_server.sh | bash -s
-    cd bin/local
-    echo "Installed selenium. Running Nightwatch"
-    ./nightwatch.js
-    ./nightwatch.js --env chrome
-  ;;
-  "3")
-    echo "saucelabs testing not performed on master branch"
-  ;;
-  esac
-  ;;
-*)
-  case "$PIPE_NUM" in
-  "1")
-    echo "local unit testing"
-    gulp test
-    echo "remote unit testing"
-    gulp test:remote
+
+    if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
+        echo "remote unit testing -  only performed on master and production branch"
+        gulp test:remote
+    fi
   ;;
   "2")
     echo "local integration testing"
@@ -41,6 +22,7 @@ case "$branch" in
     curl -sSL https://raw.githubusercontent.com/codeship/scripts/master/packages/selenium_server.sh | bash -s
     cd bin/local
 
+    echo "Installed selenium. Running Nightwatch"
     echo "test firefox (default)"
     ./nightwatch.js
 
@@ -48,27 +30,28 @@ case "$branch" in
     ./nightwatch.js --env chrome
   ;;
   "3")
-    cd bin/saucelabs
+    echo "saucelabs testing only performed on master and production branch"
 
-    echo "test chrome on windows (default)"
-    ./nightwatch.js
+    if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
+        cd bin/saucelabs
 
-    echo "test edge"
-    ./nightwatch.js --env edge
+        printf "\n --- TEST CHROME ON WINDOWS (default) --- \n\n"
+        ./nightwatch.js
 
-    echo "test firefox on windows"
-    ./nightwatch.js --env firefox-on-windows
+        printf "\n --- TEST EDGE ---\n\n"
+        ./nightwatch.js --env edge
 
-    echo "test chrome on mac"
-    ./nightwatch.js --env chrome-on-mac
+        printf "\n --- TEST FIREFOX ON WINDOWS ---\n\n"
+        ./nightwatch.js --env firefox-on-windows
 
-    echo "test firefox on mac"
-    ./nightwatch.js --env firefox-on-mac
+        printf "\n --- TEST CHROME ON MAC ---\n\n"
+        ./nightwatch.js --env chrome-on-mac
 
-    echo "test safari on mac"
-    ./nightwatch.js --env safari-on-mac
+        printf "\n --- TEST FIREFOX ON MAC ---\n\n"
+        ./nightwatch.js --env firefox-on-mac
 
-  ;;
-  esac
+        printf "\n --- TEST SAFARI ON MAC ---\n\n"
+        ./nightwatch.js --env safari-on-mac
+    fi
   ;;
 esac

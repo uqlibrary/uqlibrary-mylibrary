@@ -27,12 +27,6 @@ pwd
 echo "Build distribution"
 gulp
 
-echo "Update app cache manifest version"
-appcache="dist/index.appcache"
-version=$(git rev-parse HEAD)
-
-sed -i -e "s#<VERSION>#${version}#g" ${appcache}
-
 # use codeship branch environment variable to push to branch name dir unless it's 'production' branch (or master for now)
 if [ ${CI_BRANCH} != "production" ]; then
   export S3BucketSubDir=/${CI_BRANCH}/${dest}

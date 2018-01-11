@@ -8,7 +8,7 @@
     "page": "visionmedia/page.js#^1.7.1",
     "paper-elements": "Polymerelements/paper-elements#^1.0.7",
     "platinum-elements": "Polymerelements/platinum-elements#^2.0.0",
-    "polymer": "^1.4.0",
+    "polymer": "1.9.3",
     "uqlibrary-api": "uqlibrary/uqlibrary-api#v1.5.1",
     "uqlibrary-styles": "uqlibrary/uqlibrary-styles#v1.1.0",
     "uqlibrary-browser-supported": "uqlibrary/uqlibrary-browser-supported#v1.0.5",

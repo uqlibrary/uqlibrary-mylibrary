@@ -11,7 +11,9 @@ case "$PIPE_NUM" in
     echo "local unit testing"
     gulp test
 
-    if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
+#temp push just to see if this is the problem
+#    if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
+    if [[ (${CI_BRANCH} == "production") ]]; then
         echo "remote unit testing -  only performed on master and production branch"
         gulp test:remote
     fi

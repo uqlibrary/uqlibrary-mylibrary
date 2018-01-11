@@ -15,6 +15,9 @@ var ret = {
           'OS X 10.11/firefox@50',
           'OS X 10.11/chrome@54'
       ]
+    },
+    "local": {
+      "browsers": ["chrome"]
     }
   }
 };

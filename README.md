@@ -5,7 +5,7 @@
 
 This project acts as a container for all individual uqlibrary applications. 
 
-> [Demo](http://app.library.uq.edu.au/master/mylibrary/demo.html)
+> [Demo](https://app.library.uq.edu.au/master/mylibrary/demo.html)
 
 ## Setting up the project
 
@@ -128,8 +128,8 @@ gulp demo
 ## Publishing
 * Make sure MyLibrary functions properly when using ```gulp serve:dist```
 * Before committing to master, run ```gulp test```
-* Any commits to master are automatically deployed to [app.library](http://app.library.uq.edu.au/master/mylibrary/index.html)
-* To deploy a feature branch create a deployment pipe line in codeship, feature branch will be deployed to: `http://app.library.uq.edu.au/[feature branch]/mylibrary/index.html`
+* Any commits to master are automatically deployed to [app.library](https://app.library.uq.edu.au/master/mylibrary/index.html)
+* To deploy a feature branch create a deployment pipe line in codeship, feature branch will be deployed to: `https://app.library.uq.edu.au/[feature branch]/mylibrary/index.html`
 * Any commits to production will go live on the main UQ Library website (http://www.library.uq.edu.au/mylibrary)
 
 

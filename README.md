@@ -92,7 +92,7 @@ You can also run them locally:
   java -jar selenium-server-standalone-{VERSION}.jar
 ```
 
-or `brew install selenium-server-standalone` then `selenium-server -p 4444`
+or `brew install selenium-server-standalone` then `selenium-server -port 4444`
 
 * start server (will start server and project will be accessible at http://localhost:5001)
 

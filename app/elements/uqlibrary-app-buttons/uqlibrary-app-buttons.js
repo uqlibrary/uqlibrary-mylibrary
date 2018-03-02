@@ -70,7 +70,6 @@
      * @private
      */
     _appClicked: function (e) {
-console.log('_appClicked');
       this.fire("uqlibrary-app-button-clicked", e.detail);
     },
     /**
@@ -78,7 +77,6 @@ console.log('_appClicked');
      * @private
      */
     _applicationsChanged: function () {
-console.log('_applicationsChanged');
       var apps = [];
 
       for (var i = 0; i < this.applications.length; i++) {
@@ -95,7 +93,6 @@ console.log('_applicationsChanged');
             item.isExternal = false;
             item.route = item.link.substring(1);
             item.href = window.location.protocol + '//' + window.location.host + window.location.pathname + '#!' + item.route;
-console.log(item.href);
           }
 
           if (item.route !== "home") {

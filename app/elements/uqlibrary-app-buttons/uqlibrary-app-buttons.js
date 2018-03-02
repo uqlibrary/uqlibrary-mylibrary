@@ -87,12 +87,12 @@
         } else {
           item.isLink = true;
 
-          if (item.link.indexOf("http") == 0) {
+          if (item.link.indexOf("http") === 0) {
             item.isExternal = true;
           } else {
             item.isExternal = false;
             item.route = item.link.substring(1);
-            item.href = item.route;
+            item.href = window.location.protocol + '//' + window.location.host + window.location.pathname + '#!' + item.route;
           }
 
           if (item.route !== "home") {
@@ -101,7 +101,7 @@
         }
       }
 
-      if (apps.length != this.applications.length) {
+      if (apps.length !== this.applications.length) {
         this.applications = apps;
       }
 

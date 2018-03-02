@@ -72,7 +72,7 @@ Example:
 
             <!-- App -->
             <template is="dom-if" if="[[!item.isExternal]]">
-              <a data-route$="[[item.route]]" href=".[[item.link]]" on-tap="_appClicked" aria-label="[[item.description]]">
+              <a href="[[item.href]]" on-tap="_appClicked" aria-label="[[item.description]]">
                 <iron-icon icon="[[item.icon]]"></iron-icon>
                 <div class="button-small">[[item.title]]</div>
               </a>

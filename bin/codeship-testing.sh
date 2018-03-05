@@ -8,13 +8,12 @@ fi
 
 case "$PIPE_NUM" in
   "1")
-    echo "local unit testing"
-    gulp test
+    printf "\n local unit testing is not run as it never returns, eg https://app.codeship.com/projects/141087/builds/31294140?pipeline=92371843-3cbf-469a-87f7-a8120fba009a \n\n"
+#    gulp test
 
-    if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
-        echo "remote unit testing -  only performed on master and production branch"
-        gulp test:remote
-    fi
+    # because we cant run local test at all, we must run saucelabs test on every push :(
+    printf "\n remote unit testing on saucelabs \n\n"
+    gulp test:remote
   ;;
   "2")
     echo "local integration testing"

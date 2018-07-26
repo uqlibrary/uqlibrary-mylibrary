@@ -8,6 +8,8 @@ fi
 
 case "$PIPE_NUM" in
   "1")
+    # 'unit tests' pipeline
+
     # because codeship can be a little flakey, we arent wasting part of our canary test on general tests that arent relevent
     if [ ${CI_BRANCH} != "canarytest" ]; then
         printf "\n local unit testing is not run as it never returns, eg https://app.codeship.com/projects/141087/builds/31294140?pipeline=92371843-3cbf-469a-87f7-a8120fba009a \n\n"
@@ -19,21 +21,27 @@ case "$PIPE_NUM" in
     fi
   ;;
   "2")
+    # 'Nightwatch' pipeline
+    # local integration testing
+
     if [ ${CI_BRANCH} != "canarytest" ]; then
-        echo "local integration testing"
         echo "install selenium"
         curl -sSL https://raw.githubusercontent.com/codeship/scripts/master/packages/selenium_server.sh | bash -s
         cd bin/local
 
-        echo "Installed selenium. Running Nightwatch"
-        echo "test firefox (default)"
+        echo "Installed selenium. Running Nightwatch locally"
+
+        printf "\n --- TEST FIREFOX ON WINDOWS (default) ---\n\n"
         ./nightwatch.js
 
-        echo "test chrome"
+        printf "\n --- TEST CHROME ON WINDOWS --- \n\n"
         ./nightwatch.js --env chrome
     fi
   ;;
   "3")
+    # 'Test commands' pipeline
+    # integration testing at saucelabs
+
     cd bin/saucelabs
 
     if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
@@ -62,22 +70,22 @@ case "$PIPE_NUM" in
         printf "If you get a fail, try it manually in that browser\n\n"
 
         printf "\n --- TEST CHROME Dev on WINDOWS (canary test) ---\n\n"
-        ./nightwatch.js --env chrome-on-windows-dev --tag e2etest
+        ./nightwatch.js --env chrome-on-windows-dev
 
         printf "\n --- TEST FIREFOX Dev on WINDOWS (canary test) ---\n\n"
-        ./nightwatch.js --env firefox-on-windows-dev --tag e2etest
+        ./nightwatch.js --env firefox-on-windows-dev
 
         printf "\n --- TEST CHROME Dev on MAC (canary test) ---\n\n"
-        ./nightwatch.js --env chrome-on-mac-dev --tag e2etest
+        ./nightwatch.js --env chrome-on-mac-dev
 
         printf "\n --- TEST CHROME Beta on WINDOWS (canary test) ---\n\n"
-        ./nightwatch.js --env chrome-on-windows-beta --tag e2etest
+        ./nightwatch.js --env chrome-on-windows-beta
 
         printf "\n --- TEST FIREFOX Beta on WINDOWS (canary test) ---\n\n"
-        ./nightwatch.js --env firefox-on-windows-beta --tag e2etest
+        ./nightwatch.js --env firefox-on-windows-beta
 
         printf "\n --- TEST CHROME Beta on MAC (canary test) ---\n\n"
-        ./nightwatch.js --env chrome-on-mac-beta --tag e2etest
+        ./nightwatch.js --env chrome-on-mac-beta
     fi
   ;;
 esac

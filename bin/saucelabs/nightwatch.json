@@ -41,7 +41,7 @@
       "desiredCapabilities": {
         "browserName": "MicrosoftEdge",
         "platform": "Windows 10",
-        "version": "13.10586",
+        "version": "16.16299",
         "acceptSslCerts": true,
         "screenResolution": "1280x960"
       }

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 if [ -z $CI_BRANCH ]; then
   branch=$(git rev-parse --abbrev-ref HEAD)
 else

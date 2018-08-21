@@ -24,7 +24,9 @@ case "$PIPE_NUM" in
 
     if [ ${CI_BRANCH} == "canarytest" ]; then
         printf "Running standard tests against canary versions of the browsers for early diagnosis of polymer failure\n"
-        printf "If you get a fail, try it manually in that browser\n\n"
+        printf "(If you get a fail, consider if its codeship playing up, then check saucelabs then try it manually in that browser)\n"
+
+        cd bin/saucelabs
 
         printf "\n --- TEST CHROME Dev on WINDOWS (canary test) ---\n\n"
         ./nightwatch.js --env chrome-on-windows-dev
@@ -40,11 +42,12 @@ case "$PIPE_NUM" in
     if [ ${CI_BRANCH} != "canarytest" ]; then
         echo "install selenium"
         curl -sSL https://raw.githubusercontent.com/codeship/scripts/master/packages/selenium_server.sh | bash -s
-        cd bin/local
 
         echo "Installed selenium. Running Nightwatch locally"
 
         printf "\n Not testing firefox here atm - selenium would need an upgrade to use a recent enough geckodriver that recent firefox will work - see https://app.codeship.com/projects/141087/builds/35995050 \n\n"
+
+        cd bin/local
 
         printf "\n --- TEST CHROME ON WINDOWS --- \n\n"
         ./nightwatch.js --env chrome
@@ -52,7 +55,9 @@ case "$PIPE_NUM" in
 
     if [ ${CI_BRANCH} == "canarytest" ]; then
         printf "Running standard tests against canary versions of the browsers for early diagnosis of polymer failure\n"
-        printf "If you get a fail, try it manually in that browser\n\n"
+        printf "(If you get a fail, consider if its codeship playing up, then check saucelabs then try it manually in that browser)\n"
+
+        cd bin/saucelabs
 
         printf "\n --- TEST CHROME Dev on MAC (canary test) ---\n\n"
         ./nightwatch.js --env chrome-on-mac-dev

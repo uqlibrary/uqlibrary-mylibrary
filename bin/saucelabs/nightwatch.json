@@ -23,7 +23,7 @@
       "desiredCapabilities": {
         "browserName": "chrome",
         "platform": "Windows 10",
-        "version": "58.0",
+        "version": "68.0",
         "acceptSslCerts": true,
         "screenResolution": "1280x960"
       }

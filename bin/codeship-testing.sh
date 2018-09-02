@@ -2,6 +2,16 @@
 
 set -e
 
+function logSauceCommands {
+ SAUCELABS_LOG_FILE="${TMPDIR}sc.log"
+ if [ -f {$SAUCELABS_LOG_FILE} ]; then
+  echo "Command failed - dumping {$SAUCELABS_LOG_FILE} for debug of saucelabs"
+  cat {$SAUCELABS_LOG_FILE}
+ else
+   echo "Command failed - attempting to dump saucelabs log file but $SAUCELABS_LOG_FILE not found - did we reach the saucelabs section?"
+ fi
+}
+
 if [ -z $CI_BRANCH ]; then
   branch=$(git rev-parse --abbrev-ref HEAD)
 else
@@ -11,6 +21,8 @@ fi
 case "$PIPE_NUM" in
   "1")
     # 'unit tests' pipeline
+
+    trap logSauceCommands EXIT
 
     # because codeship can be a little flakey, we arent wasting part of our canary test on general tests that arent relevent
     if [ ${CI_BRANCH} != "canarytest" ]; then
@@ -54,6 +66,8 @@ case "$PIPE_NUM" in
     fi
 
     if [ ${CI_BRANCH} == "canarytest" ]; then
+        trap logSauceCommands EXIT
+
         printf "Running standard tests against canary versions of the browsers for early diagnosis of polymer failure\n"
         printf "(If you get a fail, consider if its codeship playing up, then check saucelabs then try it manually in that browser)\n"
 
@@ -70,7 +84,11 @@ case "$PIPE_NUM" in
     # 'Test commands' pipeline
     # integration testing at saucelabs
 
+    trap logSauceCommands EXIT
+
     cd bin/saucelabs
+
+    gulp serve:dist
 
     if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
         echo "saucelabs testing only performed on master and production branch"

@@ -88,7 +88,11 @@ case "$PIPE_NUM" in
 
     cd bin/saucelabs
 
-    gulp serve:dist
+    nohup gulp serve:dist &
+
+    sleep 20 # give the server time to come up
+
+    cat nohup.out
 
     if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
         echo "saucelabs testing only performed on master and production branch"

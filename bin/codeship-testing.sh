@@ -2,6 +2,7 @@
 
 set -e
 
+echo "On failure, will look for Saucelabs error log here: ${TMPDIR}"
 function logSauceCommands {
  SAUCELABS_LOG_FILE="${TMPDIR}sc.log"
  if [ -f {$SAUCELABS_LOG_FILE} ]; then
@@ -22,8 +23,6 @@ case "$PIPE_NUM" in
   "1")
     # 'unit tests' pipeline
 
-    trap logSauceCommands EXIT
-
     # because codeship can be a little flakey, we arent wasting part of our canary test on general tests that arent relevent
     if [ ${CI_BRANCH} != "canarytest" ]; then
         printf "\n local unit testing is not run as it never returns, eg https://app.codeship.com/projects/141087/builds/31294140?pipeline=92371843-3cbf-469a-87f7-a8120fba009a \n\n"
@@ -38,10 +37,14 @@ case "$PIPE_NUM" in
         printf "Running standard tests against canary versions of the browsers for early diagnosis of polymer failure\n"
         printf "(If you get a fail, consider if its codeship playing up, then check saucelabs then try it manually in that browser)\n"
 
+        trap logSauceCommands EXIT
+
         cd bin/saucelabs
 
         echo "start server in the background, wait 20 sec for it to load"
-        nohup bash -c "gulp serve:dist 2>&1 &" && sleep 20; cat nohup.out
+        nohup gulp serve:dist &
+        sleep 20 # give the server time to come up
+        cat nohup.out
 
         printf "\n --- TEST FIREFOX Dev on WINDOWS (canary test) ---\n\n"
         ./nightwatch.js --env firefox-on-windows-dev
@@ -78,7 +81,9 @@ case "$PIPE_NUM" in
         cd bin/saucelabs
 
         echo "start server in the background, wait 20 sec for it to load"
-        nohup bash -c "gulp serve:dist 2>&1 &" && sleep 20; cat nohup.out
+        nohup gulp serve:dist &
+        sleep 20 # give the server time to come up
+        cat nohup.out
 
         printf "\n --- TEST CHROME Beta on WINDOWS (canary test) ---\n\n"
         ./nightwatch.js --env chrome-on-windows-beta
@@ -96,7 +101,9 @@ case "$PIPE_NUM" in
     cd bin/saucelabs
 
     echo "start server in the background, wait 20 sec for it to load"
-    nohup bash -c "gulp serve:dist 2>&1 &" && sleep 20; cat nohup.out
+    nohup gulp serve:dist &
+    sleep 20 # give the server time to come up
+    cat nohup.out
 
     if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
         echo "saucelabs testing only performed on master and production branch"

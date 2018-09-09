@@ -155,15 +155,11 @@ Unit tests:
 Test Commands:
 ```
   export PIPE_NUM=3
-  echo "start server in the background, wait 20 sec for it to load"
-  nohup bash -c "gulp serve:dist 2>&1 &" && sleep 20; cat nohup.out
   bin/codeship-testing.sh
 ```
 
 Nightwatch:
 ```
   export PIPE_NUM=2
-  echo "start server in the background, wait 20 sec for it to load"
-  nohup bash -c "gulp serve:dist 2>&1 &" && sleep 20; cat nohup.out
   bin/codeship-testing.sh
 ```

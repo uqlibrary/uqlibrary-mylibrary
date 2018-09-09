@@ -40,6 +40,9 @@ case "$PIPE_NUM" in
 
         cd bin/saucelabs
 
+        echo "start server in the background, wait 20 sec for it to load"
+        nohup bash -c "gulp serve:dist 2>&1 &" && sleep 20; cat nohup.out
+
         printf "\n --- TEST FIREFOX Dev on WINDOWS (canary test) ---\n\n"
         ./nightwatch.js --env firefox-on-windows-dev
 
@@ -74,6 +77,9 @@ case "$PIPE_NUM" in
 
         cd bin/saucelabs
 
+        echo "start server in the background, wait 20 sec for it to load"
+        nohup bash -c "gulp serve:dist 2>&1 &" && sleep 20; cat nohup.out
+
         printf "\n --- TEST CHROME Beta on WINDOWS (canary test) ---\n\n"
         ./nightwatch.js --env chrome-on-windows-beta
 
@@ -89,11 +95,8 @@ case "$PIPE_NUM" in
 
     cd bin/saucelabs
 
-    nohup gulp serve:dist &
-
-    sleep 20 # give the server time to come up
-
-    cat nohup.out
+    echo "start server in the background, wait 20 sec for it to load"
+    nohup bash -c "gulp serve:dist 2>&1 &" && sleep 20; cat nohup.out
 
     if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
         echo "saucelabs testing only performed on master and production branch"

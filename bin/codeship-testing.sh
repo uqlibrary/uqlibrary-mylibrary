@@ -2,9 +2,15 @@
 
 set -e
 
-echo "On failure, will look for Saucelabs error log here: ${TMPDIR}"
+if [ -z $CI_BRANCH ]; then
+    # we are not on codeship, probably local
+    SAUCELABS_LOG_FILE="${TMPDIR}sc.log"
+else
+    SAUCELABS_LOG_FILE="/tmp/sc.log"
+fi
+echo "On failure, will look for Saucelabs error log here: ${SAUCELABS_LOG_FILE}"
+
 function logSauceCommands {
- SAUCELABS_LOG_FILE="${TMPDIR}sc.log"
  if [ -f {$SAUCELABS_LOG_FILE} ]; then
   echo "Command failed - dumping {$SAUCELABS_LOG_FILE} for debug of saucelabs"
   cat {$SAUCELABS_LOG_FILE}

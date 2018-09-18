@@ -2,12 +2,10 @@
 
 set -e
 
-if [ -z $CI_BRANCH ]; then
-    # we are not on codeship, probably local
-    SAUCELABS_LOG_FILE="${TMPDIR}sc.log"
-else
-    SAUCELABS_LOG_FILE="/tmp/sc.log"
+if [ -z ${TMPDIR} ]; then # codeship doesnt seem to set this
+  TMPDIR="/tmp"
 fi
+SAUCELABS_LOG_FILE="${TMPDIR}sc.log"
 echo "On failure, will look for Saucelabs error log here: ${SAUCELABS_LOG_FILE}"
 
 function logSauceCommands {
@@ -45,12 +43,12 @@ case "$PIPE_NUM" in
 
         trap logSauceCommands EXIT
 
-        cd bin/saucelabs
-
         echo "start server in the background, wait 20 sec for it to load"
         nohup gulp serve:dist &
         sleep 20 # give the server time to come up
         cat nohup.out
+
+        cd bin/saucelabs
 
         printf "\n --- TEST FIREFOX Dev on WINDOWS (canary test) ---\n\n"
         ./nightwatch.js --env firefox-on-windows-dev
@@ -63,6 +61,11 @@ case "$PIPE_NUM" in
   "2")
     # 'Nightwatch' pipeline
     # local integration testing
+
+    echo "start server in the background, wait 20 sec for it to load"
+    nohup gulp serve:dist &
+    sleep 20 # give the server time to come up
+    cat nohup.out
 
     if [ ${CI_BRANCH} != "canarytest" ]; then
         echo "install selenium"
@@ -86,11 +89,6 @@ case "$PIPE_NUM" in
 
         cd bin/saucelabs
 
-        echo "start server in the background, wait 20 sec for it to load"
-        nohup gulp serve:dist &
-        sleep 20 # give the server time to come up
-        cat nohup.out
-
         printf "\n --- TEST CHROME Beta on WINDOWS (canary test) ---\n\n"
         ./nightwatch.js --env chrome-on-windows-beta
 
@@ -104,12 +102,12 @@ case "$PIPE_NUM" in
 
     trap logSauceCommands EXIT
 
-    cd bin/saucelabs
-
     echo "start server in the background, wait 20 sec for it to load"
     nohup gulp serve:dist &
     sleep 20 # give the server time to come up
     cat nohup.out
+
+    cd bin/saucelabs
 
     if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
         echo "saucelabs testing only performed on master and production branch"

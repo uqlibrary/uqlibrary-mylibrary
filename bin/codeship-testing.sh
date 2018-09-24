@@ -2,8 +2,13 @@
 
 set -e
 
+if [ -z ${TMPDIR} ]; then # codeship doesnt seem to set this
+  TMPDIR="/tmp"
+fi
+SAUCELABS_LOG_FILE="${TMPDIR}sc.log"
+echo "On failure, will look for Saucelabs error log here: ${SAUCELABS_LOG_FILE}"
+
 function logSauceCommands {
- SAUCELABS_LOG_FILE="${TMPDIR}sc.log"
  if [ -f {$SAUCELABS_LOG_FILE} ]; then
   echo "Command failed - dumping {$SAUCELABS_LOG_FILE} for debug of saucelabs"
   cat {$SAUCELABS_LOG_FILE}
@@ -22,8 +27,6 @@ case "$PIPE_NUM" in
   "1")
     # 'unit tests' pipeline
 
-    trap logSauceCommands EXIT
-
     # because codeship can be a little flakey, we arent wasting part of our canary test on general tests that arent relevent
     if [ ${CI_BRANCH} != "canarytest" ]; then
         printf "\n local unit testing is not run as it never returns, eg https://app.codeship.com/projects/141087/builds/31294140?pipeline=92371843-3cbf-469a-87f7-a8120fba009a \n\n"
@@ -38,18 +41,31 @@ case "$PIPE_NUM" in
         printf "Running standard tests against canary versions of the browsers for early diagnosis of polymer failure\n"
         printf "(If you get a fail, consider if its codeship playing up, then check saucelabs then try it manually in that browser)\n"
 
+        trap logSauceCommands EXIT
+
+        echo "start server in the background, wait 20 sec for it to load"
+        nohup gulp serve:dist &
+        sleep 20 # give the server time to come up
+        cat nohup.out
+
         cd bin/saucelabs
+
+        printf "\n --- TEST FIREFOX Dev on WINDOWS (canary test) ---\n\n"
+        ./nightwatch.js --env firefox-on-windows-dev
 
         printf "\n --- TEST CHROME Dev on WINDOWS (canary test) ---\n\n"
         ./nightwatch.js --env chrome-on-windows-dev
 
-        printf "\n --- TEST FIREFOX Dev on WINDOWS (canary test) ---\n\n"
-        ./nightwatch.js --env firefox-on-windows-dev
     fi
   ;;
   "2")
     # 'Nightwatch' pipeline
     # local integration testing
+
+    echo "start server in the background, wait 20 sec for it to load"
+    nohup gulp serve:dist &
+    sleep 20 # give the server time to come up
+    cat nohup.out
 
     if [ ${CI_BRANCH} != "canarytest" ]; then
         echo "install selenium"
@@ -73,11 +89,11 @@ case "$PIPE_NUM" in
 
         cd bin/saucelabs
 
-        printf "\n --- TEST CHROME Dev on MAC (canary test) ---\n\n"
-        ./nightwatch.js --env chrome-on-mac-dev
-
         printf "\n --- TEST CHROME Beta on WINDOWS (canary test) ---\n\n"
         ./nightwatch.js --env chrome-on-windows-beta
+
+        printf "\n --- TEST CHROME Dev on MAC (canary test) ---\n\n"
+        ./nightwatch.js --env chrome-on-mac-dev
     fi
   ;;
   "3")
@@ -86,13 +102,12 @@ case "$PIPE_NUM" in
 
     trap logSauceCommands EXIT
 
-    cd bin/saucelabs
-
+    echo "start server in the background, wait 20 sec for it to load"
     nohup gulp serve:dist &
-
     sleep 20 # give the server time to come up
-
     cat nohup.out
+
+    cd bin/saucelabs
 
     if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
         echo "saucelabs testing only performed on master and production branch"
@@ -119,11 +134,11 @@ case "$PIPE_NUM" in
         printf "Running standard tests against canary versions of the browsers for early diagnosis of polymer failure\n"
         printf "If you get a fail, try it manually in that browser\n\n"
 
-        printf "\n --- TEST FIREFOX Beta on WINDOWS (canary test) ---\n\n"
-        ./nightwatch.js --env firefox-on-windows-beta
-
         printf "\n --- TEST CHROME Beta on MAC (canary test) ---\n\n"
         ./nightwatch.js --env chrome-on-mac-beta
+
+        printf "\n --- TEST FIREFOX Beta on WINDOWS (canary test) ---\n\n"
+        ./nightwatch.js --env firefox-on-windows-beta
     fi
   ;;
 esac

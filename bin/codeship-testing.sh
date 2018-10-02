@@ -3,7 +3,7 @@
 set -e
 
 if [ -z ${TMPDIR} ]; then # codeship doesnt seem to set this
-  TMPDIR="/tmp"
+  TMPDIR="/tmp/"
 fi
 SAUCELABS_LOG_FILE="${TMPDIR}sc.log"
 echo "On failure, will look for Saucelabs error log here: ${SAUCELABS_LOG_FILE}"

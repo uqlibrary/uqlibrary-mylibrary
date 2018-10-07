@@ -134,11 +134,11 @@ case "$PIPE_NUM" in
         printf "Running standard tests against canary versions of the browsers for early diagnosis of polymer failure\n"
         printf "If you get a fail, try it manually in that browser\n\n"
 
-        printf "\n --- TEST CHROME Beta on MAC (canary test) ---\n\n"
-        ./nightwatch.js --env chrome-on-mac-beta
-
         printf "\n --- TEST FIREFOX Beta on WINDOWS (canary test) ---\n\n"
         ./nightwatch.js --env firefox-on-windows-beta
+
+        printf "\n --- TEST CHROME Beta on MAC (canary test) ---\n\n"
+        ./nightwatch.js --env chrome-on-mac-beta
     fi
   ;;
 esac

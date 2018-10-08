@@ -50,12 +50,11 @@ case "$PIPE_NUM" in
 
         cd bin/saucelabs
 
-        printf "\n --- TEST FIREFOX Dev on WINDOWS (canary test) ---\n\n"
-        ./nightwatch.js --env firefox-on-windows-dev
+        printf "\n --- TEST CHROME Beta on WINDOWS (canary test) ---\n\n"
+        ./nightwatch.js --env chrome-on-windows-beta
 
         printf "\n --- TEST CHROME Dev on WINDOWS (canary test) ---\n\n"
         ./nightwatch.js --env chrome-on-windows-dev
-
     fi
   ;;
   "2")
@@ -89,11 +88,11 @@ case "$PIPE_NUM" in
 
         cd bin/saucelabs
 
-        printf "\n --- TEST CHROME Beta on WINDOWS (canary test) ---\n\n"
-        ./nightwatch.js --env chrome-on-windows-beta
+        printf "\n --- TEST FIREFOX Beta on WINDOWS (canary test) ---\n\n"
+        ./nightwatch.js --env firefox-on-windows-beta
 
-        printf "\n --- TEST CHROME Dev on MAC (canary test) ---\n\n"
-        ./nightwatch.js --env chrome-on-mac-dev
+        printf "\n --- TEST FIREFOX Dev on WINDOWS (canary test) ---\n\n"
+        ./nightwatch.js --env firefox-on-windows-dev
     fi
   ;;
   "3")
@@ -134,11 +133,11 @@ case "$PIPE_NUM" in
         printf "Running standard tests against canary versions of the browsers for early diagnosis of polymer failure\n"
         printf "If you get a fail, try it manually in that browser\n\n"
 
-        printf "\n --- TEST FIREFOX Beta on WINDOWS (canary test) ---\n\n"
-        ./nightwatch.js --env firefox-on-windows-beta
-
         printf "\n --- TEST CHROME Beta on MAC (canary test) ---\n\n"
         ./nightwatch.js --env chrome-on-mac-beta
+
+        printf "\n --- TEST CHROME Dev on MAC (canary test) ---\n\n"
+        ./nightwatch.js --env chrome-on-mac-dev
     fi
   ;;
 esac

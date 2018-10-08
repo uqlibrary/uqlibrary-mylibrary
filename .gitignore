@@ -9,3 +9,4 @@ bin/saucelabs/nightwatch.js
 *.html-e
 *.js-e
 /bin/local/reports
+wct.conf.js

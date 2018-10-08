@@ -30,16 +30,24 @@ case "$PIPE_NUM" in
     # because codeship can be a little flakey, we arent wasting part of our canary test on general tests that arent relevent
     if [ ${CI_BRANCH} != "canarytest" ]; then
         printf "\n local unit testing is not run as it never returns, eg https://app.codeship.com/projects/141087/builds/31294140?pipeline=92371843-3cbf-469a-87f7-a8120fba009a \n\n"
-    #    gulp test
+#        cp wct.conf.js.default wct.conf.js
+#        gulp test
 
         # because we cant run local test at all, we must run saucelabs test on every push :(
         printf "\n remote unit testing on saucelabs \n\n"
+        cp wct.conf.js.default wct.conf.js
         gulp test:remote
+        rm wct.conf.js
     fi
 
     if [ ${CI_BRANCH} == "canarytest" ]; then
         printf "Running standard tests against canary versions of the browsers for early diagnosis of polymer failure\n"
         printf "(If you get a fail, consider if its codeship playing up, then check saucelabs then try it manually in that browser)\n"
+
+        printf "Run WCT tests on saucelabs"
+        cp wct.conf.js.canary wct.conf.js
+        gulp test:remote
+        rm wct.conf.js
 
         trap logSauceCommands EXIT
 

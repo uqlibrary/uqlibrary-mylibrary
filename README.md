@@ -21,7 +21,7 @@ Run these commands in your Terminal to get a local server working
 * Follow the [Polymer style guide-lines](http://polymerelements.github.io/style-guide/)
 * Run ```gulp serve``` to run a local environment
 
-* IMPORTANT! Before each change, update our saucelab browser versions for [nightwatch](https://github.com/uqlibrary/uqlibrary-mylibrary/blob/master/bin/saucelabs/nightwatch.json) and [wct](https://github.com/uqlibrary/uqlibrary-mylibrary/blob/master/wct.conf.js) by using the [saucelabs configurator](https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/) so we are testing against recent versions.
+* IMPORTANT! Before each change, update our saucelab browser versions for [nightwatch](https://github.com/uqlibrary/uqlibrary-mylibrary/blob/master/bin/saucelabs/nightwatch.json) and [wct](https://github.com/uqlibrary/uqlibrary-mylibrary/blob/master/wct.conf.js.default) by using the [saucelabs configurator](https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/) so we are testing against recent versions.
 
 ## Default setup for pages (index.html, etc) 
 * Follow requirements from [uqlibrary-pages](https://github.com/uqlibrary/uqlibrary-pages/blob/master/README.md#default-setup-for-pages-indexhtml-etc)

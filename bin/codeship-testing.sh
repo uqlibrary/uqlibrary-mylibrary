@@ -10,8 +10,8 @@ echo "On failure, will look for Saucelabs error log here: ${SAUCELABS_LOG_FILE}"
 
 function logSauceCommands {
  if [ -f "$SAUCELABS_LOG_FILE" ]; then
-  echo "Command failed - dumping {$SAUCELABS_LOG_FILE} for debug of saucelabs"
-  cat {$SAUCELABS_LOG_FILE}
+  echo "Command failed - dumping $SAUCELABS_LOG_FILE for debug of saucelabs"
+  cat $SAUCELABS_LOG_FILE
  else
    echo "Command failed - attempting to dump saucelabs log file but $SAUCELABS_LOG_FILE not found - did we reach the saucelabs section?"
  fi

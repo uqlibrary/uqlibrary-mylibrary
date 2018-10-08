@@ -9,7 +9,7 @@ SAUCELABS_LOG_FILE="${TMPDIR}sc.log"
 echo "On failure, will look for Saucelabs error log here: ${SAUCELABS_LOG_FILE}"
 
 function logSauceCommands {
- if [ -f {$SAUCELABS_LOG_FILE} ]; then
+ if [ -f "$SAUCELABS_LOG_FILE" ]; then
   echo "Command failed - dumping {$SAUCELABS_LOG_FILE} for debug of saucelabs"
   cat {$SAUCELABS_LOG_FILE}
  else

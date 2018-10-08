@@ -9,7 +9,7 @@ var ret = {
         sauce: {
             browsers: [
                 'Windows 10/chrome@beta',
-                'Windows 10/firefox@beta'
+                'Windows 10/chrome@dev'
             ]
         }
     }

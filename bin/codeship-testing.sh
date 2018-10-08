@@ -107,14 +107,16 @@ case "$PIPE_NUM" in
     # 'Test commands' pipeline
     # integration testing at saucelabs
 
-    trap logSauceCommands EXIT
+    if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") || ${CI_BRANCH} == "canarytest" ]]; then
+        trap logSauceCommands EXIT
 
-    echo "start server in the background, wait 20 sec for it to load"
-    nohup gulp serve:dist &
-    sleep 20 # give the server time to come up
-    cat nohup.out
+        echo "start server in the background, wait 20 sec for it to load"
+        nohup gulp serve:dist &
+        sleep 20 # give the server time to come up
+        cat nohup.out
 
-    cd bin/saucelabs
+        cd bin/saucelabs
+    fi
 
     if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
         echo "saucelabs testing only performed on master and production branch"

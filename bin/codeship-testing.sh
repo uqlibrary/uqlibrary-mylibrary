@@ -36,7 +36,7 @@ case "$PIPE_NUM" in
         trap logSauceCommands EXIT
 
         # because we cant run local test at all, we must run saucelabs test on every push :(
-        printf "\n remote unit testing on saucelabs \n\n"
+        printf "remote unit testing on saucelabs \n\n"
         cp wct.conf.js.default wct.conf.js
         gulp test:remote
         rm wct.conf.js

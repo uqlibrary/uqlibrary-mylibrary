@@ -59,7 +59,7 @@ case "$PIPE_NUM" in
         printf "Running standard tests against canary versions of the browsers for early diagnosis of polymer failure\n"
         printf "(If you get a fail, consider if its codeship playing up, then check saucelabs then try it manually in that browser)\n"
 
-        printf "-- Run WCT tests on saucelabs -- \n"
+        printf "\n-- Run WCT tests on saucelabs -- \n"
         cp wct.conf.js.canary wct.conf.js
         gulp test:remote
         rm wct.conf.js

@@ -23,7 +23,6 @@
       "desiredCapabilities": {
         "browserName": "chrome",
         "platform": "Windows 10",
-        "version": "68.0",
         "acceptSslCerts": true,
         "screenResolution": "1280x960",
         "name": "MyLibrary - default Chrome on windows"
@@ -33,7 +32,6 @@
       "desiredCapabilities": {
         "browserName": "internet explorer",
         "platform": "Windows 10",
-        "version": "11.103",
         "acceptSslCerts": true,
         "screenResolution": "1280x960",
         "name": "MyLibrary - internet explorer on windows"
@@ -43,7 +41,6 @@
       "desiredCapabilities": {
         "browserName": "MicrosoftEdge",
         "platform": "Windows 10",
-        "version": "17.17134",
         "acceptSslCerts": true,
         "screenResolution": "1280x960",
         "name": "MyLibrary - MicrosoftEdge on windows"
@@ -53,7 +50,6 @@
       "desiredCapabilities": {
         "browserName": "firefox",
         "platform": "Windows 10",
-        "version": "61.0",
         "acceptSslCerts": true,
         "screenResolution": "1280x960",
         "name": "MyLibrary - firefox on windows"
@@ -63,7 +59,6 @@
       "desiredCapabilities": {
         "browserName": "chrome",
         "platform": "OS X 10.13",
-        "version": "68.0",
         "javascriptEnabled": true,
         "acceptSslCerts": true,
         "screenResolution": "1280x960",
@@ -74,7 +69,6 @@
       "desiredCapabilities": {
         "browserName": "firefox",
         "platform": "OS X 10.13",
-        "version": "61.0",
         "javascriptEnabled": true,
         "acceptSslCerts": true,
         "screenResolution": "1280x960",
@@ -85,7 +79,6 @@
       "desiredCapabilities": {
         "browserName": "safari",
         "platform": "OS X 10.13",
-        "version": "11.1",
         "javascriptEnabled": true,
         "acceptSslCerts": true,
         "screenResolution": "1280x960",
@@ -156,6 +149,27 @@
         "acceptSslCerts": true,
         "screenResolution": "1280x960",
         "name": "MyLibrary - chrome beta on windows"
+      }
+    },
+    "firefox-on-windows-esr" : {
+      "desiredCapabilities": {
+        "browserName": "firefox",
+        "platform": "Windows 10",
+        "version": "60.0",
+        "acceptSslCerts": true,
+        "screenResolution": "1280x960",
+        "name": "MyLibrary - firefox on windows"
+      }
+    },
+    "firefox-on-mac-esr": {
+      "desiredCapabilities": {
+        "browserName": "firefox",
+        "platform": "OS X 10.13",
+        "version": "60.0",
+        "javascriptEnabled": true,
+        "acceptSslCerts": true,
+        "screenResolution": "1280x960",
+        "name": "MyLibrary - firefox on OSx"
       }
     }
   }

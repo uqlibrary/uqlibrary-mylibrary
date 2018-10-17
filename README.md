@@ -21,6 +21,8 @@ Run these commands in your Terminal to get a local server working
 * Follow the [Polymer style guide-lines](http://polymerelements.github.io/style-guide/)
 * Run ```gulp serve``` to run a local environment
 
+* IMPORTANT! Before each change, update our saucelab operating system versions for [nightwatch](https://github.com/uqlibrary/uqlibrary-mylibrary/blob/master/bin/saucelabs/nightwatch.json) and [wct](https://github.com/uqlibrary/uqlibrary-mylibrary/blob/master/wct.conf.js.*) by using the [saucelabs configurator](https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/) so we are testing against recent versions (browser versions are mostly automatic). Also check the [latest ESR version for firefox](https://www.mozilla.org/en-US/firefox/organizations/) (Browser versions are mostly automatic). (ESR versions are deployed in our Standard Environment across the Libraries).
+
 ## Default setup for pages (index.html, etc) 
 * Follow requirements from [uqlibrary-pages](https://github.com/uqlibrary/uqlibrary-pages/blob/master/README.md#default-setup-for-pages-indexhtml-etc)
 
@@ -63,6 +65,7 @@ To get the complete test package, run the test setup script:
 
 ### Run Tests Remotely 
 
+    $ cp wct.conf.default.js wct.conf.js
     $ gulp test:remote
 
 When you run this command, you may get the error:

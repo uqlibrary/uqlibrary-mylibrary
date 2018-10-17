@@ -3,18 +3,28 @@
 set -e
 
 if [ -z ${TMPDIR} ]; then # codeship doesnt seem to set this
-  TMPDIR="/tmp"
+  TMPDIR="/tmp/"
 fi
 SAUCELABS_LOG_FILE="${TMPDIR}sc.log"
 echo "On failure, will look for Saucelabs error log here: ${SAUCELABS_LOG_FILE}"
 
 function logSauceCommands {
- if [ -f {$SAUCELABS_LOG_FILE} ]; then
-  echo "Command failed - dumping {$SAUCELABS_LOG_FILE} for debug of saucelabs"
-  cat {$SAUCELABS_LOG_FILE}
- else
-   echo "Command failed - attempting to dump saucelabs log file but $SAUCELABS_LOG_FILE not found - did we reach the saucelabs section?"
- fi
+  if [ ! -f "$SAUCELABS_LOG_FILE" ]; then
+    echo "$SAUCELABS_LOG_FILE not found - looking for alt file"
+    # testing with check /tmp/sc.log presencewct? it writes to a subdirectory, eg /tmp/wct118915-6262-1w0uwzy.q8it/sc.log
+    ALTERNATE_SAUCE_LOCN="$(find ${TMPDIR} -name 'wct*')"
+    if [ -d "${ALTERNATE_SAUCE_LOCN}" ]; then
+      SAUCELABS_LOG_FILE="${ALTERNATE_SAUCE_LOCN}/sc.log"
+    else # debug
+      echo "Could not find alternate log file ${ALTERNATE_SAUCE_LOCN}"
+    fi
+  fi
+  if [ -f "$SAUCELABS_LOG_FILE" ]; then
+    echo "Command failed - dumping $SAUCELABS_LOG_FILE for debug of saucelabs"
+    cat $SAUCELABS_LOG_FILE
+  else
+    echo "Command failed - attempting to dump saucelabs log file but $SAUCELABS_LOG_FILE not found - did we reach the saucelabs section?"
+  fi
 }
 
 if [ -z $CI_BRANCH ]; then
@@ -30,18 +40,41 @@ case "$PIPE_NUM" in
     # because codeship can be a little flakey, we arent wasting part of our canary test on general tests that arent relevent
     if [ ${CI_BRANCH} != "canarytest" ]; then
         printf "\n local unit testing is not run as it never returns, eg https://app.codeship.com/projects/141087/builds/31294140?pipeline=92371843-3cbf-469a-87f7-a8120fba009a \n\n"
-    #    gulp test
+#        cp wct.conf.js.local wct.conf.js
+#        gulp test
+#        rm wct.conf.js
+
+        trap logSauceCommands EXIT
 
         # because we cant run local test at all, we must run saucelabs test on every push :(
-        printf "\n remote unit testing on saucelabs \n\n"
+        printf "remote unit testing on saucelabs, single browser only \n\n"
+        cp wct.conf.js.default wct.conf.js
         gulp test:remote
+        rm wct.conf.js
+    fi
+
+    if [ ${CI_BRANCH} == "production" ]; then
+        trap logSauceCommands EXIT
+
+        # because we cant run local test at all, we must run saucelabs test on every push :(
+        printf "remote unit testing on saucelabs \n\n"
+        cp wct.conf.js.full wct.conf.js
+        gulp test:remote
+        rm wct.conf.js
     fi
 
     if [ ${CI_BRANCH} == "canarytest" ]; then
+        trap logSauceCommands EXIT
+
         printf "Running standard tests against canary versions of the browsers for early diagnosis of polymer failure\n"
         printf "(If you get a fail, consider if its codeship playing up, then check saucelabs then try it manually in that browser)\n"
 
-        trap logSauceCommands EXIT
+        printf "\n-- Run WCT tests on saucelabs -- \n"
+        cp wct.conf.js.canary wct.conf.js
+        gulp test:remote
+        rm wct.conf.js
+
+        printf "\n-- WCT tests on saucelabs complete -- \n\n\n"
 
         echo "start server in the background, wait 20 sec for it to load"
         nohup gulp serve:dist &
@@ -50,12 +83,11 @@ case "$PIPE_NUM" in
 
         cd bin/saucelabs
 
-        printf "\n --- TEST FIREFOX Dev on WINDOWS (canary test) ---\n\n"
-        ./nightwatch.js --env firefox-on-windows-dev
+        printf "\n --- TEST CHROME Beta on WINDOWS (canary test) ---\n\n"
+        ./nightwatch.js --env chrome-on-windows-beta
 
         printf "\n --- TEST CHROME Dev on WINDOWS (canary test) ---\n\n"
         ./nightwatch.js --env chrome-on-windows-dev
-
     fi
   ;;
   "2")
@@ -89,31 +121,40 @@ case "$PIPE_NUM" in
 
         cd bin/saucelabs
 
-        printf "\n --- TEST CHROME Beta on WINDOWS (canary test) ---\n\n"
-        ./nightwatch.js --env chrome-on-windows-beta
+        printf "\n --- TEST FIREFOX Beta on WINDOWS (canary test) ---\n\n"
+        ./nightwatch.js --env firefox-on-windows-beta
 
-        printf "\n --- TEST CHROME Dev on MAC (canary test) ---\n\n"
-        ./nightwatch.js --env chrome-on-mac-dev
+        printf "\n --- TEST FIREFOX Dev on WINDOWS (canary test) ---\n\n"
+        ./nightwatch.js --env firefox-on-windows-dev
     fi
   ;;
   "3")
     # 'Test commands' pipeline
     # integration testing at saucelabs
 
-    trap logSauceCommands EXIT
+    if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") || ${CI_BRANCH} == "canarytest" ]]; then
+        trap logSauceCommands EXIT
 
-    echo "start server in the background, wait 20 sec for it to load"
-    nohup gulp serve:dist &
-    sleep 20 # give the server time to come up
-    cat nohup.out
+        echo "start server in the background, wait 20 sec for it to load"
+        nohup gulp serve:dist &
+        sleep 20 # give the server time to come up
+        cat nohup.out
 
-    cd bin/saucelabs
+        cd bin/saucelabs
+    fi
 
     if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
         echo "saucelabs testing only performed on master and production branch"
         printf "\n --- TEST CHROME ON WINDOWS (default) --- \n\n"
         ./nightwatch.js
 
+        # Win/FF is our second most used browser, 2018 - we have the ESR release on Library Desktop SOE
+        printf "\n --- TEST FIREFOX ON WINDOWS ESR ---\n\n"
+        ./nightwatch.js --env firefox-on-windows-esr
+
+    fi
+
+    if [[ (${CI_BRANCH} == "production") ]]; then
         printf "\n --- TEST EDGE ---\n\n"
         ./nightwatch.js --env edge
 
@@ -128,6 +169,9 @@ case "$PIPE_NUM" in
 
         printf "\n --- TEST SAFARI ON MAC ---\n\n"
         ./nightwatch.js --env safari-on-mac
+
+        printf "\n --- TEST FIREFOX ON MAC ESR ---\n\n"
+        ./nightwatch.js --env firefox-on-mac-esr
     fi
 
     if [ ${CI_BRANCH} == "canarytest" ]; then
@@ -137,8 +181,8 @@ case "$PIPE_NUM" in
         printf "\n --- TEST CHROME Beta on MAC (canary test) ---\n\n"
         ./nightwatch.js --env chrome-on-mac-beta
 
-        printf "\n --- TEST FIREFOX Beta on WINDOWS (canary test) ---\n\n"
-        ./nightwatch.js --env firefox-on-windows-beta
+        printf "\n --- TEST CHROME Dev on MAC (canary test) ---\n\n"
+        ./nightwatch.js --env chrome-on-mac-dev
     fi
   ;;
 esac

@@ -28,7 +28,7 @@
         "name": "MyLibrary - default Chrome on windows"
       }
     },
-    "ie11" : {
+    "ie11-browser" : {
       "desiredCapabilities": {
         "browserName": "internet explorer",
         "platform": "Windows 10",
@@ -37,7 +37,7 @@
         "name": "MyLibrary - internet explorer on windows"
       }
     },
-    "edge" : {
+    "edge-browser" : {
       "desiredCapabilities": {
         "browserName": "MicrosoftEdge",
         "platform": "Windows 10",

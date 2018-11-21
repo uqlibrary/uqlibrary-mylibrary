@@ -58,7 +58,14 @@ case "$PIPE_NUM" in
 
         # because we cant run local test at all, we must run saucelabs test on every push :(
         printf "remote unit testing on saucelabs \n\n"
-        cp wct.conf.js.full wct.conf.js
+        cp wct.conf.js.fullA wct.conf.js
+        gulp test:remote
+        rm wct.conf.js
+
+        sleep 10 # seconds
+
+        # split testing into 2 runs so it doesnt occupy so many saucelab resources in one hit
+        cp wct.conf.js.fullB wct.conf.js
         gulp test:remote
         rm wct.conf.js
     fi

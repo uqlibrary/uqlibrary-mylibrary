@@ -45,6 +45,8 @@
     "hydrolysis": "^1.18",
     "uqlibrary-api": "v1.5.8",
     "iron-doc-viewer": "^3.0.0",
-    "iron-location": "1 - 2"
+    "iron-location": "1 - 2",
+    "polymer": "1.9.3",
+    "webcomponentsjs": "^0.7.24"
   }
 }

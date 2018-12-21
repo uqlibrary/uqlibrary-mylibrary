@@ -48,10 +48,7 @@
     "start": "gulp serve"
   },
   "engines": {
-    "npm": ">=3",
-    "node": "^v6.2.2"
-  },
-  "dependencies": {
-    "npm": "^5.7.1"
+    "npm": "^6.5.0",
+    "node": "^8.14.0"
   }
 }

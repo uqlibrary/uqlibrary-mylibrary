@@ -14,9 +14,6 @@ if [[ "$version" < "1.8" ]]; then
   return 1
 fi
 
-echo "Clear npm cache"
-npm cache clear
-
 npm -v
 node -v
 

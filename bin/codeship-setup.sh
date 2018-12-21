@@ -18,7 +18,7 @@ npm -v
 node -v
 
 echo "Install dependencies"
-npm install -g gulp bower nightwatch
+npm install -g gulp@^3.9.1 bower nightwatch
 npm install
 bower install
 

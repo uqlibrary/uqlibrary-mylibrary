@@ -6,7 +6,7 @@
     "del": "^2.0.2",
     "es6-promise": "^4.2.4",
     "glob-all": "^3.0.1",
-    "gulp": "^3.8.5",
+    "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-awspublish": "^3.3.1",
     "gulp-cache": "^0.4.0",
@@ -40,7 +40,7 @@
     "run-sequence": "^1.1.5",
     "sauce-connect-launcher": "^1.2.3",
     "vulcanize": ">= 1.4.2",
-    "web-component-tester": "^4.3.5",
+    "web-component-tester": "^4.3.7",
     "yargs": "^6.5.0"
   },
   "scripts": {
@@ -48,10 +48,7 @@
     "start": "gulp serve"
   },
   "engines": {
-    "npm": ">=3",
-    "node": "^v6.2.2"
-  },
-  "dependencies": {
-    "npm": "^5.7.1"
+    "npm": "^6.5.0",
+    "node": "^8.14.0"
   }
 }

@@ -135,6 +135,10 @@ gulp demo
 * To deploy a feature branch create a deployment pipe line in codeship, feature branch will be deployed to: `https://app.library.uq.edu.au/[feature branch]/mylibrary/index.html`
 * Any commits to production will go live on the main UQ Library website (http://www.library.uq.edu.au/mylibrary)
 
+## Canary Tests
+* The canarytest branch is used in a weekly job started from AWS as [repo-periodic-test-mylibrary](https://ap-southeast-2.console.aws.amazon.com/ecs/home?region=ap-southeast-2#/clusters/default/scheduledTasks) in Scheduled Tasks that checks that our sites work in future browsers. See bin/codeship-test.sh 
+* Scheduled Tasks: in Amazon, go to ECS > Clusters > Default > Scheduled Tasks tab which may be [here](https://ap-southeast-2.console.aws.amazon.com/ecs/home?region=ap-southeast-2#/clusters/default/scheduledTasks) and note task `repo-periodic-test-mylibrary`. 
+* This can be run manually from the Tasks tab - (put in repo-periodic-test-mylibrary as the Name and I think you have to click open Advanced Options so you can add the same extra parameter as the scheduled task?)
 
 ## Codeship config (at Jan/2017)
 Setup Commands:

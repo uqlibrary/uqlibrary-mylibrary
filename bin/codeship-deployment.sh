@@ -5,7 +5,7 @@ set -e
 
 echo "Install prerequisites gulp/bower/packages"
 
-npm install -g gulp@^3.9.1 bower
+npm install -g gulp-cli bower
 
 npm install
 bower install

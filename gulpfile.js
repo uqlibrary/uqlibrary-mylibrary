@@ -16,7 +16,6 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var del = require('del');
-var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var merge = require('merge-stream');
@@ -24,11 +23,11 @@ var path = require('path');
 var fs = require('fs');
 var glob = require('glob-all');
 var historyApiFallback = require('connect-history-api-fallback');
-var packageJson = require('./package.json');
+var packageJson = JSON.parse(fs.readFileSync('./package.json', 'utf-8'));
 var crypto = require('crypto');
 var replace = require('gulp-replace-task');
 var cloudfront = require('gulp-invalidate-cloudfront');
-var argv = require('yargs').argv;
+var argv = require('yargs/yargs')(process.argv.slice(2));
 
 // Other tasks
 var ensureFiles = require('./tasks/ensure-files.js');
@@ -205,8 +204,19 @@ gulp.task('html', function () {
     dist());
 });
 
+// update paths to bower_components for all components inside bower_components
+gulp.task('clean_bower', function () {
+
+  var regEx = new RegExp('bower_components', 'g');
+
+  return gulp.src('app/bower_components/**/*.html')
+    .pipe(replace({patterns: [{match: regEx, replacement: ".."}], usePrefix: false}))
+    .pipe(gulp.dest('app/bower_components'))
+    .pipe($.size({title: 'clean_bower'}));
+});
+
 // Vulcanize granular configuration
-gulp.task('vulcanize', ['clean_bower'], function () {
+gulp.task('vulcanize', gulp.series('clean_bower', function () {
   return gulp.src('app/elements/elements.html')
     .pipe($.vulcanize({
       stripComments: true,
@@ -219,7 +229,7 @@ gulp.task('vulcanize', ['clean_bower'], function () {
     }))
     .pipe(gulp.dest(dist('elements')))
     .pipe($.size({title: 'vulcanize'}));
-});
+}));
 
 // Generate config data for the <sw-precache-cache> element.
 // This include a list of files that should be precached, as well as a (hopefully unique) cache
@@ -262,23 +272,12 @@ gulp.task('clean', function () {
   return del(['.tmp', dist()]);
 });
 
-// update paths to bower_components for all components inside bower_components
-gulp.task('clean_bower', function () {
-
-  var regEx = new RegExp("bower_components", "g");
-
-  return gulp.src('app/bower_components/**/*.html')
-    .pipe(replace({patterns: [{match: regEx, replacement: ".."}], usePrefix: false}))
-    .pipe(gulp.dest('app/bower_components'))
-    .pipe($.size({title: 'clean_bower'}));
-});
-
 gulp.task('elements', function () {
   return styleTask('elements', ['**/*.css']);
 });
 
 // Watch files for changes & reload
-gulp.task("demo", [], function () {
+gulp.task('demo', function (done) {
   console.log("Running demonstration server...");
   browserSync({
     open: "external",
@@ -295,15 +294,15 @@ gulp.task("demo", [], function () {
       "scripts/*.js"
     ]
   });
+  done();
 });
 
 
 // Watch files for changes & reload
-gulp.task('serve', ['elements', 'styles', 'clean_bower'], function () {
+gulp.task('serve', gulp.series('elements', 'styles', 'clean_bower', function (done) {
   browserSync({
     port: 5000,
     notify: false,
-    startPath: "/demo.html",
     logPrefix: 'MyLibrary',
     snippetOptions: {
       rule: {
@@ -323,14 +322,37 @@ gulp.task('serve', ['elements', 'styles', 'clean_bower'], function () {
     }
   });
 
-  gulp.watch(['app/**/*.html', '!app/bower_components/**/*.html'], reload);
-  gulp.watch(['app/styles/**/*.scss'], ['styles', reload]);
-  gulp.watch(['app/scripts/**/*.js'], reload);
-  gulp.watch(['app/images/**/*'], reload);
-});
+  gulp.watch(['app/**/*.html', '!app/bower_components/**/*.html'], gulp.series(reload));
+  gulp.watch(['app/styles/**/*.scss'], gulp.series('styles', reload));
+  gulp.watch(['app/scripts/**/*.js'], gulp.series(reload));
+  gulp.watch(['app/images/**/*'], gulp.series(reload));
+  done();
+}));
+
+// Build production files, the default task
+gulp.task('default', gulp.series(
+  // Uncomment 'cache-config' if you are going to use service workers.  
+  'clean',
+  gulp.parallel('ensureFiles', 'copy', 'styles'),
+  gulp.parallel('images', 'fonts', 'html'),
+  'vulcanize',
+  // 'cache-config',
+  'inject-preloader',
+  'inject-browser-update',
+  'inject-ga-values',
+  'rev',
+  'monkey-patch-rev-manifest',
+  'rev-replace-polymer-fix',
+  'app-cache-version-update',
+  'rev-appcache-update',
+  'remove-rev-file',
+  function (cb) {
+    cb();
+  }
+));
 
 // Build and serve the output from the dist build
-gulp.task('serve:dist', ['default'], function () {
+gulp.task('serve:dist', gulp.series('default', function (done) {
   browserSync({
     port: 5001,
     notify: false,
@@ -350,33 +372,16 @@ gulp.task('serve:dist', ['default'], function () {
     server: dist(),
     middleware: [historyApiFallback()]
   });
-});
-
-// Build production files, the default task
-gulp.task('default', ['clean'], function (cb) {
-  // Uncomment 'cache-config' if you are going to use service workers.
-  runSequence(
-    ['ensureFiles', 'copy', 'styles'],
-    ['images', 'fonts', 'html'],
-    'vulcanize', // 'cache-config',
-    'inject-preloader',
-    'inject-browser-update',
-    'inject-ga-values',
-    'rev',
-    'monkey-patch-rev-manifest',
-    'rev-replace-polymer-fix',
-    'app-cache-version-update',
-    'rev-appcache-update',
-    'remove-rev-file',
-    cb);
-});
+  done();
+}));
 
 // Build then deploy to GitHub pages gh-pages branch
 gulp.task('build-deploy-gh-pages', function (cb) {
-  runSequence(
+  gulp.series(
     'default',
     'deploy-gh-pages',
-    cb);
+    cb
+  );
 });
 
 // Deploy to GitHub pages gh-pages branch
@@ -396,7 +401,7 @@ require('web-component-tester').gulp.init(gulp);
  * If no bucket path passed will invalidate production subdir
  */
 gulp.task('invalidate', function () {
-  var awsConfig = JSON.parse(fs.readFileSync('./aws.json'));
+  var awsConfig = JSON.parse(fs.readFileSync('./aws.json', 'utf-8'));
 
   var invalidatePath = '';
 
@@ -436,7 +441,7 @@ gulp.task('invalidate', function () {
 gulp.task('publish', function () {
 
   // create a new publisher using S3 options
-  var awsConfig = JSON.parse(fs.readFileSync('./aws.json'));
+  var awsConfig = JSON.parse(fs.readFileSync('./aws.json', 'utf-8'));
   var publisher = $.awspublish.create(awsConfig);
 
   // define custom headers
@@ -463,9 +468,4 @@ gulp.task('publish', function () {
 });
 
 // Load custom tasks from the `tasks` directory
-try {
-  require('require-dir')('tasks');
-}
-catch (err) {
-  // Do nothing
-}
+ require('require-dir')('tasks');

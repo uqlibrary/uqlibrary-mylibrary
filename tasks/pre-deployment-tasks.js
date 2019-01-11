@@ -52,9 +52,11 @@ gulp.task('app-cache-version-update', function() {
 });
 
 gulp.task('rev-appcache-update', function () {
-  var json = JSON.parse(fs.readFileSync(dist() + "/rev-manifest.json"));
+  var json = JSON.parse(fs.readFileSync(dist() + '/rev-manifest.json', 'utf-8'));
 
-  var source = gulp.src(dist() + '/index.appcache');
+  var source = gulp.src(dist() + '/index.appcache', {
+    allowEmpty: true
+  });
   for (var key in json) {
     if (!json.hasOwnProperty(key)) continue;
     source.pipe($.replace(key, json[key]));
@@ -104,10 +106,12 @@ gulp.task('monkey-patch-rev-manifest', function () {
 });
 
 // inject values for GA
-gulp.task('inject-ga-values', function() {
+gulp.task('inject-ga-values', function(done) {
 
-  if (process.env.CI_BRANCH !== "production")
+  if (process.env.CI_BRANCH !== "production") {
+    done();
     return;
+  }
 
   var gaIdEx = new RegExp("<GA-TRACKING-ID>", "g");
   var gaUrlEx = new RegExp("<GA-WEBSITE-URL>", "g");

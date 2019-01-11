@@ -303,7 +303,6 @@ gulp.task('serve', gulp.series('elements', 'styles', 'clean_bower', function (do
   browserSync({
     port: 5000,
     notify: false,
-    startPath: "/demo.html",
     logPrefix: 'MyLibrary',
     snippetOptions: {
       rule: {

@@ -160,7 +160,7 @@ gulp demo
 * Scheduled Tasks: in Amazon, go to ECS > Clusters > Default > Scheduled Tasks tab which may be [here](https://ap-southeast-2.console.aws.amazon.com/ecs/home?region=ap-southeast-2#/clusters/default/scheduledTasks) and note task `repo-periodic-test-mylibrary`.
 * This can be run manually from the Tasks tab - (put in repo-periodic-test-mylibrary as the Name and I think you have to click open Advanced Options so you can add the same extra parameter as the scheduled task?)
 
-## Codeship config (at Jan/2017)
+## Codeship config (at 11/Jan/2019)
 
 Setup Commands:
 
@@ -168,9 +168,6 @@ Setup Commands:
 jdk_switcher use oraclejdk8
 chmod a+x -R bin/*
 bin/codeship-setup.sh
-npm cache clear
-rm -rf node_modules
-npm install
 bin/test-setup.sh
 ```
 

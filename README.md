@@ -4,16 +4,16 @@
 [![Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-mylibrary.svg)](https://david-dm.org/uqlibrary/uqlibrary-mylibrary)
 [![Dev Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-mylibrary/dev-status.svg)](https://david-dm.org/uqlibrary/uqlibrary-mylibrary?type=dev)
 
-This project acts as a container for all individual uqlibrary applications. [Demo](https://app.library.uq.edu.au/master/mylibrary/demo.html).
+This project acts as a container for all individual uqlibrary applications.
+
+The current master build can be viewed [here](https://app.library.uq.edu.au/master/mylibrary/).
 
 ## Setting up the project
 
-Run these commands in your Terminal to get a local server working
-
-(note the first one must be run as super user)
+Run these commands in your Terminal to get a local server working.
 
 ```bash
-sudo npm install -g gulp bower
+npm install -g bower gulp-cli nightwatch web-component-tester
 npm install
 bower install
 ```
@@ -21,7 +21,7 @@ bower install
 ## Developing
 
 * Follow the [Polymer style guide-lines](http://polymerelements.github.io/style-guide/)
-* Run ```gulp serve``` to run a local environment
+* Run `gulp serve` to run a local environment
 
 * IMPORTANT! Before each change, update our saucelab operating system versions for [nightwatch](https://github.com/uqlibrary/uqlibrary-mylibrary/blob/master/bin/saucelabs/nightwatch.json) and [wct](https://github.com/uqlibrary/uqlibrary-mylibrary/blob/master/wct.conf.js.*) by using the [saucelabs configurator](https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/) so we are testing against recent versions (browser versions are mostly automatic). Also check the [latest ESR version for firefox](https://www.mozilla.org/en-US/firefox/organizations/) (Browser versions are mostly automatic). (ESR versions are deployed in our Standard Environment across the Libraries).
 
@@ -43,12 +43,13 @@ bower install
 1. Clone [uqlibrary-starter-kit](https://github.com/uqlibrary/uqlibrary-starter-kit)
 1. Make sure the element contains the paper-toolbar
 1. Make sure the element has a "standAlone" attribute and a "_toggleDrawerPanel" function
-1. When the App is ready, tag a release, eg git tag -a v1.0.0 -m 'First release'
-1. In uqlibrary-mylibrary, bower install the element (eg. bower install uqlibrary/uqlibrary-starter-kit#v1.0.0) (Note that bower_components subfolders are no longer used and bower components are build into the parent directory, above each project)
-1. Add the element in app/elements/elements.html
-1. Add a section containing the element in app/index.html
+1. When the App is ready, tag a release, eg `git tag -a v1.0.0 -m 'First release'`
+1. In uqlibrary-mylibrary, bower install the element (eg. `bower install uqlibrary/uqlibrary-starter-kit#v1.0.0`) 
+    * (Note that `bower_components subfolders` are no longer used and bower components are build into the parent directory, above each project)
+1. Add the element in `app/elements/elements.html`
+1. Add a section containing the element in `app/index.html`
 1. Add a menu item in uqlibrary-api (applications HTML)
-1. Add a route via PageJS in app/elements/routing.html
+1. Add a route via PageJS in `app/elements/routing.html`
 
 ## Tests
 
@@ -98,7 +99,7 @@ then run the `gulp test:remote` command again
 
 ### Nightwatch tests
 
-Nightwatch is also run on Codeship for deployment testing. No gulp interface provided
+Nightwatch is also run on Codeship for deployment testing. No gulp interface provided.
 
 You can also run them locally:
 
@@ -147,8 +148,8 @@ gulp demo
 
 ## Publishing
 
-* Make sure MyLibrary functions properly when using ```gulp serve:dist```
-* Before committing to master, run ```gulp test```
+* Make sure MyLibrary functions properly when using `gulp serve:dist`
+* Before committing to master, run `gulp test`
 * Any commits to master are automatically deployed to [app.library](https://app.library.uq.edu.au/master/mylibrary/index.html)
 * To deploy a feature branch create a deployment pipe line in codeship, feature branch will be deployed to: `https://app.library.uq.edu.au/[feature branch]/mylibrary/index.html`
 * Any commits to production will go live on the main UQ Library website (<http://www.library.uq.edu.au/mylibrary>)

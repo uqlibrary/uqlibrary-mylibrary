@@ -28,11 +28,5 @@
   },
   "devDependencies": {
     "web-component-tester": "*"
-  },
-  "resolutions": {
-    "iron-elements": "^1.0.10",
-    "paper-elements": "^1.0.7",
-    "platinum-elements": "^2.0.0",
-    "platinum-bluetooth": "^2.0.0"
   }
 }

@@ -3,6 +3,9 @@
 # start debugging/tracing commands, -e - exit if command returns error (non-zero status)
 set -e
 
+# This gets rid of an error
+npm rebuild node-sass
+
 # Update paths in bower_components
 echo 'gulp clean_bower'
 gulp clean_bower

@@ -4,12 +4,11 @@
   "dependencies": {
     "font-roboto": "Polymerelements/font-roboto#^1.0.1",
     "iron-elements": "Polymerelements/iron-elements#^1.0.9",
-    "lodash": "3.7.0",
     "neon-elements": "PolymerElements/neon-elements#1.0.0",
     "page": "visionmedia/page.js#^1.7.1",
     "paper-elements": "Polymerelements/paper-elements#^1.0.7",
     "platinum-elements": "Polymerelements/platinum-elements#^2.0.0",
-    "polymer": "1.9.3",
+    "polymer": "Polymer/polymer#^1.9.3",
     "uqlibrary-api": "uqlibrary/uqlibrary-api",
     "uqlibrary-autosuggest-input": "uqlibrary/uqlibrary-autosuggest-input",
     "uqlibrary-borrowing": "uqlibrary/uqlibrary-borrowing",
@@ -28,17 +27,6 @@
     "uq-wait": "uqlibrary/uq-wait"
   },
   "devDependencies": {
-    "web-component-tester": "^4.3.7",
-    "test-fixture": "PolymerElements/test-fixture#^1.0.0"
-  },
-  "resolutions": {
-    "test-fixture": "^1.0.0",
-    "paper-elements": "1.0.7",
-    "iron-elements": "1.0.10",
-    "platinum-elements": "^2.0.0",
-    "uqlibrary-autosuggest-input": "1.1.4",
-    "uqlibrary-api": "1.5.12",
-    "uqlibrary-styles": "1.1.8",
-    "platinum-bluetooth": "^2.0.0"
+    "web-component-tester": "*"
   }
 }

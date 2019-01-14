@@ -27,6 +27,10 @@
     "uq-wait": "uqlibrary/uq-wait"
   },
   "devDependencies": {
-    "web-component-tester": "*"
+    "web-component-tester": "*",
+    "test-fixture": "PolymerElements/test-fixture#^1.1.2"
+  },
+  "resolutions": {
+    "test-fixture": "^1.1.2"
   }
 }

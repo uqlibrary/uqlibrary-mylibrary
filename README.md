@@ -79,7 +79,7 @@ gulp test:local
 ### Run Tests Remotely
 
 ```bash
-cp wct.conf.default.js wct.conf.js
+cp wct.conf.js.default wct.conf.js
 gulp test:remote
 ```
 

@@ -39,13 +39,10 @@ case "$PIPE_NUM" in
 
     # because codeship can be a little flakey, we arent wasting part of our canary test on general tests that arent relevent
     if [ ${CI_BRANCH} != "canarytest" ]; then
-
-        printf "Running local tests"
+        echo "Running local tests"
         cp wct.conf.js.local wct.conf.js
         gulp test
         rm wct.conf.js
-
-        trap logSauceCommands EXIT
     fi
 
     if [ ${CI_BRANCH} == "production" ]; then

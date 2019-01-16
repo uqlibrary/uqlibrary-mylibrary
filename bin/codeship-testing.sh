@@ -155,7 +155,8 @@ case "$PIPE_NUM" in
 
     if [[ (${CI_BRANCH} == "production") ]]; then
         printf "\n --- TEST EDGE ---\n\n"
-        ./nightwatch.js --env edge-browser
+        echo "Disabled."
+        # ./nightwatch.js --env edge-browser
 
         printf "\n --- TEST IE11 ---\n\n"
         ./nightwatch.js --env ie11-browser

@@ -134,7 +134,9 @@ case "$PIPE_NUM" in
 
     if [[ (${CI_BRANCH} == "production") ]]; then
         printf "\n --- TEST All other browsers ---\n\n"
-        ./nightwatch.js --env edge-browser,ie11-browser,firefox-on-windows,chrome-on-mac,firefox-on-mac,safari-on-mac,firefox-on-mac-esr
+        echo "Note: Edge test disabled."
+        # ./nightwatch.js --env edge-browser,ie11-browser,firefox-on-windows,chrome-on-mac,firefox-on-mac,safari-on-mac,firefox-on-mac-esr
+        ./nightwatch.js --env ie11-browser,firefox-on-windows,chrome-on-mac,firefox-on-mac,safari-on-mac,firefox-on-mac-esr
     fi
 
   ;;

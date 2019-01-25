@@ -73,25 +73,12 @@ case "$PIPE_NUM" in
         gulp test:remote
         rm wct.conf.js
 
-        printf "\n-- WCT tests on saucelabs complete -- \n\n\n"
-
-        echo "start server in the background, wait 20 sec for it to load"
-        nohup gulp serve:dist &
-        sleep 20 # give the server time to come up
-        cat nohup.out
-
-        cd bin/saucelabs
-
-        printf "\n --- TEST CHROME Beta on WINDOWS (canary test) ---\n\n"
-        ./nightwatch.js --env chrome-on-windows-beta
-
-        printf "\n --- TEST CHROME Dev on WINDOWS (canary test) ---\n\n"
-        ./nightwatch.js --env chrome-on-windows-dev
+        printf "\n-- WCT tests on saucelabs complete --"
     fi
   ;;
   "2")
     # 'Nightwatch' pipeline
-    # local integration testing
+    # Integration testing
 
     echo "start server in the background, wait 20 sec for it to load"
     nohup gulp serve:dist &
@@ -120,72 +107,35 @@ case "$PIPE_NUM" in
 
         cd bin/saucelabs
 
-        printf "\n --- TEST FIREFOX Beta on WINDOWS (canary test) ---\n\n"
-        ./nightwatch.js --env firefox-on-windows-beta
-
-        printf "\n --- TEST FIREFOX Dev on WINDOWS (canary test) ---\n\n"
-        ./nightwatch.js --env firefox-on-windows-dev
+        printf "\n --- TEST Beta and Dev versions of Firefox and Chrome on Mac and Windows  ---\n\n"
+        ./nightwatch.js --env chrome-on-windows-beta,chrome-on-windows-dev,firefox-on-windows-beta,firefox-on-windows-dev,chrome-on-mac-beta,chrome-on-mac-dev
     fi
   ;;
   "3")
     # 'Test commands' pipeline
     # integration testing at saucelabs
 
-    if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") || ${CI_BRANCH} == "canarytest" ]]; then
+    if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
         trap logSauceCommands EXIT
 
-        echo "start server in the background, wait 20 sec for it to load"
+        echo "Start server in the background, wait 20 sec for it to load"
         nohup gulp serve:dist &
         sleep 20 # give the server time to come up
         cat nohup.out
 
         cd bin/saucelabs
-    fi
-
-    if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
-        echo "saucelabs testing only performed on master and production branch"
-        printf "\n --- TEST CHROME ON WINDOWS (default) --- \n\n"
-        ./nightwatch.js
 
         # Win/FF is our second most used browser, 2018 - we have the ESR release on Library Desktop SOE
-        printf "\n --- TEST FIREFOX ON WINDOWS ESR ---\n\n"
-        ./nightwatch.js --env firefox-on-windows-esr
+        echo "Saucelabs testing only performed on master and production branch"
+        printf "\n --- TEST Popular browsers ---\n\n"
+        ./nightwatch.js --env default,firefox-on-windows-esr
 
     fi
 
     if [[ (${CI_BRANCH} == "production") ]]; then
-        printf "\n --- TEST EDGE ---\n\n"
-        echo "Disabled."
-        # ./nightwatch.js --env edge-browser
-
-        printf "\n --- TEST IE11 ---\n\n"
-        ./nightwatch.js --env ie11-browser
-
-        printf "\n --- TEST FIREFOX ON WINDOWS ---\n\n"
-        ./nightwatch.js --env firefox-on-windows
-
-        printf "\n --- TEST CHROME ON MAC ---\n\n"
-        ./nightwatch.js --env chrome-on-mac
-
-        printf "\n --- TEST FIREFOX ON MAC ---\n\n"
-        ./nightwatch.js --env firefox-on-mac
-
-        printf "\n --- TEST SAFARI ON MAC ---\n\n"
-        ./nightwatch.js --env safari-on-mac
-
-        printf "\n --- TEST FIREFOX ON MAC ESR ---\n\n"
-        ./nightwatch.js --env firefox-on-mac-esr
+        printf "\n --- TEST All other browsers ---\n\n"
+        ./nightwatch.js --env edge-browser,ie11-browser,firefox-on-windows,chrome-on-mac,firefox-on-mac,safari-on-mac,firefox-on-mac-esr
     fi
 
-    if [ ${CI_BRANCH} == "canarytest" ]; then
-        printf "Running standard tests against canary versions of the browsers for early diagnosis of polymer failure\n"
-        printf "If you get a fail, try it manually in that browser\n\n"
-
-        printf "\n --- TEST CHROME Beta on MAC (canary test) ---\n\n"
-        ./nightwatch.js --env chrome-on-mac-beta
-
-        printf "\n --- TEST CHROME Dev on MAC (canary test) ---\n\n"
-        ./nightwatch.js --env chrome-on-mac-dev
-    fi
   ;;
 esac

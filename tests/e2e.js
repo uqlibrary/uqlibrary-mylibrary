@@ -12,6 +12,6 @@ module.exports = {
       // .assert.elementPresent('.applications > paper-button:nth-of-type(14)', 'all buttons present')
       // .assert.elementNotPresent('.applications > paper-button:nth-of-type(15)', 'no extra buttons found')
 
-      .end();
+    ;      
   }
 };

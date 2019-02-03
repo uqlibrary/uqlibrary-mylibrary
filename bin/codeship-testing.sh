@@ -35,9 +35,10 @@ fi
 
 case "$PIPE_NUM" in
   "1")
-    # 'unit tests' pipeline
+    # 'Unit tests' pipeline
+    # WCT
 
-    # because codeship can be a little flakey, we arent wasting part of our canary test on general tests that arent relevent
+    # Because Codeship can be a little flaky, we arent wasting part of our canary test on general tests that aren't relevent
     if [ ${CI_BRANCH} != "canarytest" ]; then
         echo "Running local tests"
         cp wct.conf.js.local wct.conf.js
@@ -49,7 +50,7 @@ case "$PIPE_NUM" in
         trap logSauceCommands EXIT
 
         # because we cant run local test at all, we must run saucelabs test on every push :(
-        printf "remote unit testing on saucelabs \n\n"
+        printf "\n-- Remote unit testing on Saucelabs --\n\n"
         cp wct.conf.js.fullA wct.conf.js
         gulp test:remote
         rm wct.conf.js
@@ -65,126 +66,67 @@ case "$PIPE_NUM" in
     if [ ${CI_BRANCH} == "canarytest" ]; then
         trap logSauceCommands EXIT
 
-        printf "Running standard tests against canary versions of the browsers for early diagnosis of polymer failure\n"
-        printf "(If you get a fail, consider if its codeship playing up, then check saucelabs then try it manually in that browser)\n"
+        echo "Running unit tests against canary versions of the browsers for early diagnosis of polymer failure"
+        echo "(If you get a fail, consider if it's Codeship playing up, then check saucelabs then try it manually in that browser.)"
 
-        printf "\n-- Run WCT tests on saucelabs -- \n"
+        printf "\n-- Run WCT tests on saucelabs --\n\n"
         cp wct.conf.js.canary wct.conf.js
         gulp test:remote
         rm wct.conf.js
-
-        printf "\n-- WCT tests on saucelabs complete -- \n\n\n"
-
-        echo "start server in the background, wait 20 sec for it to load"
-        nohup gulp serve:dist &
-        sleep 20 # give the server time to come up
-        cat nohup.out
-
-        cd bin/saucelabs
-
-        printf "\n --- TEST CHROME Beta on WINDOWS (canary test) ---\n\n"
-        ./nightwatch.js --env chrome-on-windows-beta
-
-        printf "\n --- TEST CHROME Dev on WINDOWS (canary test) ---\n\n"
-        ./nightwatch.js --env chrome-on-windows-dev
     fi
   ;;
   "2")
-    # 'Nightwatch' pipeline
-    # local integration testing
+    # 'Integration tests' pipeline
+    # Nightwatch
 
-    echo "start server in the background, wait 20 sec for it to load"
+    echo "Start server in the background, wait 20 sec for it to load..."
     nohup gulp serve:dist &
     sleep 20 # give the server time to come up
     cat nohup.out
 
     if [ ${CI_BRANCH} != "canarytest" ]; then
-        echo "install selenium"
+        echo "Installing Selenium..."
         curl -sSL https://raw.githubusercontent.com/codeship/scripts/master/packages/selenium_server.sh | bash -s
 
-        echo "Installed selenium. Running Nightwatch locally"
+        echo "Installed Selenium. Running Nightwatch locally."
 
-        printf "\n Not testing firefox here atm - selenium would need an upgrade to use a recent enough geckodriver that recent firefox will work - see https://app.codeship.com/projects/141087/builds/35995050 \n\n"
+        printf "\n Not testing firefox here atm - selenium would need an upgrade to use a recent enough geckodriver"
+        printf " that recent firefox will work - see https://app.codeship.com/projects/141087/builds/35995050 \n\n"
 
         cd bin/local
 
         printf "\n --- TEST CHROME ON WINDOWS --- \n\n"
         ./nightwatch.js --env chrome
+
+        cd ../../
+    fi
+
+    if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production" || ${CI_BRANCH} == "canarytest") ]]; then
+        cd bin/saucelabs
+        trap logSauceCommands EXIT
     fi
 
     if [ ${CI_BRANCH} == "canarytest" ]; then
-        trap logSauceCommands EXIT
+        echo "Running integration tests against canary versions of the browsers for early diagnosis of polymer failure"
+        echo "(If you get a fail, consider if its codeship playing up, then check saucelabs then try it manually in that browser)"
 
-        printf "Running standard tests against canary versions of the browsers for early diagnosis of polymer failure\n"
-        printf "(If you get a fail, consider if its codeship playing up, then check saucelabs then try it manually in that browser)\n"
-
-        cd bin/saucelabs
-
-        printf "\n --- TEST FIREFOX Beta on WINDOWS (canary test) ---\n\n"
-        ./nightwatch.js --env firefox-on-windows-beta
-
-        printf "\n --- TEST FIREFOX Dev on WINDOWS (canary test) ---\n\n"
-        ./nightwatch.js --env firefox-on-windows-dev
-    fi
-  ;;
-  "3")
-    # 'Test commands' pipeline
-    # integration testing at saucelabs
-
-    if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") || ${CI_BRANCH} == "canarytest" ]]; then
-        trap logSauceCommands EXIT
-
-        echo "start server in the background, wait 20 sec for it to load"
-        nohup gulp serve:dist &
-        sleep 20 # give the server time to come up
-        cat nohup.out
-
-        cd bin/saucelabs
+        printf "\n --- TEST Beta and Dev versions of Firefox and Chrome on Mac and Windows  ---\n\n"
+        ./nightwatch.js --env chrome-on-windows-beta,chrome-on-windows-dev,firefox-on-windows-beta,firefox-on-windows-dev,chrome-on-mac-beta,chrome-on-mac-dev
     fi
 
     if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
-        echo "saucelabs testing only performed on master and production branch"
-        printf "\n --- TEST CHROME ON WINDOWS (default) --- \n\n"
-        ./nightwatch.js
-
         # Win/FF is our second most used browser, 2018 - we have the ESR release on Library Desktop SOE
-        printf "\n --- TEST FIREFOX ON WINDOWS ESR ---\n\n"
-        ./nightwatch.js --env firefox-on-windows-esr
-
+        echo "Saucelabs testing only performed on master and production branch"
+        printf "\n --- TEST Chrome and Firefox ESR (popular browsers) ---\n\n"
+        ./nightwatch.js --env default,firefox-on-windows-esr
     fi
 
     if [[ (${CI_BRANCH} == "production") ]]; then
-        printf "\n --- TEST EDGE ---\n\n"
-        ./nightwatch.js --env edge-browser
-
-        printf "\n --- TEST IE11 ---\n\n"
-        ./nightwatch.js --env ie11-browser
-
-        printf "\n --- TEST FIREFOX ON WINDOWS ---\n\n"
-        ./nightwatch.js --env firefox-on-windows
-
-        printf "\n --- TEST CHROME ON MAC ---\n\n"
-        ./nightwatch.js --env chrome-on-mac
-
-        printf "\n --- TEST FIREFOX ON MAC ---\n\n"
-        ./nightwatch.js --env firefox-on-mac
-
-        printf "\n --- TEST SAFARI ON MAC ---\n\n"
-        ./nightwatch.js --env safari-on-mac
-
-        printf "\n --- TEST FIREFOX ON MAC ESR ---\n\n"
-        ./nightwatch.js --env firefox-on-mac-esr
+        printf "\n --- TEST All other browsers ---\n\n"
+        echo "Note: Edge test disabled."
+        # ./nightwatch.js --env edge-browser,ie11-browser,firefox-on-windows,chrome-on-mac,firefox-on-mac,safari-on-mac,firefox-on-mac-esr
+        ./nightwatch.js --env ie11-browser,firefox-on-windows,chrome-on-mac,firefox-on-mac,safari-on-mac,firefox-on-mac-esr
     fi
 
-    if [ ${CI_BRANCH} == "canarytest" ]; then
-        printf "Running standard tests against canary versions of the browsers for early diagnosis of polymer failure\n"
-        printf "If you get a fail, try it manually in that browser\n\n"
-
-        printf "\n --- TEST CHROME Beta on MAC (canary test) ---\n\n"
-        ./nightwatch.js --env chrome-on-mac-beta
-
-        printf "\n --- TEST CHROME Dev on MAC (canary test) ---\n\n"
-        ./nightwatch.js --env chrome-on-mac-dev
-    fi
   ;;
 esac

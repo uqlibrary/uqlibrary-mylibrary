@@ -18,7 +18,7 @@ fi
 
 function logSauceCommands {
   if [[ "$LOG_SAUCELAB_ERRORS" != true ]]; then
-    echo "An error happened and (presumably) saucelabs failed but we arent reporting the output - set LOG_SAUCELAB_ERRORS to true in Codeship Environment Variables to see the log next time"
+    echo "An error happened and (presumably) saucelabs failed but we arent reporting the output - set LOG_SAUCELAB_ERRORS to true in Codeship Environment Variables to see the log next time (it is details very specific to the internals of saucelabs - really only needed if saucelabs are asking to see it to diagnose a problem)"
     return
   fi
 
@@ -61,19 +61,23 @@ case "$PIPE_NUM" in
     # WCT
 
     echo "Running local tests"
+    # test chrome on every build
     cp wct.conf.js.local wct.conf.js
     gulp test
     rm wct.conf.js
 
-    if [[ ${CI_BRANCH} == "production" ]]; then
+    if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
+        # test most common browsers on master and prod
+        # (also splits tests into two runs so it doesnt slam saucelabs quite so hard)
         trap logSauceCommands EXIT
 
-        # because we cant run local test at all, we must run saucelabs test on every push :(
         printf "\n-- Remote unit testing on Saucelabs --\n\n"
         cp wct.conf.js.fullA wct.conf.js
         gulp test:remote
         rm wct.conf.js
+    fi
 
+    if [[ ${CI_BRANCH} == "production" ]]; then
         sleep 10 # seconds
 
         # split testing into 2 runs so it doesnt occupy so many saucelab resources in one hit

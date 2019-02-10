@@ -53,8 +53,16 @@ case "$PIPE_NUM" in
     # 'Unit tests' pipeline
     # WCT
 
-    # Because Codeship can be a little flaky, we arent wasting part of our canary test on general tests that aren't relevent
-    if [ ${CI_BRANCH} != "canarytest" ]; then
+#    if [ ${CI_BRANCH} == "canarytest" ]; then
+    if [ ${CI_BRANCH} == "canary-163684472" ]; then
+        printf "sleep to give other pipelines time to run without clashing\n"
+        sleep 600 # seconds
+        printf "Time of awaken : $(date +"%T")\n\n"
+    fi
+
+    # we dont run general tests that aren't relevent for canary test
+#    if [ ${CI_BRANCH} != "canarytest" ]; then
+    if [ ${CI_BRANCH} != "canary-163684472" ]; then
         echo "Running local tests"
         cp wct.conf.js.local wct.conf.js
         gulp test
@@ -78,7 +86,8 @@ case "$PIPE_NUM" in
         rm wct.conf.js
     fi
 
-    if [ ${CI_BRANCH} == "canarytest" ]; then
+#    if [ ${CI_BRANCH} == "canarytest" ]; then
+    if [ ${CI_BRANCH} == "canary-163684472" ]; then
         trap logSauceCommands EXIT
 
         echo "Running unit tests against canary versions of the browsers for early diagnosis of polymer failure"
@@ -99,7 +108,8 @@ case "$PIPE_NUM" in
     sleep 20 # give the server time to come up
     cat nohup.out
 
-    if [ ${CI_BRANCH} != "canarytest" ]; then
+#    if [ ${CI_BRANCH} != "canarytest" ]; then
+    if [ ${CI_BRANCH} != "canary-163684472" ]; then
         echo "Installing Selenium..."
         curl -sSL https://raw.githubusercontent.com/codeship/scripts/master/packages/selenium_server.sh | bash -s
 
@@ -116,12 +126,14 @@ case "$PIPE_NUM" in
         cd ../../
     fi
 
-    if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production" || ${CI_BRANCH} == "canarytest") ]]; then
+#    if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production" || ${CI_BRANCH} == "canarytest") ]]; then
+    if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production" || ${CI_BRANCH} == "canary-163684472") ]]; then
         cd bin/saucelabs
         trap logSauceCommands EXIT
     fi
 
-    if [ ${CI_BRANCH} == "canarytest" ]; then
+#    if [ ${CI_BRANCH} == "canarytest" ]; then
+    if [ ${CI_BRANCH} == "canary-163684472" ]; then
         echo "Running integration tests against canary versions of the browsers for early diagnosis of polymer failure"
         echo "(If you get a fail, consider if its codeship playing up, then check saucelabs then try it manually in that browser)"
 

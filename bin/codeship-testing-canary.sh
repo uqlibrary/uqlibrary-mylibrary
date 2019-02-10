@@ -42,9 +42,6 @@ case "$PIPE_NUM" in
     echo "Running integration tests against canary versions of the browsers for early diagnosis of polymer failure"
     echo "(If you get a fail, consider if its codeship playing up, then check saucelabs then try it manually in that browser)"
 
-    echo "temp: see if edge now passes"
-    ./nightwatch.js --env edge-browser
-
     echo " --- Nightwatch  ---"
     ./nightwatch.js --env chrome-on-windows-beta,chrome-on-windows-dev,firefox-on-windows-beta,firefox-on-windows-dev,chrome-on-mac-beta,chrome-on-mac-dev
   ;;

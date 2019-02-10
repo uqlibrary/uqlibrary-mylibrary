@@ -9,7 +9,7 @@ if [[ -z $LOG_SAUCELAB_ERRORS ]]; then
     LOG_SAUCELAB_ERRORS=false
 fi
 if [[ "$LOG_SAUCELAB_ERRORS" == true ]]; then
-    if [ -z ${TMPDIR} ]; then # codeship doesnt seem to set this
+    if [[ -z ${TMPDIR} ]]; then # codeship doesnt seem to set this
       TMPDIR="/tmp/"
     fi
     SAUCELABS_LOG_FILE="${TMPDIR}sc.log"
@@ -22,17 +22,16 @@ function logSauceCommands {
     return
   fi
 
-  if [ ! -f "$SAUCELABS_LOG_FILE" ]; then
+  if [[ ! -f "$SAUCELABS_LOG_FILE" ]]; then # testing with wct? it writes to a subdirectory, eg /tmp/wct118915-6262-1w0uwzy.q8it/sc.log
     echo "$SAUCELABS_LOG_FILE not found - looking for alt file"
-    # testing with check /tmp/sc.log presencewct? it writes to a subdirectory, eg /tmp/wct118915-6262-1w0uwzy.q8it/sc.log
     ALTERNATE_SAUCE_LOCN="$(find ${TMPDIR} -name 'wct*')"
-    if [ -d "${ALTERNATE_SAUCE_LOCN}" ]; then
+    if [[ -d "${ALTERNATE_SAUCE_LOCN}" ]]; then
       SAUCELABS_LOG_FILE="${ALTERNATE_SAUCE_LOCN}/sc.log"
     else # debug
       echo "Could not find alternate log file ${ALTERNATE_SAUCE_LOCN}"
     fi
   fi
-  if [ -f "$SAUCELABS_LOG_FILE" ]; then
+  if [[ -f "$SAUCELABS_LOG_FILE" ]]; then
     echo "Command failed - dumping $SAUCELABS_LOG_FILE for debug of saucelabs"
     cat $SAUCELABS_LOG_FILE
   else
@@ -40,7 +39,7 @@ function logSauceCommands {
   fi
 }
 
-if [ -z $CI_BRANCH ]; then
+if [[ -z $CI_BRANCH ]]; then
     CI_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 fi
 
@@ -53,23 +52,23 @@ case "$PIPE_NUM" in
     # 'Unit tests' pipeline
     # WCT
 
-#    if [ ${CI_BRANCH} == "canarytest" ]; then
-    if [ ${CI_BRANCH} == "canary-163684472" ]; then
-        printf "sleep to give other pipelines time to run without clashing\n"
-        sleep 600 # seconds
+#    if [[ ${CI_BRANCH} == "canarytest" ]]; then
+    if [[ ${CI_BRANCH} == "canary-163684472" ]]; then
+        printf "\nsleep to give other pipelines time to run without clashing\n"
+        sleep 300 # seconds
         printf "Time of awaken : $(date +"%T")\n\n"
     fi
 
     # we dont run general tests that aren't relevent for canary test
-#    if [ ${CI_BRANCH} != "canarytest" ]; then
-    if [ ${CI_BRANCH} != "canary-163684472" ]; then
+#    if [[ ${CI_BRANCH} != "canarytest" ]]; then
+    if [[ ${CI_BRANCH} != "canary-163684472" ]]; then
         echo "Running local tests"
         cp wct.conf.js.local wct.conf.js
         gulp test
         rm wct.conf.js
     fi
 
-    if [ ${CI_BRANCH} == "production" ]; then
+    if [[ ${CI_BRANCH} == "production" ]]; then
         trap logSauceCommands EXIT
 
         # because we cant run local test at all, we must run saucelabs test on every push :(
@@ -86,8 +85,8 @@ case "$PIPE_NUM" in
         rm wct.conf.js
     fi
 
-#    if [ ${CI_BRANCH} == "canarytest" ]; then
-    if [ ${CI_BRANCH} == "canary-163684472" ]; then
+#    if [[ ${CI_BRANCH} == "canarytest" ]]; then
+    if [[ ${CI_BRANCH} == "canary-163684472" ]]; then
         trap logSauceCommands EXIT
 
         echo "Running unit tests against canary versions of the browsers for early diagnosis of polymer failure"
@@ -108,8 +107,8 @@ case "$PIPE_NUM" in
     sleep 20 # give the server time to come up
     cat nohup.out
 
-#    if [ ${CI_BRANCH} != "canarytest" ]; then
-    if [ ${CI_BRANCH} != "canary-163684472" ]; then
+#    if [[ ${CI_BRANCH} != "canarytest" ]]; then
+    if [[ ${CI_BRANCH} != "canary-163684472" ]]; then
         echo "Installing Selenium..."
         curl -sSL https://raw.githubusercontent.com/codeship/scripts/master/packages/selenium_server.sh | bash -s
 
@@ -132,8 +131,8 @@ case "$PIPE_NUM" in
         trap logSauceCommands EXIT
     fi
 
-#    if [ ${CI_BRANCH} == "canarytest" ]; then
-    if [ ${CI_BRANCH} == "canary-163684472" ]; then
+#    if [[ ${CI_BRANCH} == "canarytest" ]]; then
+    if [[ ${CI_BRANCH} == "canary-163684472" ]]; then
         echo "Running integration tests against canary versions of the browsers for early diagnosis of polymer failure"
         echo "(If you get a fail, consider if its codeship playing up, then check saucelabs then try it manually in that browser)"
 
@@ -143,16 +142,17 @@ case "$PIPE_NUM" in
 
     if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
         # Win/FF is our second most used browser, 2018 - we have the ESR release on Library Desktop SOE
+        # IE11 should be tested on each build for earlier detection of problematic js
         echo "Saucelabs testing only performed on master and production branch"
         printf "\n --- TEST Chrome and Firefox ESR (popular browsers) ---\n\n"
-        ./nightwatch.js --env default,firefox-on-windows-esr
+        ./nightwatch.js --env default,firefox-on-windows-esr,ie11-browser
     fi
 
     if [[ (${CI_BRANCH} == "production") ]]; then
         printf "\n --- TEST All other browsers ---\n\n"
         echo "Note: Edge test disabled."
         # ./nightwatch.js --env edge-browser,ie11-browser,firefox-on-windows,chrome-on-mac,firefox-on-mac,safari-on-mac,firefox-on-mac-esr
-        ./nightwatch.js --env ie11-browser,firefox-on-windows,chrome-on-mac,firefox-on-mac,safari-on-mac,firefox-on-mac-esr
+        ./nightwatch.js --env firefox-on-windows,chrome-on-mac,firefox-on-mac,safari-on-mac,firefox-on-mac-esr
     fi
 
   ;;

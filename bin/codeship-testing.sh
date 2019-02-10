@@ -118,7 +118,7 @@ case "$PIPE_NUM" in
         # Win/FF is our second most used browser, 2018 - we have the ESR release on Library Desktop SOE
         # IE11 should be tested on each build for earlier detection of problematic js
         echo "Saucelabs testing only performed on master and production branch"
-        printf "\n --- TEST Chrome and Firefox ESR (popular browsers) ---\n\n"
+        printf "\n --- TEST popular browsers (change this as analytics changes) ---\n\n"
         ./nightwatch.js --env default,firefox-on-windows-esr,ie11-browser
     fi
 

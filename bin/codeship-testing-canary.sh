@@ -30,7 +30,7 @@ case "$PIPE_NUM" in
     # 'Integration tests' pipeline
     # Nightwatch
 
-    echo "Start server in the background, wait 20 sec for it to load..."
+    printf "\nStart server in the background, wait 20 sec for it to load...\n"
     nohup gulp serve:dist &
     sleep 20 # give the server time to come up
     cat nohup.out
@@ -41,7 +41,7 @@ case "$PIPE_NUM" in
     echo "Running integration tests against canary versions of the browsers for early diagnosis of polymer failure"
     echo "(If you get a fail, consider if its codeship playing up, then check saucelabs then try it manually in that browser)"
 
-    printf "\n --- TEST Beta and Dev versions of Firefox and Chrome on Mac and Windows  ---\n\n"
+    echo " --- Nightwatch  ---"
     ./nightwatch.js --env chrome-on-windows-beta,chrome-on-windows-dev,firefox-on-windows-beta,firefox-on-windows-dev,chrome-on-mac-beta,chrome-on-mac-dev
   ;;
 esac

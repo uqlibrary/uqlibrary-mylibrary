@@ -4,11 +4,10 @@
 Element providing the library main app-buttons component
 
 Example:
+
     <uqlibrary-app-buttons></uqlibrary-app-buttons>
 
 @demo
-
-@demo demo/index.html Demo of the Full view
 -->
 <dom-module id="uqlibrary-app-buttons">
   <!-- Template -->
@@ -16,18 +15,18 @@ Example:
     <!-- All element styles -->
     <style is="custom-style" include="iron-flex iron-flex-alignment common-styles">
       :host {
-        @apply(--layout-vertical);
+        @apply --layout-vertical;
       }
 
       .applications {
-        @apply(--layout-horizontal);
-        @apply(--layout-wrap);
+        @apply --layout-horizontal;
+        @apply --layout-wrap;
       }
 
       paper-button {
         width: 130px;
         height: 100px;
-        @apply(--layout-self-center);
+        @apply --layout-self-center;
       }
 
       paper-card {

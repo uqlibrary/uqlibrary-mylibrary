@@ -106,6 +106,8 @@ case "$PIPE_NUM" in
 
     printf "\n --- TEST CHROME ON WINDOWS --- \n\n"
     # all branches do a quick test on chrome
+    # even though we could do everything in saucelabs, its good to have this - when saucelabs fails its reassuring to have one test that passes...
+    # and this is probably faster
     ./nightwatch.js --env chrome
 
     cd ../../
@@ -117,12 +119,12 @@ case "$PIPE_NUM" in
         # Win/FF is our second most used browser, 2018 - we have the ESR release on Library Desktop SOE
         # IE11 should be tested on each build for earlier detection of problematic js
         echo "Saucelabs testing only performed on master and production branch"
-        printf "\n --- TEST popular browsers (change this as analytics changes) ---\n\n"
+        printf "\n --- Use saucelabs to TEST most popular browsers (change this as analytics changes) ---\n\n"
         ./nightwatch.js --env default,firefox-on-windows-esr,ie11-browser
     fi
 
     if [[ (${CI_BRANCH} == "production") ]]; then
-        printf "\n --- TEST All other browsers ---\n\n"
+        printf "\n --- Use saucelabs to TEST all other browsers above around 2% usage ---\n\n"
         echo "Note: Edge test temporarily disabled as the tests failed despite the page working fine."
         # ./nightwatch.js --env edge-browser,firefox-on-windows,chrome-on-mac,firefox-on-mac,safari-on-mac,firefox-on-mac-esr
         ./nightwatch.js --env firefox-on-windows,chrome-on-mac,firefox-on-mac,safari-on-mac,firefox-on-mac-esr

@@ -22,6 +22,7 @@ bower install
 
 * Follow the [Polymer style guide-lines](http://polymerelements.github.io/style-guide/)
 * Run `gulp serve` to run a local environment
+* Refer to [directions here](https://github.com/uqlibrary/uqlibrary-pages#updating-uql-component-dependencies) for post-dev steps to make sure that changes from child components make it to this repo.
 
 * IMPORTANT! Before each change, update our saucelab operating system versions for [nightwatch](https://github.com/uqlibrary/uqlibrary-mylibrary/blob/master/bin/saucelabs/nightwatch.json) and [wct](https://github.com/uqlibrary/uqlibrary-mylibrary/blob/master/wct.conf.js.*) by using the [saucelabs configurator](https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/) so we are testing against recent versions (browser versions are mostly automatic). Also check the [latest ESR version for firefox](https://www.mozilla.org/en-US/firefox/organizations/) (Browser versions are mostly automatic). (ESR versions are deployed in our Standard Environment across the Libraries).
 
@@ -44,7 +45,7 @@ bower install
 1. Make sure the element contains the paper-toolbar
 1. Make sure the element has a "standAlone" attribute and a "_toggleDrawerPanel" function
 1. When the App is ready, tag a release, eg `git tag -a v1.0.0 -m 'First release'`
-1. In uqlibrary-mylibrary, bower install the element (eg. `bower install uqlibrary/uqlibrary-starter-kit#v1.0.0`) 
+1. In uqlibrary-mylibrary, bower install the element (eg. `bower install uqlibrary/uqlibrary-starter-kit#v1.0.0`)
     * (Note that `bower_components subfolders` are no longer used and bower components are build into the parent directory, above each project)
 1. Add the element in `app/elements/elements.html`
 1. Add a section containing the element in `app/index.html`

@@ -59,18 +59,24 @@ case "$PIPE_NUM" in
     # 'Unit tests' pipeline
     # WCT
 
-    echo "Running local tests"
+    printf "\n-- Running unit tests on chrome --\n\n"
     # test chrome on every build
     cp wct.conf.js.local wct.conf.js
     gulp test
     rm wct.conf.js
 
     if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
+        echo "we use saucelabs as a way to test browsers that codeship doesnt offer"
+
         # test most common browsers on master and prod
         # (also splits tests into two runs so it doesnt slam saucelabs quite so hard)
         trap logSauceCommands EXIT
 
-        printf "\n-- Remote unit testing on Saucelabs --\n\n"
+        printf "\n-- Remote unit testing on Saucelabs for most popular browsers (master and production) --\n\n"
+        # check analytics at least annually to confirm correct browser choice
+        # Win/Chrome is our most used browser, 2018
+        # Win/FF is our second most used browser, 2018 - we have the ESR release on Library Desktop SOE
+        # IE11 should be tested on master for earlier detection of problematic js
         cp wct.conf.js.fullA wct.conf.js
         gulp test:remote
         rm wct.conf.js
@@ -79,7 +85,7 @@ case "$PIPE_NUM" in
     if [[ ${CI_BRANCH} == "production" ]]; then
         sleep 10 # seconds
 
-        # split testing into 2 runs so it doesnt occupy so many saucelab resources in one hit
+        printf "\n-- Remote unit testing on Saucelabs for remaining browsers (production) --\n\n"
         cp wct.conf.js.fullB wct.conf.js
         gulp test:remote
         rm wct.conf.js
@@ -105,6 +111,7 @@ case "$PIPE_NUM" in
     cd bin/local
 
     printf "\n --- TEST CHROME ON WINDOWS --- \n\n"
+    echo "we can test this locally on codeship"
     # all branches do a quick test on chrome
     # even though we could do everything in saucelabs, its good to have this - when saucelabs fails its reassuring to have one test that passes...
     # and this is probably faster
@@ -113,6 +120,8 @@ case "$PIPE_NUM" in
     cd ../../
 
     if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
+        echo "we use saucelabs as a way to test browsers that codeship doesnt offer"
+
         cd bin/saucelabs
         trap logSauceCommands EXIT
 
@@ -120,7 +129,7 @@ case "$PIPE_NUM" in
         # IE11 should be tested on each build for earlier detection of problematic js
         echo "Saucelabs testing only performed on master and production branch"
         printf "\n --- Use saucelabs to TEST most popular browsers (change this as analytics changes) ---\n\n"
-        ./nightwatch.js --env default,firefox-on-windows-esr,ie11-browser
+        ./nightwatch.js --env firefox-on-windows-esr,ie11-browser
     fi
 
     if [[ (${CI_BRANCH} == "production") ]]; then

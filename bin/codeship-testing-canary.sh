@@ -13,7 +13,7 @@ case "$PIPE_NUM" in
     # WCT
 
     printf "\nCurrent time : $(date +"%T")\n"
-    printf "sleep to give other pipelines time to run without clashing\n"
+    printf "sleep 5 minutes to give first pipeline time to run without clashing\n"
     sleep 300 # seconds
     printf "Time of awaken : $(date +"%T")\n\n"
 

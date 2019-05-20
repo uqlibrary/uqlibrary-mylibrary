@@ -30,15 +30,6 @@ bower install
 
 * Follow requirements from [uqlibrary-pages](https://github.com/uqlibrary/uqlibrary-pages/blob/master/README.md#default-setup-for-pages-indexhtml-etc)
 
-### IMS force login
-
-1. IMS script should be included in the header to force on-campus users to login to be able to access content on S3 and Internet
-
-```html
-  <!-- force IMS login for on-campus users -->
-  <script src="//www.library.uq.edu.au/js/ims.js"></script>
-```
-
 ## Developing a new app
 
 1. Clone [uqlibrary-starter-kit](https://github.com/uqlibrary/uqlibrary-starter-kit)

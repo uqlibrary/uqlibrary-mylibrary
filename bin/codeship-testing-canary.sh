@@ -13,7 +13,7 @@ case "$PIPE_NUM" in
     # WCT
 
     printf "\nCurrent time : $(date +"%T")\n"
-    printf "sleep to give other pipelines time to run without clashing\n"
+    printf "sleep 5 minutes to give first pipeline time to run without clashing\n"
     sleep 300 # seconds
     printf "Time of awaken : $(date +"%T")\n\n"
 
@@ -25,7 +25,14 @@ case "$PIPE_NUM" in
     printf "\n-- Run WCT tests on saucelabs --\n\n"
     cp wct.conf.js.canary wct.conf.js
     gulp test:remote
+
+    printf "\n-- Run flakey DEV WCT tests on saucelabs --\n\n"
+    # when dev starts working again, put it back into the single file
+    cp wct.conf.js.canary.temp wct.conf.js
+    gulp test:remote
+
     rm wct.conf.js
+
   ;;
   "2")
     # 'Integration tests' pipeline

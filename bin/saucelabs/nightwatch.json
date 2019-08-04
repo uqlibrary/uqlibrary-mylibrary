@@ -108,8 +108,7 @@
         "javascriptEnabled": true,
         "acceptSslCerts": true,
         "screenResolution": "1280x960",
-        "name": "MyLibrary - Chrome dev on OSx",
-        "chromedriverVersion": "75.0.3770.8"
+        "name": "MyLibrary - Chrome dev on OSx"
       }
     },
     "firefox-on-windows-dev": {
@@ -142,8 +141,7 @@
         "javascriptEnabled": true,
         "acceptSslCerts": true,
         "screenResolution": "1280x960",
-        "name": "MyLibrary - chrome dev on windows",
-        "chromedriverVersion": "75.0.3770.8"
+        "name": "MyLibrary - chrome dev on windows"
       }
     },
     "chrome-on-windows-beta": {

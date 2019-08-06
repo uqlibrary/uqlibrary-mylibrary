@@ -27,7 +27,7 @@ var packageJson = JSON.parse(fs.readFileSync('./package.json', 'utf-8'));
 var crypto = require('crypto');
 var replace = require('gulp-replace-task');
 var cloudfront = require('gulp-invalidate-cloudfront');
-var argv = require('yargs/yargs')(process.argv.slice(2));
+var argv = require('yargs').argv;
 
 // Other tasks
 var ensureFiles = require('./tasks/ensure-files.js');
@@ -331,7 +331,7 @@ gulp.task('serve', gulp.series('elements', 'styles', 'clean_bower', function (do
 
 // Build production files, the default task
 gulp.task('default', gulp.series(
-  // Uncomment 'cache-config' if you are going to use service workers.  
+  // Uncomment 'cache-config' if you are going to use service workers.
   'clean',
   gulp.parallel('ensureFiles', 'copy', 'styles'),
   gulp.parallel('images', 'fonts', 'html'),
@@ -405,10 +405,9 @@ gulp.task('invalidate', function () {
 
   var invalidatePath = '';
 
-  if (argv.path) {
+  if (!!argv.path) {
     invalidatePath = argv.path + '/*';
-  }
-  else {
+  } else {
     invalidatePath += '/pages/*';
   }
 

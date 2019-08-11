@@ -32,6 +32,15 @@
         "name": "MyLibrary - default Chrome on windows"
       }
     },
+    "chrome-on-windows" : {
+      "desiredCapabilities": {
+        "browserName": "chrome",
+        "platform": "Windows 10",
+        "acceptSslCerts": true,
+        "screenResolution": "1280x960",
+        "name": "MyLibrary - Chrome on windows"
+      }
+    },
     "ie11-browser" : {
       "desiredCapabilities": {
         "browserName": "internet explorer",
@@ -108,8 +117,7 @@
         "javascriptEnabled": true,
         "acceptSslCerts": true,
         "screenResolution": "1280x960",
-        "name": "MyLibrary - Chrome dev on OSx",
-        "chromedriverVersion": "75.0.3770.8"
+        "name": "MyLibrary - Chrome dev on OSx"
       }
     },
     "firefox-on-windows-dev": {
@@ -142,8 +150,7 @@
         "javascriptEnabled": true,
         "acceptSslCerts": true,
         "screenResolution": "1280x960",
-        "name": "MyLibrary - chrome dev on windows",
-        "chromedriverVersion": "75.0.3770.8"
+        "name": "MyLibrary - chrome dev on windows"
       }
     },
     "chrome-on-windows-beta": {

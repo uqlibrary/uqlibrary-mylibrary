@@ -55,8 +55,5 @@
     "npm": "^6.5.0",
     "node": "^11.8.0"
   },
-  "engine-strict": true,
-  "dependencies": {
-    "page": "^1.7.1"
-  }
+  "engine-strict": true
 }

@@ -31,6 +31,7 @@
     "test-fixture": "PolymerElements/test-fixture#^1.1.2"
   },
   "resolutions": {
-    "test-fixture": "^1.1.2"
+    "test-fixture": "^1.1.2",
+    "lodash": "^4.17.15"
   }
 }

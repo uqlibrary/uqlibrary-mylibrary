@@ -14,16 +14,13 @@ if [[ "$version" < "1.8" ]]; then
   return 1
 fi
 
-printf "\n\n $ npm -v"
-npm -v
-
-printf "\n\n$ node -v"
-node -v
+printf "Node "; node -v;
+printf "(Before npm i -g) npm v"; npm -v
 
 printf "\n\n --- Install dependencies"
 
-printf "\n\n $ npm install -g gulp-cli bower nightwatch web-component-tester\n"
-npm install -g gulp-cli bower nightwatch web-component-tester
+printf "\n\n $ npm install -g gulp-cli bower nightwatch web-component-tester npm@6\n"
+npm install -g gulp-cli bower nightwatch web-component-tester npm@6
 
 printf "\n $ npm install\n"
 npm install

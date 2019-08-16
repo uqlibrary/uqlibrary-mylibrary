@@ -13,7 +13,7 @@ The current master build can be viewed [here](https://app.library.uq.edu.au/mast
 Run these commands in your Terminal to get a local server working.
 
 ```bash
-npm install -g bower gulp-cli nightwatch web-component-tester
+npm install -g bower gulp-cli nightwatch web-component-tester npm@6
 npm install
 bower install
 ```

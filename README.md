@@ -10,7 +10,21 @@ The current master build can be viewed [here](https://app.library.uq.edu.au/mast
 
 ## Setting up the project
 
-Run these commands in your Terminal to get a local server working.
+### Prerequisites
+
+You need the following installed
+
+1. NodeJS, with `npm` available in path (Check `package.json` for the required version)
+1. Java version 8
+
+   - You can have multiple versions of Java installed on your system, while being able to switch between them using a tool like <https://www.jenv.be/>
+   - On Debian-based systems, you can use the following command:
+
+     ```bash
+     sudo update-alternatives --config java
+     ```
+
+Run these commands in your Terminal to install all the dependencies.
 
 ```bash
 npm install -g bower gulp-cli nightwatch web-component-tester npm@6

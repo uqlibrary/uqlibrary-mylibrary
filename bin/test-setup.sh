@@ -3,6 +3,14 @@
 # start debugging/tracing commands, -e - exit if command returns error (non-zero status)
 set -e
 
+# Check Java version
+version=$(java -version 2>&1 | head -1 | cut -d'"' -f2 | sed '/^1\./s///' | cut -d'.' -f1)
+echo "Java version is $version"
+if [[ "$version" != "8" ]]; then
+  echo "Java 8 is required"
+  exit 1
+fi
+
 # This gets rid of an error
 npm rebuild node-sass
 

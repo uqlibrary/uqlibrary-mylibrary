@@ -47,8 +47,20 @@
     "web-component-tester": "*",
     "yargs": "^13.3.0"
   },
+  "peerDependencies": {
+    "bower": "^1.8.8",
+    "gulp-cli": "^2.2.0",
+    "nightwatch": "^1.2.1",
+    "web-component-tester": "^6.9.2",
+    "npm": "^6"
+  },
   "scripts": {
+    "postinstall": "bower update",
+    "pretest": "bin/test-setup.sh",
     "test": "gulp test:local",
+    "test:local": "gulp test:local",
+    "test:remote": "gulp test:remote",
+    "clean": "rm -rf node_modules app/bower_components app/test/bower_components app/test/index.html dist .tmp",
     "start": "gulp serve"
   },
   "engines": {

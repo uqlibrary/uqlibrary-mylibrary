@@ -16,13 +16,6 @@ fi
 printf "Node "; node -v;
 printf "(Before npm i -g) npm v"; npm -v
 
-printf "\n\n --- Install dependencies"
-
-printf "\n\n $ npm install -g gulp-cli bower nightwatch web-component-tester npm@6\n"
+printf "\n\n--- Install dependencies ---"
 npm install -g gulp-cli bower nightwatch web-component-tester npm@6
-
-printf "\n $ npm install\n"
 npm install
-
-printf "\n\n $ bower install\n"
-bower install

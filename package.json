@@ -67,5 +67,8 @@
     "npm": "^6",
     "node": "11.10.1"
   },
-  "engine-strict": true
+  "engine-strict": true,
+  "dependencies": {
+    "page": "^1.7.1"
+  }
 }

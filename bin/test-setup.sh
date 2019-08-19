@@ -26,7 +26,6 @@ rm -rf ./app/bower_components/uqlibrary-research/node_modules/
 
 # replace node_modules location
 mkdir -p ./app/bower_components/uqlibrary-computers/node_modules/lodash/
-echo "$ cp ./node_modules/lodash/lodash.min.js /Users/uqldegro/github/uqlibrary-mylibrary/app/bower_components/uqlibrary-computers/node_modules/lodash/lodash.min.js"
 cp ./node_modules/lodash/lodash.min.js ./app/bower_components/uqlibrary-computers/node_modules/lodash/lodash.min.js
 
 mkdir -p ./app/bower_components/uqlibrary-hours/node_modules/lodash/

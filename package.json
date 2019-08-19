@@ -69,6 +69,7 @@
   },
   "engine-strict": true,
   "dependencies": {
+    "moment": "^2.12.0",
     "page": "^1.7.1"
   }
 }

@@ -29,7 +29,7 @@ pwd
 ##gulp syntax
 
 echo "Build distribution"
-source ./bin/bower_setup.sh
+source ./bin/bower-setup.sh
 
 gulp
 

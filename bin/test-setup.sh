@@ -14,7 +14,7 @@ fi
 # This gets rid of an error
 npm rebuild node-sass
 
-source ./bin/bower_setup.sh
+source ./bin/bower-setup.sh
 
 cp -R app/bower_components app/test
 components=$(ls -d app/test/bower_components/uqlibrary-*/test/*test* | grep -v index)

@@ -14,31 +14,7 @@ fi
 # This gets rid of an error
 npm rebuild node-sass
 
-# Update paths in bower_components
-echo 'gulp clean_bower'
-gulp clean_bower
-
-# cleanup in case of multiple runs
-rm -rf ./app/bower_components/uqlibrary-computers/node_modules/
-rm -rf ./app/bower_components/uqlibrary-hours/node_modules/
-rm -rf ./app/bower_components/uqlibrary-papercut/node_modules/
-rm -rf ./app/bower_components/uqlibrary-research/node_modules/
-
-# replace node_modules location
-mkdir -p ./app/bower_components/uqlibrary-computers/node_modules/lodash/
-cp ./node_modules/lodash/lodash.min.js ./app/bower_components/uqlibrary-computers/node_modules/lodash/lodash.min.js
-
-mkdir -p ./app/bower_components/uqlibrary-hours/node_modules/lodash/
-cp ./node_modules/lodash/lodash.min.js  ./app/bower_components/uqlibrary-hours/node_modules/lodash/lodash.min.js
-mkdir -p ./app/bower_components/uqlibrary-hours/node_modules/moment/
-cp ./node_modules/moment/moment.js  ./app/bower_components/uqlibrary-hours/node_modules/moment/moment.js
-
-mkdir -p ./app/bower_components/uqlibrary-papercut/node_modules/moment/
-cp ./node_modules/moment/moment.js  ./app/bower_components/uqlibrary-papercut/node_modules/moment/moment.js
-
-mkdir -p ./app/bower_components/uqlibrary-research/node_modules/moment/
-cp ./node_modules/moment/moment.js  ./app/bower_components/uqlibrary-research/node_modules/moment/moment.js
-
+source ./bin/bower_setup.sh
 
 cp -R app/bower_components app/test
 components=$(ls -d app/test/bower_components/uqlibrary-*/test/*test* | grep -v index)

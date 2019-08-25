@@ -7,7 +7,7 @@ echo "Install prerequisites gulp/bower/packages"
 
 npm install -g gulp-cli bower
 
-npm install
+npm install --ignore-scripts
 bower install --production
 
 echo "Deploying branch: ${CI_BRANCH}"

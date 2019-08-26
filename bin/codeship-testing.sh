@@ -77,7 +77,7 @@ case "$PIPE_NUM" in
         # Win/Chrome is our most used browser, 2018
         # Win/FF is our second most used browser, 2018 - we have the ESR release on Library Desktop SOE
         # IE11 should be tested on master for earlier detection of problematic js
-        cp wct.conf.js.fullA wct.conf.js
+        cp wct.conf.js.masterprod wct.conf.js
         gulp test:remote
         rm wct.conf.js
     fi
@@ -86,7 +86,7 @@ case "$PIPE_NUM" in
         sleep 10 # seconds
 
         printf "\n-- Remote unit testing on Saucelabs for remaining browsers (production) --\n\n"
-        cp wct.conf.js.fullB wct.conf.js
+        cp wct.conf.js.prod wct.conf.js
         gulp test:remote
         rm wct.conf.js
     fi
@@ -95,48 +95,51 @@ case "$PIPE_NUM" in
     # 'Integration tests' pipeline
     # Nightwatch
 
-    echo "Start server in the background, wait 20 sec for it to load..."
+    printf "\n --- Start server in the background, wait 20 sec for it to load...\n\n"
     nohup gulp serve:dist &
     sleep 20 # give the server time to come up
     cat nohup.out
 
-    echo "Installing Selenium..."
+    printf "\n --- Installing Selenium...\n\n"
     curl -sSL https://raw.githubusercontent.com/codeship/scripts/master/packages/selenium_server.sh | bash -s
 
-    echo "Installed Selenium. Running Nightwatch locally."
-
-    printf "\n Not testing firefox here atm - selenium would need an upgrade to use a recent enough geckodriver"
-    printf " that recent firefox will work - see https://app.codeship.com/projects/141087/builds/35995050 \n\n"
+    printf "\n --- Installed Selenium. Running Nightwatch locally.\n\n"
 
     cd bin/local
 
-    printf "\n --- TEST CHROME ON WINDOWS --- \n\n"
+    printf "\n --- TEST FIREFOX (default) ON WINDOWS --- \n\n"
     echo "we can test this locally on codeship"
-    # all branches do a quick test on chrome
+    # all branches do a quick test on firefox
     # even though we could do everything in saucelabs, its good to have this - when saucelabs fails its reassuring to have one test that passes...
-    # and this is probably faster
-    ./nightwatch.js --env chrome
+    ./nightwatch.js
 
     cd ../../
 
     if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
-        echo "we use saucelabs as a way to test browsers that codeship doesnt offer"
-
         cd bin/saucelabs
+        # we use saucelabs as a way to test browsers that codeship doesnt offer
+
         trap logSauceCommands EXIT
 
-        # Win/FF is our second most used browser, 2018 - we have the ESR release on Library Desktop SOE
+        # The FF ESR releases are what we put on Library Desktop SOE
         # IE11 should be tested on each build for earlier detection of problematic js
         echo "Saucelabs testing only performed on master and production branch"
         printf "\n --- Use saucelabs to TEST most popular browsers (change this as analytics changes) ---\n\n"
-        ./nightwatch.js --env firefox-on-windows-esr,ie11-browser
+        ./nightwatch.js --env chrome-on-windows,safari-on-mac,ie11-browser
+
+        # Edge test disabled as the tests ALWAYS failed despite the page working fine. Do try it though!
+        # ./nightwatch.js --env edge-browser
     fi
 
     if [[ (${CI_BRANCH} == "production") ]]; then
-        printf "\n --- Use saucelabs to TEST all other browsers above around 2% usage ---\n\n"
-        echo "Note: Edge test temporarily disabled as the tests failed despite the page working fine."
-        # ./nightwatch.js --env edge-browser,firefox-on-windows,chrome-on-mac,firefox-on-mac,safari-on-mac,firefox-on-mac-esr
-        ./nightwatch.js --env firefox-on-windows,chrome-on-mac,firefox-on-mac,safari-on-mac,firefox-on-mac-esr
+        printf "\n --- Use saucelabs to test all other browsers above around 2% usage ---\n\n"
+        ./nightwatch.js --env chrome-on-mac,firefox-on-windows-esr,firefox-on-mac,firefox-on-mac-esr
+
+        # ff/win done in codeship
+        # ./nightwatch.js --env firefox-on-windows
+
+        # commented out browsers with %age too low
+        # ./nightwatch.js --env chrome-on-mac,firefox-on-mac,safari-on-mac,firefox-on-mac-esr
     fi
 
   ;;

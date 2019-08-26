@@ -7,8 +7,12 @@ echo "Install prerequisites gulp/bower/packages"
 
 npm install -g gulp-cli bower
 
-npm install
+npm install --ignore-scripts
 bower install --production
+
+if [[ -z $CI_BRANCH ]]; then
+    CI_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+fi
 
 echo "Deploying branch: ${CI_BRANCH}"
 
@@ -25,6 +29,8 @@ pwd
 ##gulp syntax
 
 echo "Build distribution"
+source ./bin/bower-setup.sh
+
 gulp
 
 # use codeship branch environment variable to push to branch name dir unless it's 'production' branch (or master for now)

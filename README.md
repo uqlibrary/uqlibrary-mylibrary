@@ -84,7 +84,7 @@ This will install the local npm dev dependencies as well as bower dependencies u
 ### Run Tests Locally
 
 ```bash
-npm test:local
+npm run test:local
 ```
 
 You should see over 50 tests run and 1 or 2 minutes of run time - a fast response time means no tests were run
@@ -93,7 +93,7 @@ You should see over 50 tests run and 1 or 2 minutes of run time - a fast respons
 
 ```bash
 cp wct.conf.js.default wct.conf.js
-npm test:remote
+npm run test:remote
 ```
 
 When you run this command, you may get the error:
@@ -108,7 +108,7 @@ To set these fields:
 
    `$ export SAUCE_ACCESS_KEY='XXX'`
 
-then run the `npm test:remote` command again
+then run the `npm run test:remote` command again
 
 ### Nightwatch tests
 

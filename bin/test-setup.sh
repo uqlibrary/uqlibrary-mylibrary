@@ -14,9 +14,7 @@ fi
 # This gets rid of an error
 npm rebuild node-sass
 
-# Update paths in bower_components
-echo 'gulp clean_bower'
-gulp clean_bower
+source ./bin/bower-setup.sh
 
 cp -R app/bower_components app/test
 components=$(ls -d app/test/bower_components/uqlibrary-*/test/*test* | grep -v index)

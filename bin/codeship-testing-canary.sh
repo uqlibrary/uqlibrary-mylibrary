@@ -26,11 +26,6 @@ case "$PIPE_NUM" in
     cp wct.conf.js.canary wct.conf.js
     gulp test:remote
 
-    printf "\n-- Run flakey DEV WCT tests on saucelabs --\n\n"
-    # when dev starts working again, put it back into the single file
-    cp wct.conf.js.canary.temp wct.conf.js
-    gulp test:remote
-
     rm wct.conf.js
 
   ;;
@@ -50,6 +45,6 @@ case "$PIPE_NUM" in
     echo "(If you get a fail, consider if its codeship playing up, then check saucelabs then try it manually in that browser)"
 
     echo " --- Nightwatch  ---"
-    ./nightwatch.js --env chrome-on-windows-beta,chrome-on-windows-dev,firefox-on-windows-beta,firefox-on-windows-dev,chrome-on-mac-beta,chrome-on-mac-dev
+    ./nightwatch.js --env chrome-on-windows-beta,firefox-on-windows-beta,firefox-on-windows-dev,chrome-on-mac-beta
   ;;
 esac

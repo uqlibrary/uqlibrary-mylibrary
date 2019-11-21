@@ -44,7 +44,7 @@ This will install the local npm dev dependencies as well as bower dependencies u
 - Run `npm start` to run a local environment
 - Refer to [directions here](https://github.com/uqlibrary/uqlibrary-pages#updating-uql-component-dependencies) for post-dev steps to make sure that changes from child components make it to this repo.
 
-- IMPORTANT! Before each change, update our saucelab operating system versions for [nightwatch](https://github.com/uqlibrary/uqlibrary-mylibrary/blob/master/bin/saucelabs/nightwatch.json) and [wct](https://github.com/uqlibrary/uqlibrary-mylibrary/blob/master/wct.conf.js.*) by using the [saucelabs configurator](https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/) so we are testing against recent versions (browser versions are mostly automatic). Also check the [latest ESR version for firefox](https://www.mozilla.org/en-US/firefox/organizations/) (Browser versions are mostly automatic). (ESR versions are deployed in our Standard Environment across the Libraries).
+- IMPORTANT! Before each change, update our saucelab operating system versions for [nightwatch](https://github.com/uqlibrary/uqlibrary-mylibrary/blob/master/bin/saucelabs/nightwatch.json) and [wct](https://github.com/uqlibrary/uqlibrary-mylibrary/blob/master/wct.conf.*.js) by using the [saucelabs configurator](https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/) so we are testing against recent versions (browser versions are mostly automatic). Also check the [latest ESR version for firefox](https://www.mozilla.org/en-US/firefox/organizations/) (Browser versions are mostly automatic). (ESR versions are deployed in our Standard Environment across the Libraries).
 
 ## Default setup for pages (index.html, etc)
 
@@ -92,7 +92,7 @@ You should see over 50 tests run and 1 or 2 minutes of run time - a fast respons
 ### Run Tests Remotely
 
 ```bash
-cp wct.conf.js.default wct.conf.js
+cp wct.conf.default.js wct.conf.js
 npm run test:remote
 ```
 

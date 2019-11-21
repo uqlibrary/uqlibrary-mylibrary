@@ -28,8 +28,7 @@
         "browserName": "chrome",
         "platform": "Windows 10",
         "acceptSslCerts": true,
-        "screenResolution": "1280x960",
-        "name": "MyLibrary - default Chrome on windows"
+        "screenResolution": "1280x960"
       }
     },
     "chrome-on-windows" : {
@@ -37,8 +36,7 @@
         "browserName": "chrome",
         "platform": "Windows 10",
         "acceptSslCerts": true,
-        "screenResolution": "1280x960",
-        "name": "MyLibrary - Chrome on windows"
+        "screenResolution": "1280x960"
       }
     },
     "ie11-browser" : {
@@ -46,8 +44,7 @@
         "browserName": "internet explorer",
         "platform": "Windows 10",
         "acceptSslCerts": true,
-        "screenResolution": "1280x960",
-        "name": "MyLibrary - internet explorer on windows"
+        "screenResolution": "1280x960"
       }
     },
     "edge-browser" : {
@@ -55,8 +52,7 @@
         "browserName": "MicrosoftEdge",
         "platform": "Windows 10",
         "acceptSslCerts": true,
-        "screenResolution": "1280x960",
-        "name": "MyLibrary - MicrosoftEdge on windows"
+        "screenResolution": "1280x960"
       }
     },
     "firefox-on-windows" : {
@@ -64,60 +60,54 @@
         "browserName": "firefox",
         "platform": "Windows 10",
         "acceptSslCerts": true,
-        "screenResolution": "1280x960",
-        "name": "MyLibrary - firefox on windows"
+        "screenResolution": "1280x960"
       }
     },
     "chrome-on-mac": {
       "desiredCapabilities": {
         "browserName": "chrome",
-        "platform": "OS X 10.13",
+        "platform": "OS X 10.14",
         "javascriptEnabled": true,
         "acceptSslCerts": true,
-        "screenResolution": "1280x960",
-        "name": "MyLibrary - Chrome on OSx"
+        "screenResolution": "1280x960"
       }
     },
     "firefox-on-mac": {
       "desiredCapabilities": {
         "browserName": "firefox",
-        "platform": "OS X 10.13",
+        "platform": "OS X 10.14",
         "javascriptEnabled": true,
         "acceptSslCerts": true,
-        "screenResolution": "1280x960",
-        "name": "MyLibrary - firefox on OSx"
+        "screenResolution": "1280x960"
       }
     },
     "safari-on-mac": {
       "desiredCapabilities": {
         "browserName": "safari",
-        "platform": "OS X 10.13",
+        "platform": "OS X 10.14",
         "javascriptEnabled": true,
         "acceptSslCerts": true,
-        "screenResolution": "1280x960",
-        "name": "MyLibrary - safari on OSx"
+        "screenResolution": "1280x960"
       }
     },
     "chrome-on-mac-beta": {
       "desiredCapabilities": {
         "browserName": "chrome",
-        "platform": "macOS 10.13",
+        "platform": "macOS 10.14",
         "version": "beta",
         "javascriptEnabled": true,
         "acceptSslCerts": true,
-        "screenResolution": "1280x960",
-        "name": "MyLibrary - chrome beta on OSx"
+        "screenResolution": "1280x960"
       }
     },
     "chrome-on-mac-dev": {
       "desiredCapabilities": {
         "browserName": "chrome",
-        "platform": "macOS 10.13",
+        "platform": "macOS 10.14",
         "version": "dev",
         "javascriptEnabled": true,
         "acceptSslCerts": true,
-        "screenResolution": "1280x960",
-        "name": "MyLibrary - Chrome dev on OSx"
+        "screenResolution": "1280x960"
       }
     },
     "firefox-on-windows-dev": {
@@ -127,8 +117,7 @@
         "version": "dev",
         "javascriptEnabled": true,
         "acceptSslCerts": true,
-        "screenResolution": "1280x960",
-        "name": "MyLibrary - firefox dev on windows"
+        "screenResolution": "1280x960"
       }
     },
     "firefox-on-windows-beta": {
@@ -138,8 +127,7 @@
         "version": "beta",
         "javascriptEnabled": true,
         "acceptSslCerts": true,
-        "screenResolution": "1280x960",
-        "name": "MyLibrary - firefox beta on windows"
+        "screenResolution": "1280x960"
       }
     },
     "chrome-on-windows-dev": {
@@ -149,8 +137,7 @@
         "version": "dev",
         "javascriptEnabled": true,
         "acceptSslCerts": true,
-        "screenResolution": "1280x960",
-        "name": "MyLibrary - chrome dev on windows"
+        "screenResolution": "1280x960"
       }
     },
     "chrome-on-windows-beta": {
@@ -160,8 +147,7 @@
         "version": "beta",
         "javascriptEnabled": true,
         "acceptSslCerts": true,
-        "screenResolution": "1280x960",
-        "name": "MyLibrary - chrome beta on windows"
+        "screenResolution": "1280x960"
       }
     },
     "firefox-on-windows-esr" : {
@@ -170,19 +156,17 @@
         "platform": "Windows 10",
         "version": "60.0",
         "acceptSslCerts": true,
-        "screenResolution": "1280x960",
-        "name": "MyLibrary - firefox on windows"
+        "screenResolution": "1280x960"
       }
     },
     "firefox-on-mac-esr": {
       "desiredCapabilities": {
         "browserName": "firefox",
-        "platform": "OS X 10.13",
+        "platform": "OS X 10.14",
         "version": "60.0",
         "javascriptEnabled": true,
         "acceptSslCerts": true,
-        "screenResolution": "1280x960",
-        "name": "MyLibrary - firefox on OSx"
+        "screenResolution": "1280x960"
       }
     }
   }

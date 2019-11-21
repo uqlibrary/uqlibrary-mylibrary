@@ -92,9 +92,11 @@ You should see over 50 tests run and 1 or 2 minutes of run time - a fast respons
 ### Run Tests Remotely
 
 ```bash
-cp wct.conf.default.js wct.conf.js
+cp wct.conf.js.default wct.conf.js
 npm run test:remote
 ```
+
+Note: It seems that remote runs the file with the first file alphabetically that satisfies the pattern wct.conf*js. Make sure it is wct.conf.js
 
 When you run this command, you may get the error:
 
@@ -104,7 +106,7 @@ To set these fields:
 
 1. Visit the [Mylibrary Codeship Environment Variable page](https://codeship.com/projects/141087/configure_environment)
 2. Note the values for SAUCE_USERNAME and for SAUCE_ACCESS_KEY
-3. export these as local variables on your box, eq:
+3. export these as local variables on your box, eg:
 
    `$ export SAUCE_ACCESS_KEY='XXX'`
 

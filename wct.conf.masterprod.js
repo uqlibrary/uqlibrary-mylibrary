@@ -9,10 +9,10 @@ var ret = {
     plugins: {
         sauce: {
             browsers: [
-                'OS X 10.13/firefox',
-                'OS X 10.13/firefox@60',
-                'OS X 10.13/chrome',
-                'Windows 10/firefox@60' // ESR - check # at https://www.mozilla.org/en-US/firefox/organizations/
+                'Windows 10/microsoftedge',
+                'Windows 10/internet explorer',
+                'OS X 10.14/safari',
+                'Windows 10/firefox'
             ]
         }
     }

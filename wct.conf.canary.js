@@ -1,4 +1,3 @@
-// doc: https://github.com/Polymer/tools/tree/master/packages/web-component-tester
 var path = require('path');
 
 var ret = {
@@ -9,10 +8,10 @@ var ret = {
     plugins: {
         sauce: {
             browsers: [
-                'Windows 10/microsoftedge',
-                'Windows 10/internet explorer',
-                'OS X 10.13/safari',
-                'Windows 10/firefox'
+                'Windows 10/chrome@beta',
+                'Windows 10/firefox@dev',
+                'Windows 10/firefox@beta',
+                'OS X 10.14/chrome@beta'
             ]
         }
     }

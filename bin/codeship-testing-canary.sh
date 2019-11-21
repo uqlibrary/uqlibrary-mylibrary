@@ -23,7 +23,7 @@ case "$PIPE_NUM" in
     echo "(If you get a fail, consider if it's Codeship playing up, then check saucelabs then try it manually in that browser.)"
 
     printf "\n-- Run WCT tests on saucelabs --\n\n"
-    cp wct.conf.canary.js wct.conf.js
+    cp wct.conf.js.canary wct.conf.js
     gulp test:remote
 
     rm wct.conf.js

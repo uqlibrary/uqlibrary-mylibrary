@@ -61,7 +61,7 @@ case "$PIPE_NUM" in
 
     printf "\n-- Running unit tests on chrome --\n\n"
     # test chrome on every build
-    cp wct.conf.local.js wct.conf.js
+    cp wct.conf.js.local wct.conf.js
     gulp test
     rm wct.conf.js
 
@@ -77,7 +77,7 @@ case "$PIPE_NUM" in
         # Win/Chrome is our most used browser, 2018
         # Win/FF is our second most used browser, 2018 - we have the ESR release on Library Desktop SOE
         # IE11 should be tested on master for earlier detection of problematic js
-        cp wct.conf.masterprod.js wct.conf.js
+        cp wct.conf.js.masterprod wct.conf.js
         gulp test:remote
         rm wct.conf.js
     fi
@@ -86,7 +86,7 @@ case "$PIPE_NUM" in
         sleep 10 # seconds
 
         printf "\n-- Remote unit testing on Saucelabs for remaining browsers (production) --\n\n"
-        cp wct.conf.prod.js wct.conf.js
+        cp wct.conf.js.prod wct.conf.js
         gulp test:remote
         rm wct.conf.js
     fi

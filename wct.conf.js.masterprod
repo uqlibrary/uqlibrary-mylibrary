@@ -11,7 +11,7 @@ var ret = {
             browsers: [
                 'Windows 10/microsoftedge',
                 'Windows 10/internet explorer',
-                'OS X 10.13/safari',
+                'OS X 10.14/safari',
                 'Windows 10/firefox'
             ]
         }

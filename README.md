@@ -23,6 +23,10 @@ You need the following installed
      ```bash
      sudo update-alternatives --config java
      ```
+   - On OSX, using brew, you can simply:
+     ```bash
+     brew cask install java
+     ```
 
 Run these commands in your Terminal to get all the required dev utilities.
 

@@ -23,10 +23,7 @@ You need the following installed
      ```bash
      sudo update-alternatives --config java
      ```
-   - On OSX, using brew, you can simply:
-     ```bash
-     brew cask install java
-     ```
+   - On OSX, java can be installed via brew. Note you need version 8. [stack overflow](https://stackoverflow.com/questions/24342886/how-to-install-java-8-on-mac) has instructions for what packages are current
 
 Run these commands in your Terminal to get all the required dev utilities.
 

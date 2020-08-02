@@ -119,8 +119,8 @@ case "$PIPE_NUM" in
     echo "ls ../../node_modules/nightwatch/lib/utils/"
     ls ../../node_modules/nightwatch/lib/utils/
 
-    echo "ls ../../node_modules/nightwatch/lib/util/"
-    ls ../../node_modules/nightwatch/lib/util/
+#    echo "ls ../../node_modules/nightwatch/lib/util/"
+#    ls ../../node_modules/nightwatch/lib/util/
 
     printf "\n --- TEST FIREFOX (default) ON WINDOWS --- \n\n"
     echo "we can test this locally on codeship"

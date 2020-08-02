@@ -107,12 +107,19 @@ case "$PIPE_NUM" in
 
     cd bin/local
 
+    echo "ls ../../node_modules/"
     ls ../../node_modules/
 
+    echo "ls ../../node_modules/nightwatch/"
     ls ../../node_modules/nightwatch/
 
+    echo "ls ../../node_modules/nightwatch/lib/"
     ls ../../node_modules/nightwatch/lib/
 
+    echo "ls ../../node_modules/nightwatch/lib/utils/"
+    ls ../../node_modules/nightwatch/lib/utils/
+
+    echo "ls ../../node_modules/nightwatch/lib/util/"
     ls ../../node_modules/nightwatch/lib/util/
 
     printf "\n --- TEST FIREFOX (default) ON WINDOWS --- \n\n"

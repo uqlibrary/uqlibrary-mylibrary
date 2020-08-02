@@ -107,6 +107,14 @@ case "$PIPE_NUM" in
 
     cd bin/local
 
+    ls ../../node_modules/
+
+    ls ../../node_modules/nightwatch/
+
+    ls ../../node_modules/nightwatch/lib/
+
+    ls ../../node_modules/nightwatch/lib/util/
+
     printf "\n --- TEST FIREFOX (default) ON WINDOWS --- \n\n"
     echo "we can test this locally on codeship"
     # all branches do a quick test on firefox

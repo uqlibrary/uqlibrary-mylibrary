@@ -76,7 +76,6 @@ case "$PIPE_NUM" in
         # check analytics at least annually to confirm correct browser choice
         # Win/Chrome is our most used browser, 2018
         # Win/FF is our second most used browser, 2018 - we have the ESR release on Library Desktop SOE
-        # IE11 should be tested on master for earlier detection of problematic js
         cp wct.conf.js.masterprod wct.conf.js
         gulp test:remote
         rm wct.conf.js
@@ -122,10 +121,9 @@ case "$PIPE_NUM" in
         trap logSauceCommands EXIT
 
         # The FF ESR releases are what we put on Library Desktop SOE
-        # IE11 should be tested on each build for earlier detection of problematic js
         echo "Saucelabs testing only performed on master and production branch"
         printf "\n --- Use saucelabs to TEST most popular browsers (change this as analytics changes) ---\n\n"
-        ./nightwatch.js --env chrome-on-windows,safari-on-mac,ie11-browser
+        ./nightwatch.js --env chrome-on-windows,safari-on-mac
 
         # Edge test disabled as the tests ALWAYS failed despite the page working fine. Do try it though!
         # ./nightwatch.js --env edge-browser

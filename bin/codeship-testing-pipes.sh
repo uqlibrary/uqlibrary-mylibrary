@@ -43,43 +43,57 @@ if [[ -z $CI_BRANCH ]]; then
     CI_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 fi
 
+if [[ -z $PIPE_NUM ]]; then
+    PIPE_NUM=1
+fi
+
 # "canarytest" is used by a job that runs weekly to test the polymer repos on the upcoming browser versions
 # The intent is to get early notice of polymer 1 failing in modern browsers
 if [[ ${CI_BRANCH} == "canarytest" ]]; then
-    # 'Integration tests'
-    # Nightwatch
-    printf "\nStart server in the background, wait 20 sec for it to load...\n"
-    nohup gulp serve:dist &
-    sleep 20 # give the server time to come up
-    cat nohup.out
+  source ./bin/codeship-testing-canary.sh
+  exit 0
+fi
 
-    cd bin/saucelabs
-    trap logSauceCommands EXIT
-
-    echo "Running integration tests against canary versions of the browsers for early diagnosis of polymer failure"
-    echo "(If you get a fail, consider if its codeship playing up, then check saucelabs then try it manually in that browser)"
-
-    echo " --- Nightwatch  ---"
-    ./nightwatch.js --env chrome-on-windows-beta,firefox-on-windows-beta,firefox-on-windows-dev,chrome-on-mac-beta
-
-    cd ../../
-
-    # 'Unit tests'
+case "$PIPE_NUM" in
+  "1")
+    # 'Unit tests' pipeline
     # WCT
-    trap logSauceCommands EXIT
 
-    echo "Running unit tests against canary versions of the browsers for early diagnosis of polymer failure"
-    echo "(If you get a fail, consider if it's Codeship playing up, then check saucelabs then try it manually in that browser.)"
-
-    printf "\n-- Run WCT tests on saucelabs --\n\n"
-    cp wct.conf.js.canary wct.conf.js
-    gulp test:remote
-
+    printf "\n-- Running unit tests on chrome --\n\n"
+    # test chrome on every build
+    cp wct.conf.js.local wct.conf.js
+    gulp test
     rm wct.conf.js
 
-else
-    # 'Integration tests'
+    if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
+        echo "we use saucelabs as a way to test browsers that codeship doesnt offer"
+
+        # test most common browsers on master and prod
+        # (also splits tests into two runs so it doesnt slam saucelabs quite so hard)
+        trap logSauceCommands EXIT
+
+        printf "\n-- Remote unit testing on Saucelabs for most popular browsers (master and production) --\n\n"
+        # check analytics at least annually to confirm correct browser choice
+        # Win/Chrome is our most used browser, 2018
+        # Win/FF is our second most used browser, 2018 - we have the ESR release on Library Desktop SOE
+        cp wct.conf.js.masterprod wct.conf.js
+        gulp test:remote
+        rm wct.conf.js
+    fi
+
+    if [[ ${CI_BRANCH} == "production" ]]; then
+        sleep 10 # seconds
+
+        printf "\n-- Remote unit testing on Saucelabs for remaining browsers (production) --\n\n"
+        cp wct.conf.js.prod wct.conf.js
+        gulp test:remote
+        rm wct.conf.js
+    fi
+  ;;
+  "2")
+    # 'Integration tests' pipeline
     # Nightwatch
+
     printf "\n --- Start server in the background, wait 20 sec for it to load...\n\n"
     nohup gulp serve:dist &
     sleep 20 # give the server time to come up
@@ -126,40 +140,5 @@ else
         # ./nightwatch.js --env chrome-on-mac,firefox-on-mac,safari-on-mac,firefox-on-mac-esr
     fi
 
-    cd ../../
-
-    # 'Unit tests'
-    # WCT
-    printf "\n-- Running unit tests on chrome --\n\n"
-    # test chrome on every build
-    cp wct.conf.js.local wct.conf.js
-    gulp test
-    rm wct.conf.js
-
-    if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
-        echo "we use saucelabs as a way to test browsers that codeship doesnt offer"
-
-        # test most common browsers on master and prod
-        # (also splits tests into two runs so it doesnt slam saucelabs quite so hard)
-        trap logSauceCommands EXIT
-
-        printf "\n-- Remote unit testing on Saucelabs for most popular browsers (master and production) --\n\n"
-        # check analytics at least annually to confirm correct browser choice
-        # Win/Chrome is our most used browser, 2018
-        # Win/FF is our second most used browser, 2018 - we have the ESR release on Library Desktop SOE
-        cp wct.conf.js.masterprod wct.conf.js
-        gulp test:remote
-        rm wct.conf.js
-    fi
-
-    if [[ ${CI_BRANCH} == "production" ]]; then
-        sleep 10 # seconds
-
-        printf "\n-- Remote unit testing on Saucelabs for remaining browsers (production) --\n\n"
-        cp wct.conf.js.prod wct.conf.js
-        gulp test:remote
-        rm wct.conf.js
-    fi
-
-fi
-
+  ;;
+esac

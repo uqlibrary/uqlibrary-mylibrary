@@ -43,10 +43,6 @@ if [[ -z $CI_BRANCH ]]; then
     CI_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 fi
 
-if [[ -z $PIPE_NUM ]]; then
-    PIPE_NUM=1
-fi
-
 # "canarytest" is used by a job that runs weekly to test the polymer repos on the upcoming browser versions
 # The intent is to get early notice of polymer 1 failing in modern browsers
 if [[ ${CI_BRANCH} == "canarytest" ]]; then
@@ -54,91 +50,96 @@ if [[ ${CI_BRANCH} == "canarytest" ]]; then
   exit 0
 fi
 
-case "$PIPE_NUM" in
-  "1")
-    # 'Unit tests' pipeline
-    # WCT
 
-    printf "\n-- Running unit tests on chrome --\n\n"
-    # test chrome on every build
-    cp wct.conf.js.local wct.conf.js
-    gulp test
-    rm wct.conf.js
+# Clear out saucelabs log
+trap logSauceCommands EXIT
 
-    if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
-        echo "we use saucelabs as a way to test browsers that codeship doesnt offer"
 
-        # test most common browsers on master and prod
-        # (also splits tests into two runs so it doesnt slam saucelabs quite so hard)
-        trap logSauceCommands EXIT
+# 'Integration tests'
+# Nightwatch
+printf "\n --- Start server in the background, wait 20 sec for it to load...\n\n"
+nohup gulp serve:dist &
+sleep 20 # give the server time to come up
+cat nohup.out
 
-        printf "\n-- Remote unit testing on Saucelabs for most popular browsers (master and production) --\n\n"
-        # check analytics at least annually to confirm correct browser choice
-        # Win/Chrome is our most used browser, 2018
-        # Win/FF is our second most used browser, 2018 - we have the ESR release on Library Desktop SOE
-        cp wct.conf.js.masterprod wct.conf.js
-        gulp test:remote
-        rm wct.conf.js
-    fi
+printf "\n --- Installing Selenium...\n\n"
+curl -sSL https://raw.githubusercontent.com/codeship/scripts/master/packages/selenium_server.sh | bash -s
 
-    if [[ ${CI_BRANCH} == "production" ]]; then
-        sleep 10 # seconds
+printf "\n --- Installed Selenium. Running Nightwatch locally.\n\n"
 
-        printf "\n-- Remote unit testing on Saucelabs for remaining browsers (production) --\n\n"
-        cp wct.conf.js.prod wct.conf.js
-        gulp test:remote
-        rm wct.conf.js
-    fi
-  ;;
-  "2")
-    # 'Integration tests' pipeline
-    # Nightwatch
+cd bin/local
 
-    printf "\n --- Start server in the background, wait 20 sec for it to load...\n\n"
-    nohup gulp serve:dist &
-    sleep 20 # give the server time to come up
-    cat nohup.out
+printf "\n --- TEST FIREFOX (default) ON WINDOWS --- \n\n"
+echo "we can test this locally on codeship"
+# all branches do a quick test on firefox
+# even though we could do everything in saucelabs, its good to have this - when saucelabs fails its reassuring to have one test that passes...
+./nightwatch.js
 
-    printf "\n --- Installing Selenium...\n\n"
-    curl -sSL https://raw.githubusercontent.com/codeship/scripts/master/packages/selenium_server.sh | bash -s
+cd ../../
 
-    printf "\n --- Installed Selenium. Running Nightwatch locally.\n\n"
+if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
+    cd bin/saucelabs
+    # we use saucelabs as a way to test browsers that codeship doesnt offer
 
-    cd bin/local
+    trap logSauceCommands EXIT
 
-    printf "\n --- TEST FIREFOX (default) ON WINDOWS --- \n\n"
-    echo "we can test this locally on codeship"
-    # all branches do a quick test on firefox
-    # even though we could do everything in saucelabs, its good to have this - when saucelabs fails its reassuring to have one test that passes...
-    ./nightwatch.js
+    # The FF ESR releases are what we put on Library Desktop SOE
+    echo "Saucelabs testing only performed on master and production branch"
+    printf "\n --- Use saucelabs to TEST most popular browsers (change this as analytics changes) ---\n\n"
+    ./nightwatch.js --env chrome-on-windows,safari-on-mac
+
+    # Edge test disabled as the tests ALWAYS failed despite the page working fine. Do try it though!
+    # ./nightwatch.js --env edge-browser
 
     cd ../../
+fi
 
-    if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
-        cd bin/saucelabs
-        # we use saucelabs as a way to test browsers that codeship doesnt offer
+if [[ (${CI_BRANCH} == "production") ]]; then
+    cd bin/saucelabs
+    printf "\n --- Use saucelabs to test all other browsers above around 2% usage ---\n\n"
+    ./nightwatch.js --env chrome-on-mac,firefox-on-windows-esr
+    ./nightwatch.js --env firefox-on-mac,firefox-on-mac-esr
 
-        trap logSauceCommands EXIT
+    # ff/win done in codeship
+    # ./nightwatch.js --env firefox-on-windows
 
-        # The FF ESR releases are what we put on Library Desktop SOE
-        echo "Saucelabs testing only performed on master and production branch"
-        printf "\n --- Use saucelabs to TEST most popular browsers (change this as analytics changes) ---\n\n"
-        ./nightwatch.js --env chrome-on-windows,safari-on-mac
+    # commented out browsers with %age too low
+    # ./nightwatch.js --env chrome-on-mac,firefox-on-mac,safari-on-mac,firefox-on-mac-esr
 
-        # Edge test disabled as the tests ALWAYS failed despite the page working fine. Do try it though!
-        # ./nightwatch.js --env edge-browser
-    fi
+    cd ../../
+fi
 
-    if [[ (${CI_BRANCH} == "production") ]]; then
-        printf "\n --- Use saucelabs to test all other browsers above around 2% usage ---\n\n"
-        ./nightwatch.js --env chrome-on-mac,firefox-on-windows-esr,firefox-on-mac,firefox-on-mac-esr
 
-        # ff/win done in codeship
-        # ./nightwatch.js --env firefox-on-windows
+# 'Unit tests'
+# WCT
+printf "\n-- Running unit tests on chrome --\n\n"
+# test chrome on every build
+cp wct.conf.js.local wct.conf.js
+gulp test
+rm wct.conf.js
 
-        # commented out browsers with %age too low
-        # ./nightwatch.js --env chrome-on-mac,firefox-on-mac,safari-on-mac,firefox-on-mac-esr
-    fi
+if [[ (${CI_BRANCH} == "master" || ${CI_BRANCH} == "production") ]]; then
+    echo "we use saucelabs as a way to test browsers that codeship doesnt offer"
 
-  ;;
-esac
+    # test most common browsers on master and prod
+    # (also splits tests into two runs so it doesnt slam saucelabs quite so hard)
+    trap logSauceCommands EXIT
+
+    printf "\n-- Remote unit testing on Saucelabs for most popular browsers (master and production) --\n\n"
+    # check analytics at least annually to confirm correct browser choice
+    # Win/Chrome is our most used browser, 2018
+    # Win/FF is our second most used browser, 2018 - we have the ESR release on Library Desktop SOE
+    cp wct.conf.js.masterprod wct.conf.js
+    gulp test:remote
+    rm wct.conf.js
+fi
+
+if [[ ${CI_BRANCH} == "production" ]]; then
+    sleep 10 # seconds
+
+    printf "\n-- Remote unit testing on Saucelabs for remaining browsers (production) --\n\n"
+    cp wct.conf.js.prod wct.conf.js
+    gulp test:remote
+    rm wct.conf.js
+fi
+

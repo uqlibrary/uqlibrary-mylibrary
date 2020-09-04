@@ -7,44 +7,44 @@
 # the ordering of the canary browser tests is: test beta, then test dev (beta is closer to ready for prod, per http://www.chromium.org/getting-involved/dev-channel
 # win chrome, win firefox and osx chrome are tested -  other options either dont have canaries or usage is too low to justify
 
-case "$PIPE_NUM" in
-  "1")
-    # 'Unit tests' pipeline
-    # WCT
+trap logSauceCommands EXIT
 
-    printf "\nCurrent time : $(date +"%T")\n"
-    printf "sleep 5 minutes to give first pipeline time to run without clashing\n"
-    sleep 300 # seconds
-    printf "Time of awaken : $(date +"%T")\n\n"
+echo "Running integration tests against canary versions of the browsers for early diagnosis of polymer failure"
+echo "(If you get a fail, consider if its codeship playing up, then check saucelabs then try it manually in that browser)"
 
-    trap logSauceCommands EXIT
 
-    echo "Running unit tests against canary versions of the browsers for early diagnosis of polymer failure"
-    echo "(If you get a fail, consider if it's Codeship playing up, then check saucelabs then try it manually in that browser.)"
+# "Nightwatch integreation testing" 
 
-    printf "\n-- Run WCT tests on saucelabs --\n\n"
-    cp wct.conf.js.canary wct.conf.js
-    gulp test:remote
+printf "\nStart server in the background, wait 40 sec for it to load...\n"
+nohup gulp serve:dist &
+sleep 40 # give the server time to come up
+cat nohup.out
 
-    rm wct.conf.js
+printf "Running standard tests against canary versions of the browsers for early diagnosis of polymer failure\n"
+printf "If you get a fail, try it manually in that browser\n\n"
 
-  ;;
-  "2")
-    # 'Integration tests' pipeline
-    # Nightwatch
+printf "\n --- Saucelabs Integration Testing ---\n\n"
+cd bin/saucelabs
 
-    printf "\nStart server in the background, wait 20 sec for it to load...\n"
-    nohup gulp serve:dist &
-    sleep 20 # give the server time to come up
-    cat nohup.out
+printf "\n --- TEST CHROME Beta on WINDOWS (canary test) ---\n\n"
+# the env names on the call to nightwatch.js must match the entries in saucelabs/nightwatch.json
+./nightwatch.js --env chrome-on-windows-beta --tag e2etest
 
-    cd bin/saucelabs
-    trap logSauceCommands EXIT
+printf "\n --- TEST CHROME Beta on MAC (canary test) ---\n\n"
+# the env names on the call to nightwatch.js must match the entries in saucelabs/nightwatch.json
+./nightwatch.js --env chrome-on-mac-beta --tag e2etest
 
-    echo "Running integration tests against canary versions of the browsers for early diagnosis of polymer failure"
-    echo "(If you get a fail, consider if its codeship playing up, then check saucelabs then try it manually in that browser)"
+printf "\n --- TEST FIREFOX Beta and Dev on WINDOWS (canary test) ---\n\n"
+# the env names on the call to nightwatch.js must match the entries in saucelabs/nightwatch.json
+./nightwatch.js --env firefox-on-windows-beta,firefox-on-windows-dev --tag e2etest
 
-    echo " --- Nightwatch  ---"
-    ./nightwatch.js --env chrome-on-windows-beta,firefox-on-windows-beta,firefox-on-windows-dev,chrome-on-mac-beta
-  ;;
-esac
+cd ../../
+
+# "Unit testing"
+
+printf "\n --- WCT CANARY UNIT TESTING ---\n\n"
+cp wct.conf.js.canary wct.conf.js
+gulp test:remote
+rm wct.conf.js
+printf "\n --- WCT unit testing complete---\n\n"
+

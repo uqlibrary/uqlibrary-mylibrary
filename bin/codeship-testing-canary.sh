@@ -28,15 +28,15 @@ cd bin/saucelabs
 
 printf "\n --- TEST CHROME Beta on WINDOWS (canary test) ---\n\n"
 # the env names on the call to nightwatch.js must match the entries in saucelabs/nightwatch.json
-./nightwatch.js --env chrome-on-windows-beta --tag e2etest
+./nightwatch.js --env chrome-on-windows-beta
 
 printf "\n --- TEST CHROME Beta on MAC (canary test) ---\n\n"
 # the env names on the call to nightwatch.js must match the entries in saucelabs/nightwatch.json
-./nightwatch.js --env chrome-on-mac-beta --tag e2etest
+./nightwatch.js --env chrome-on-mac-beta
 
 printf "\n --- TEST FIREFOX Beta and Dev on WINDOWS (canary test) ---\n\n"
 # the env names on the call to nightwatch.js must match the entries in saucelabs/nightwatch.json
-./nightwatch.js --env firefox-on-windows-beta,firefox-on-windows-dev --tag e2etest
+./nightwatch.js --env firefox-on-windows-beta,firefox-on-windows-dev
 
 cd ../../
 

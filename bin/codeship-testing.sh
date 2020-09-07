@@ -67,6 +67,7 @@ curl -sSL https://raw.githubusercontent.com/codeship/scripts/master/packages/sel
 
 printf "\n --- Installed Selenium. Running Nightwatch locally.\n\n"
 
+pwd
 cd bin/local
 
 printf "\n --- TEST FIREFOX (default) ON WINDOWS --- \n\n"
@@ -114,6 +115,8 @@ fi
 # WCT
 printf "\n-- Running unit tests on chrome --\n\n"
 # test chrome on every build
+pwd
+ls -al
 cp wct.conf.js.local wct.conf.js
 gulp test
 rm wct.conf.js
